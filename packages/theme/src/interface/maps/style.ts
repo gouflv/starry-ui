@@ -4,4 +4,5 @@ export interface StyleMapToken {
   borderRadiusXS: number
   borderRadiusSM: number
   borderRadiusLG: number
+  borderRadiusOuter: number
 }

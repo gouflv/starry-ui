@@ -42,7 +42,7 @@ export interface SeedToken extends PresetColorType {
   /** 步长 @default 4 */
   sizeStep: number
   sizePopupArrow: number
-  /** 输入控件高度 32 */
+  /** 输入控件高度 @default 32 */
   controlHeight: number
 
   // Z-index
@@ -51,5 +51,9 @@ export interface SeedToken extends PresetColorType {
   zIndexBase: number
   zIndexPopupBase: number
 
-  // TODO: motion tokens
+  // Motion tokens
+  //
+
+  motionUnit: number
+  motionBase: number
 }
