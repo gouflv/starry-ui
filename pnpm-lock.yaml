@@ -13,6 +13,10 @@ importers:
         version: 3.3.3
 
   packages/theme:
+    dependencies:
+      '@ctrl/tinycolor':
+        specifier: ^4.1.0
+        version: 4.1.0
     devDependencies:
       '@tsconfig/node20':
         specifier: ^20.1.4
@@ -28,6 +32,10 @@ importers:
         version: 5.6.3
 
 packages:
+
+  '@ctrl/tinycolor@4.1.0':
+    resolution: {integrity: sha512-WyOx8cJQ+FQus4Mm4uPIZA64gbk3Wxh0so5Lcii0aJifqwoVOlfFtorjLE0Hen4OYyHZMXDWqMmaQemBhgxFRQ==}
+    engines: {node: '>=14'}
 
   '@esbuild/aix-ppc64@0.23.1':
     resolution: {integrity: sha512-6VhYk1diRqrhBAqpJEdjASR/+WVRtfjpqKuNw11cLiaWpAT/Uu+nokB+UJnevzy/P9C/ty6AOe0dwueMrGh/iQ==}
@@ -692,6 +700,8 @@ packages:
     engines: {node: '>=12'}
 
 snapshots:
+
+  '@ctrl/tinycolor@4.1.0': {}
 
   '@esbuild/aix-ppc64@0.23.1':
     optional: true
