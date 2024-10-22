@@ -52,7 +52,11 @@ const seedToken: SeedToken = {
 
   // zIndex
   zIndexBase: 0,
-  zIndexPopupBase: 1000
+  zIndexPopupBase: 1000,
+
+  // Motion
+  motionUnit: 0.1,
+  motionBase: 0
 }
 
 export default seedToken

@@ -51,7 +51,7 @@ export interface SeedToken extends PresetColorType {
   zIndexBase: number
   zIndexPopupBase: number
 
-  // Motion tokens
+  // Motion
   //
 
   motionUnit: number
