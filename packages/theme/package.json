@@ -1,6 +1,11 @@
 {
   "name": "@starry/theme",
   "version": "0.0.1",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts"
+    }
+  },
   "scripts": {
     "build": "tsup"
   },
