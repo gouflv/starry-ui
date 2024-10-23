@@ -1,19 +1,54 @@
 <template>
-  <div
-    class="flex p-1 items-center gap-2 border border-gray-2 rounded-md cursor-pointer"
-  >
+  <Popover v-model:open="open" trigger="click" destroy-tooltip-on-hide>
     <div
-      class="w-10 h-7 rounded-md"
-      :style="{
-        backgroundColor: value
-      }"
-    ></div>
-    <code class="">{{ value }}</code>
-  </div>
+      class="relative flex cursor-pointer items-center gap-2 border border-gray-2 rounded-md p-1"
+      @click="open = true"
+    >
+      <div
+        class="h-7 w-10 rounded-md"
+        :style="{
+          backgroundColor: value
+        }"
+      ></div>
+      <code class="">{{ value }}</code>
+    </div>
+
+    <template #content>
+      <color-picker
+        :pureColor="value"
+        picker-type="chrome"
+        is-widget
+        disable-history
+        style="min-width: 270px"
+        @update:pure-color="onChange"
+      />
+    </template>
+  </Popover>
 </template>
 
 <script setup lang="ts">
+import { Popover } from 'ant-design-vue'
+import { ref } from 'vue'
+import { ColorPicker } from 'vue3-colorpicker'
+import 'vue3-colorpicker/style.css'
+
 defineProps<{
   value: string
 }>()
+const emit = defineEmits<{
+  'update:value': [string]
+}>()
+
+const open = ref(false)
+
+function onChange(value: string) {
+  emit('update:value', value)
+}
 </script>
+
+<style>
+.vc-colorpicker {
+  box-shadow: none !important;
+  margin: -12px;
+}
+</style>

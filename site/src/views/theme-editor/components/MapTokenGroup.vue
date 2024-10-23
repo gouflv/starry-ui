@@ -1,10 +1,10 @@
 <template>
-  <div class="mb-4 bg-gray-50 p-3 rounded-md">
+  <div class="rounded-md p-3">
     <div class="mb-1">
       {{ data.title }}
     </div>
 
-    <div v-if="data.name" class="flex items-center justify-between mb-2">
+    <div v-if="data.name" class="mb-2 flex items-center justify-between">
       <div class="font-semibold">
         {{ data.name }}
       </div>
@@ -56,11 +56,7 @@ const active = ref<string[]>([])
 </script>
 
 <style>
-.ant-collapse-header {
-  padding-top: 6px !important;
-  padding-bottom: 6px !important;
-}
-.ant-collapse-expand-icon {
-  padding-inline-end: 8px !important;
+.ant-collapse-content-box {
+  margin-top: -6px;
 }
 </style>
