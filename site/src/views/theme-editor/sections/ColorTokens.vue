@@ -110,7 +110,13 @@ const items: MapGroupItem[] = [
       { name: 'colorText', title: '一级文本' },
       { name: 'colorTextSecondary', title: '二级文本' },
       { name: 'colorTextTertiary', title: '三级文本' },
-      { name: 'colorTextQuaternary', title: '四级文本' }
+      { name: 'colorTextQuaternary', title: '四级文本' },
+      { name: 'colorTextPlaceholder', title: '占位文本' },
+      { name: 'colorTextDisabled', title: '禁用文本' },
+      { name: 'colorTextHeading', title: '标题文本' },
+      { name: 'colorTextLabel', title: '标签文本' },
+      { name: 'colorTextDescription', title: '描述文本' },
+      { name: 'colorTextLightSolid', title: '深色背景高亮文本' }
     ]
   },
   {

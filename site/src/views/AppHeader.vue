@@ -1,5 +1,7 @@
 <template>
-  <div class="z-1 flex justify-between border-b border-gray-2 px-8 shadow">
+  <div
+    class="relative sticky top-0 z-1 z-1 flex justify-between border-b border-gray-2 bg-white px-8 shadow-sm"
+  >
     <div class="flex items-center py-3">
       <!-- <i class="mr-2 h-10 w-10 bg-gray-1"></i> -->
       <h1 class="m-0 text-lg font-semibold">Starry UI</h1>

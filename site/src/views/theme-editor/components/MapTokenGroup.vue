@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-md p-3">
+  <div class="py-5">
     <div class="mb-1">
       {{ data.title }}
     </div>
@@ -9,11 +9,19 @@
         {{ data.name }}
       </div>
       <div>
-        <ColorPicker :value="token[data.name] as string" />
+        <ColorPicker
+          v-if="dataType === 'color'"
+          :value="token[data.name] as string"
+        />
+        <InputNumber
+          v-if="['size', 'font'].includes(dataType)"
+          :value="token[data.name] as number"
+          :min="0"
+        />
       </div>
     </div>
 
-    <div vif="data.map" class="border border-gray-2 rounded-md">
+    <div v-if="data.map" class="border border-gray-2 rounded-md">
       <Collapse v-model:active-key="active" :bordered="false">
         <template #expandIcon="{ isActive }">
           <CaretRightOutlined :rotate="isActive ? 90 : 0" />
@@ -24,6 +32,7 @@
             :key="i"
             :token="token"
             :data="sub"
+            :data-type="data.dataType"
           />
         </CollapsePanel>
       </Collapse>
@@ -35,16 +44,20 @@
 import ColorPicker from '@/components/ColorPicker.vue'
 import { CaretRightOutlined } from '@ant-design/icons-vue'
 import type { GlobalToken } from '@starry/theme'
-import { Collapse, CollapsePanel } from 'ant-design-vue'
+import { Collapse, CollapsePanel, InputNumber } from 'ant-design-vue'
 import { ref } from 'vue'
 import MapTokenSubItem from './MapTokenSubItem.vue'
 
-export type MapGroupItem = {
-  title: string
+type TokenMeta = {
+  title?: string
   name?: keyof GlobalToken
   desc?: string
-  dataType?: 'color' | 'number' | 'string'
-  map?: { title?: string; name: keyof GlobalToken; desc?: string }[]
+  dataType?: 'color' | 'size' | 'font' | 'string'
+}
+
+export type MapGroupItem = TokenMeta & {
+  title: string
+  map?: Array<TokenMeta & { name: keyof GlobalToken }>
 }
 
 const props = defineProps<{
@@ -53,4 +66,6 @@ const props = defineProps<{
 }>()
 
 const active = ref<string[]>([])
+
+const dataType = props.data.dataType || 'color'
 </script>
