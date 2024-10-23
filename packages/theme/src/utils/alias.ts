@@ -111,7 +111,7 @@ export default function formatToken(
 
     fontWeightStrong: 600,
 
-    opacityLoading: 0.65,
+    // opacityLoading: 0.65,
 
     linkDecoration: 'none',
     linkHoverDecoration: 'none',
@@ -129,8 +129,8 @@ export default function formatToken(
     paddingXL: mergedToken.sizeXL,
 
     paddingContentHorizontalLG: mergedToken.sizeLG,
-    paddingContentVerticalLG: mergedToken.sizeMS,
-    paddingContentHorizontal: mergedToken.sizeMS,
+    paddingContentVerticalLG: mergedToken.sizeSM,
+    paddingContentHorizontal: mergedToken.sizeSM,
     paddingContentVertical: mergedToken.sizeSM,
     paddingContentHorizontalSM: mergedToken.size,
     paddingContentVerticalSM: mergedToken.sizeXS,
