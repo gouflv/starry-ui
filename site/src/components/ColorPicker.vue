@@ -27,6 +27,7 @@
 </template>
 
 <script setup lang="ts">
+import { fixRGBA2Hex } from '@/utils/color'
 import { Popover } from 'ant-design-vue'
 import { ref } from 'vue'
 import { ColorPicker } from 'vue3-colorpicker'
@@ -42,7 +43,7 @@ const emit = defineEmits<{
 const open = ref(false)
 
 function onChange(value: string) {
-  emit('update:value', value)
+  emit('update:value', fixRGBA2Hex(value))
 }
 </script>
 

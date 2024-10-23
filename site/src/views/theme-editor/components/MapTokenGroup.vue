@@ -1,22 +1,24 @@
 <template>
-  <div class="py-5">
+  <div class="mb-3 py-2">
     <div class="mb-1">
       {{ data.title }}
     </div>
 
     <div v-if="data.name" class="mb-2 flex items-center justify-between">
-      <div class="font-semibold">
+      <div class="text-blue-5 font-semibold">
         {{ data.name }}
       </div>
       <div>
         <ColorPicker
           v-if="dataType === 'color'"
           :value="token[data.name] as string"
+          @update:value="onUpdate"
         />
         <InputNumber
           v-if="['size', 'font'].includes(dataType)"
           :value="token[data.name] as number"
           :min="0"
+          @update:value="onUpdate"
         />
       </div>
     </div>
@@ -46,6 +48,7 @@ import { CaretRightOutlined } from '@ant-design/icons-vue'
 import type { GlobalToken } from '@starry/theme'
 import { Collapse, CollapsePanel, InputNumber } from 'ant-design-vue'
 import { ref } from 'vue'
+import { useEditorStore } from '../store/useEditorStore'
 import MapTokenSubItem from './MapTokenSubItem.vue'
 
 type TokenMeta = {
@@ -68,4 +71,11 @@ const props = defineProps<{
 const active = ref<string[]>([])
 
 const dataType = props.data.dataType || 'color'
+
+const { set } = useEditorStore()
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function onUpdate(value: any) {
+  set(props.data.name!, value)
+}
 </script>

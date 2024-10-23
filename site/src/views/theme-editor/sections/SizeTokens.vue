@@ -10,12 +10,13 @@
 </template>
 
 <script setup lang="ts">
-import { useToken } from '@starry/theme'
+import { storeToRefs } from 'pinia'
 import MapTokenGroup, {
   type MapGroupItem
 } from '../components/MapTokenGroup.vue'
+import { useEditorStore } from '../store/useEditorStore'
 
-const [, token] = useToken()
+const { token } = storeToRefs(useEditorStore())
 
 const items: MapGroupItem[] = [
   {
@@ -32,8 +33,8 @@ const items: MapGroupItem[] = [
       { name: 'fontSizeHeading4' },
       { name: 'fontSizeHeading5' },
       { name: 'lineHeight' },
-      { name: 'lineHeightSM' },
-      { name: 'lineHeightLG' },
+      { name: 'lineHeightSM', title: '小型文本行高' },
+      { name: 'lineHeightLG', title: '大型文本行高' },
       { name: 'lineHeightHeading1' },
       { name: 'lineHeightHeading2' },
       { name: 'lineHeightHeading3' },

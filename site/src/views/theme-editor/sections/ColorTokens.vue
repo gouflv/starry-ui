@@ -10,12 +10,13 @@
 </template>
 
 <script setup lang="ts">
-import { useToken } from '@starry/theme'
+import { storeToRefs } from 'pinia'
 import MapTokenGroup, {
   type MapGroupItem
 } from '../components/MapTokenGroup.vue'
+import { useEditorStore } from '../store/useEditorStore'
 
-const [, token] = useToken()
+const { token } = storeToRefs(useEditorStore())
 
 const items: MapGroupItem[] = [
   {
