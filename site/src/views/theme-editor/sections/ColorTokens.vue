@@ -112,6 +112,23 @@ const items: MapGroupItem[] = [
       { name: 'colorTextTertiary', title: '三级文本' },
       { name: 'colorTextQuaternary', title: '四级文本' }
     ]
+  },
+  {
+    name: 'colorBgBase',
+    title: '背景基础色',
+    map: [
+      { name: 'colorBorder', title: '一级边框' },
+      { name: 'colorBorderSecondary', title: '二级边框' },
+      { name: 'colorFill', title: '一级填充' },
+      { name: 'colorFillSecondary', title: '二级填充' },
+      { name: 'colorFillTertiary', title: '三级填充' },
+      { name: 'colorFillQuaternary', title: '四级填充' },
+      { name: 'colorBgContainer', title: '容器背景' },
+      { name: 'colorBgElevated', title: '覆层容器背景' },
+      { name: 'colorBgLayout', title: '布局背景' },
+      { name: 'colorBgSpotlight', title: '聚焦背景' },
+      { name: 'colorBgMask', title: '遮罩背景' }
+    ]
   }
 ]
 </script>

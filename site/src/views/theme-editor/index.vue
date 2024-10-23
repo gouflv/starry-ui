@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="pb-20">
     <AppHeader />
     <div class="border-b border-gray-1 bg-white px-5 py-4">
       <div class="font-semibold">主题编辑器</div>
@@ -20,8 +20,8 @@
 </template>
 
 <script lang="ts" setup>
-import AppHeader from '@/components/AppHeader.vue'
 import { TabPane, Tabs } from 'ant-design-vue'
+import AppHeader from '../AppHeader.vue'
 import { default as ColorTokens } from './sections/ColorTokens.vue'
 import PresetColors from './sections/PresetColors.vue'
 </script>

@@ -11,7 +11,7 @@
       </span>
     </div>
     <div class="flex items-center space-x-3">
-      <code class="rounded bg-gray-2 p-1 text-gray-700">{{
+      <code class="rounded bg-gray-1 p-1 text-gray-5">{{
         token[data.name]
       }}</code>
       <div

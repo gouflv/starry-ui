@@ -5,12 +5,12 @@
       @click="open = true"
     >
       <div
-        class="h-7 w-10 rounded-md"
+        class="h-8 w-12 border border-gray-1 rounded"
         :style="{
           backgroundColor: value
         }"
       ></div>
-      <code class="">{{ value }}</code>
+      <code class="text-xs text-gray-5">{{ value }}</code>
     </div>
 
     <template #content>

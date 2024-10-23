@@ -2,3 +2,13 @@
   border-width: 0;
   border-style: solid;
 }
+
+ol,
+ul {
+  list-style-type: none;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}

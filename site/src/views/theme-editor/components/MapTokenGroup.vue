@@ -14,7 +14,7 @@
     </div>
 
     <div vif="data.map" class="border border-gray-2 rounded-md">
-      <Collapse v-model:active-key="active" :bordered="false" ghost>
+      <Collapse v-model:active-key="active" :bordered="false">
         <template #expandIcon="{ isActive }">
           <CaretRightOutlined :rotate="isActive ? 90 : 0" />
         </template>
@@ -54,9 +54,3 @@ const props = defineProps<{
 
 const active = ref<string[]>([])
 </script>
-
-<style>
-.ant-collapse-content-box {
-  margin-top: -6px;
-}
-</style>
