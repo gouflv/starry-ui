@@ -26,6 +26,8 @@ export interface ColorNeutralMapToken {
 
   colorBgLayout: string
   colorBgContainer: string
+  colorBgElevated: string
+  colorBgSpotlight: string
 }
 
 interface ColorPrimaryMapToken {
