@@ -35,8 +35,10 @@ import { computed } from 'vue'
 
 const props = defineProps<{
   token: GlobalToken
-  name: keyof GlobalToken
+  name: string
 }>()
 
-const value = computed(() => props.token[props.name] as string)
+const value = computed(
+  () => props.token[props.name as keyof GlobalToken] as string
+)
 </script>

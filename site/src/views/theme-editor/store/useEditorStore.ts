@@ -4,7 +4,7 @@ import { computed, ref, watch } from 'vue'
 
 export const useEditorStore = defineStore('editor', () => {
   // global token
-  const [, token] = useToken()
+  const { token } = useToken()
 
   const original = ref<GlobalToken>()
   const data = ref({} as GlobalToken)
@@ -35,16 +35,19 @@ export const useEditorStore = defineStore('editor', () => {
     return dirty
   })
 
-  function set(name: string, value: string | number) {
+  function set(name: keyof GlobalToken, value: string | number) {
     data.value = {
       ...data.value,
-      [name as keyof GlobalToken]: value
+      [name]: value
     }
   }
   function reset(name: keyof GlobalToken) {
-    delete data.value[name]
+    data.value = {
+      ...data.value,
+      [name]: original.value![name]
+    }
   }
-  function checkDirty(name: string) {
+  function checkDirty(name: keyof GlobalToken) {
     return computed(() => {
       return dirty.value[name as keyof GlobalToken] !== undefined
     })

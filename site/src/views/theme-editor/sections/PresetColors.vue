@@ -12,5 +12,5 @@
 import { PresetColors, useToken } from '@starry/theme'
 import Color from '../components/Color.vue'
 
-const [, token] = useToken()
+const { token } = useToken()
 </script>

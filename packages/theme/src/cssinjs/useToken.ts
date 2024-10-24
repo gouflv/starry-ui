@@ -11,10 +11,10 @@ import {
 } from './context'
 import Theme from './theme/Theme'
 
-export function useToken(): [
-  ComputedRef<Theme<SeedToken, MapToken>>,
-  ComputedRef<GlobalToken>
-] {
+export function useToken(): {
+  theme: ComputedRef<Theme<SeedToken, MapToken>>
+  token: ComputedRef<GlobalToken>
+} {
   const context = inject<ComputedRef<DesignTokenContext>>(
     DesignTokenContextKey,
     computed(() => globalDesignTokenApi.value || defaultConfig)
@@ -39,5 +39,5 @@ export function useToken(): [
     )
   )
 
-  return [theme, mergedDerivativeToken]
+  return { theme, token: mergedDerivativeToken }
 }
