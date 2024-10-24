@@ -1,2 +1,2 @@
-export * from './cssinjs/useToken'
+export * from './cssinjs'
 export * from './interface'

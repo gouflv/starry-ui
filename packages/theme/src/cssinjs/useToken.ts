@@ -1,6 +1,6 @@
 import { computed, ComputedRef, inject } from 'vue'
-import { GlobalToken, MapToken, SeedToken } from '../interface'
-import { defaultTheme } from '../internal'
+import { AliasToken, GlobalToken, MapToken, SeedToken } from '../interface'
+import { defaultTheme, getComputedToken } from '../internal'
 import defaultSeedToken from '../themes/seed'
 import formatToken from '../utils/alias'
 import {
@@ -22,26 +22,22 @@ export function useToken(): [
 
   const theme = computed(() => context.value.theme || defaultTheme)
 
-  const mergedTokens = Object.assign({}, defaultSeedToken, context.value.token)
+  const mergedTokens = computed<any>(
+    () => Object.assign({}, defaultSeedToken, context.value.token) as AliasToken
+  )
 
-  const mergedDerivativeToken = getComputedToken(
-    mergedTokens,
-    theme.value,
-    formatToken
+  const overrideToken = computed<Partial<AliasToken>>(
+    () => context.value.token || {}
+  )
+
+  const mergedDerivativeToken = computed(() =>
+    getComputedToken(
+      mergedTokens.value,
+      overrideToken.value,
+      theme.value,
+      formatToken
+    )
   )
 
   return [theme, mergedDerivativeToken]
-}
-
-const getComputedToken = <
-  DerivativeToken = object,
-  DesignToken = DerivativeToken
->(
-  token: DesignToken,
-  theme: Theme<any, any>,
-  format: (token: any) => any
-) => {
-  const derivativeToken = theme.getDerivativeToken(token)
-  const mergedDerivativeToken = format({ ...derivativeToken })
-  return mergedDerivativeToken
 }

@@ -1,6 +1,9 @@
 import { generate } from '@ant-design/colors'
-import { getAlphaColor, getSolidColor } from '../../utils/colorAlgorithm'
-import type { GenerateColorMap, GenerateNeutralColorMap } from '../ColorMap'
+import type {
+  GenerateColorMap,
+  GenerateNeutralColorMap
+} from '../../interface/ColorMap'
+import { getAlphaColor, getSolidColor } from './colorAlgorithm'
 
 export const generateColorPalettes: GenerateColorMap = (baseColor: string) => {
   const colors = generate(baseColor)

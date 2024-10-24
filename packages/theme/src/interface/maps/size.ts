@@ -3,6 +3,7 @@ export interface SizeMapToken {
   sizeXL: number
   sizeLG: number
   sizeMD: number
+  sizeMS: number
   size: number
   sizeSM: number
   sizeXS: number
