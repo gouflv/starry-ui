@@ -2,7 +2,7 @@
 
 exports[`should it works > default designs token 1`] = `
 {
-  "blue": "#3a8bff",
+  "blue": "#3A8BFF",
   "blue-1": "#f0f9ff",
   "blue-10": "#072266",
   "blue-2": "#def0ff",

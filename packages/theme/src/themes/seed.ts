@@ -1,7 +1,7 @@
 import { PresetColorType, SeedToken } from '../interface'
 
 export const defaultPresetColors: PresetColorType = {
-  blue: '#3a8bff',
+  blue: '#3A8BFF',
   purple: '#722ED1',
   cyan: '#13C2C2',
   green: '#52C41A',

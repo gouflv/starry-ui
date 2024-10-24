@@ -1,31 +1,39 @@
 import { computed, ComputedRef, defineComponent, PropType, provide } from 'vue'
+import { AliasToken, MapToken, SeedToken } from '../interface'
+import defaultAlgoliaTheme from '../themes/default'
 import { DesignTokenContext, DesignTokenContextKey } from './context'
+import { DerivativeFunc } from './theme/interface'
+import Theme from './theme/Theme'
+
+type Algorithm = DerivativeFunc<SeedToken, MapToken>
 
 export const DesignTokenProvider = defineComponent({
   props: {
-    value: {
-      type: Object as PropType<DesignTokenContext>
+    token: {
+      type: Object as PropType<Partial<AliasToken>>
+    },
+    algorithm: {
+      type: [Function, Array] as PropType<Algorithm | Algorithm[]>
     }
   },
   setup(props, { slots }) {
-    useDesignTokenProvider(computed(() => props.value!))
+    // TODO: support nested provider, need to merge token and theme
+    // const parent = inject<ComputedRef<DesignTokenContext>>(
+    //   DesignTokenContextKey
+    // )
+
+    useDesignTokenProvider(
+      computed(() => ({
+        token: props.token || {},
+        theme: new Theme(props.algorithm || defaultAlgoliaTheme)
+      }))
+    )
     return () => {
       return slots.default?.()
     }
   }
 })
 
-export const useDesignTokenProvider = (
-  value: ComputedRef<DesignTokenContext>
-) => {
+const useDesignTokenProvider = (value: ComputedRef<DesignTokenContext>) => {
   provide(DesignTokenContextKey, value)
-  // TODO: remove
-  // watch(
-  //   value,
-  //   () => {
-  //     globalDesignTokenApi.value = unref(value)
-  //     triggerRef(globalDesignTokenApi)
-  //   },
-  //   { immediate: true, deep: true }
-  // )
 }

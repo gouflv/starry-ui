@@ -1,10 +1,13 @@
 <template>
-  <div>
-    <span v-for="(v, t) in token" :key="t">{{ t }}:{{ v }}</span>
-  </div>
+  {{ value }}
 </template>
 
 <script setup lang="ts">
 import { useToken } from '@starry/theme'
+import { reduce } from 'lodash-es'
+import { computed } from 'vue'
 const [, token] = useToken()
+const value = computed(() =>
+  reduce(token.value, (acc, v, n) => acc + `${n}:${v};`, '')
+)
 </script>
