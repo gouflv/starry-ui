@@ -416,50 +416,6 @@ exports[`should it works with custom seed token > custom seed token 1`] = `
 }
 `;
 
-exports[`should it works with custom seed token > custom seed token 2`] = `
-{
-  "colorBgContainerDisabled": "rgba(0, 0, 255, 0.04)",
-  "colorBgSpotlight": "rgba(0, 0, 255, 0.85)",
-  "colorBgTextActive": "rgba(0, 0, 255, 0.15)",
-  "colorBgTextHover": "rgba(0, 0, 255, 0.06)",
-  "colorFill": "rgba(0, 0, 255, 0.15)",
-  "colorFillAlter": "rgba(0, 0, 255, 0.02)",
-  "colorFillContent": "rgba(0, 0, 255, 0.06)",
-  "colorFillContentHover": "rgba(0, 0, 255, 0.15)",
-  "colorFillQuaternary": "rgba(0, 0, 255, 0.02)",
-  "colorFillSecondary": "rgba(0, 0, 255, 0.06)",
-  "colorFillTertiary": "rgba(0, 0, 255, 0.04)",
-  "colorIcon": "rgba(0, 0, 255, 0.45)",
-  "colorIconHover": "rgba(0, 0, 255, 0.88)",
-  "colorPrimary": "red",
-  "colorPrimaryActive": "#d90007",
-  "colorPrimaryBg": "#ffeae6",
-  "colorPrimaryBgHover": "#ffafa3",
-  "colorPrimaryBorder": "#ff887a",
-  "colorPrimaryBorderHover": "#ff5d52",
-  "colorPrimaryHover": "#ff3029",
-  "colorPrimaryText": "#ff0000",
-  "colorPrimaryTextActive": "#d90007",
-  "colorPrimaryTextHover": "#ff3029",
-  "colorText": "rgba(0, 0, 255, 0.88)",
-  "colorTextBase": "blue",
-  "colorTextDescription": "rgba(0, 0, 255, 0.45)",
-  "colorTextDisabled": "rgba(0, 0, 255, 0.25)",
-  "colorTextHeading": "rgba(0, 0, 255, 0.88)",
-  "colorTextLabel": "rgba(0, 0, 255, 0.65)",
-  "colorTextPlaceholder": "rgba(0, 0, 255, 0.25)",
-  "colorTextQuaternary": "rgba(0, 0, 255, 0.25)",
-  "colorTextSecondary": "rgba(0, 0, 255, 0.65)",
-  "colorTextTertiary": "rgba(0, 0, 255, 0.45)",
-  "controlItemBgActive": "#ffeae6",
-  "controlItemBgActiveDisabled": "rgba(0, 0, 255, 0.15)",
-  "controlItemBgActiveHover": "#ffafa3",
-  "controlItemBgHover": "rgba(0, 0, 255, 0.04)",
-  "controlOutline": "rgba(255, 45, 5, 0.1)",
-  "controlTmpOutline": "rgba(0, 0, 255, 0.02)",
-}
-`;
-
 exports[`should it works with custom seed token 2 > custom seed token 1`] = `
 {
   "colorBgContainerDisabled": "rgba(0, 0, 255, 0.04)",

@@ -1,0 +1,14 @@
+{
+  "name": "tests",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.4",
+    "@types/lodash-es": "^4.17.12",
+    "@vue/test-utils": "^2.4.6",
+    "lodash-es": "^4.17.21",
+    "vitest": "^2.1.3"
+  }
+}
