@@ -6,3 +6,11 @@ test('should TokenRender works', () => {
   const vm = mount(TokenRender)
   expect(vm.html()).toMatchSnapshot('all tokens')
 })
+
+test('should ThemeProvider works', () => {
+  const app = {
+    template: `
+      
+    `
+  }
+})

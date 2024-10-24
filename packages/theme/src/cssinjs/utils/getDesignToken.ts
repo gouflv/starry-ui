@@ -7,7 +7,7 @@ import createTheme from '../theme/createTheme'
 import { DerivativeFunc } from '../theme/interface'
 
 type ThemeConfig = {
-  token: Partial<AliasToken>
+  token?: Partial<AliasToken>
   derivative?:
     | DerivativeFunc<SeedToken, MapToken>
     | DerivativeFunc<SeedToken, MapToken>[]

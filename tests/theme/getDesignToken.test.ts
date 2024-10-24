@@ -1,7 +1,8 @@
-import { isEqual } from 'lodash-es'
+import { themes } from '@starry/theme'
 import { beforeEach, expect, test } from 'vitest'
 import getDesignToken from '../../packages/theme/src/cssinjs/utils/getDesignToken'
 import { GlobalToken } from '../../packages/theme/src/interface'
+import { objectDiff } from '../utils'
 
 let originToken: GlobalToken
 
@@ -45,12 +46,18 @@ test('should it works with custom map token', () => {
   expect(objectDiff(token, originToken)).toMatchSnapshot('custom map token')
 })
 
-function objectDiff(a: any, b: any) {
-  let diff: { [key: string]: any } = {}
-  for (const key in a) {
-    if (!isEqual(a[key], b[key])) {
-      diff[key] = a[key]
-    }
-  }
-  return diff
-}
+test('should it works with compact algorithm', () => {
+  const token = getDesignToken({
+    token: {},
+    derivative: [themes.default, themes.compact]
+  })
+  expect(objectDiff(token, originToken)).toMatchSnapshot('compact algorithm')
+})
+
+test('should it works with loosen algorithm', () => {
+  const token = getDesignToken({
+    token: {},
+    derivative: [themes.default, themes.loosen]
+  })
+  expect(objectDiff(token, originToken)).toMatchSnapshot('loosen algorithm')
+})
