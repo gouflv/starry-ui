@@ -9,24 +9,34 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '首页', link: '/' },
-      { text: '设计', link: '/design/theme' },
-      { text: '开发', link: '/develop' },
-      { text: '组件', link: '/components' },
+      { text: '设计', link: '/design/' },
+      { text: '研发', link: '/develop/' },
+      { text: '组件', link: '/components/' },
       { text: '主题编辑', link: '/theme-editor' }
     ],
 
-    sidebar: [
-      {
-        text: '设计',
-        items: [
-          {
-            text: '主题',
-            link: '/design/theme'
-          },
-          { text: '颜色', link: '/design/colors' }
-        ]
-      }
-    ],
+    sidebar: {
+      '/design/': [
+        {
+          text: '设计',
+          items: [
+            { text: '色彩', link: '/design/colors' },
+            { text: '主题', link: '/design/theme' }
+          ]
+        }
+      ],
+      '/develop/': [
+        {
+          text: '研发',
+          items: [{ text: '快速上手' }, { text: '主题定制' }]
+        }
+      ],
+      '/components/': []
+    },
+
+    outline: {
+      level: [2, 3]
+    },
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
