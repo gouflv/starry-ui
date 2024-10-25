@@ -1,52 +1,31 @@
-import { useToken, type GlobalToken } from '@starry/theme'
+import { getDesignToken, type GlobalToken } from '@starry/theme'
+import { omit } from 'lodash-es'
 import { defineStore } from 'pinia'
 import { computed, ref, watch } from 'vue'
 
 export const useEditorStore = defineStore('editor', () => {
-  // global token
-  const { token } = useToken()
+  const token = ref(getDesignToken())
 
-  const original = ref<GlobalToken>()
-  const data = ref({} as GlobalToken)
-  watch(
-    token,
-    () => {
-      original.value = data.value = { ...token.value }
-    },
-    {
-      immediate: true
-    }
-  )
+  const dirty = ref<Partial<GlobalToken>>({})
 
-  const dirty = computed(() => {
-    const keys = Object.keys(data.value) as unknown as Array<keyof GlobalToken>
-
-    const dirty: Partial<GlobalToken> = keys.reduce((acc, key) => {
-      if (
-        original.value &&
-        data.value &&
-        original.value[key] !== data.value[key]
-      ) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        acc[key] = data.value[key] as any
-      }
-      return acc
-    }, {} as Partial<GlobalToken>)
-    return dirty
+  watch(dirty, () => {
+    // update token
+    token.value = getDesignToken({
+      token: dirty.value
+    })
   })
 
   function set(name: keyof GlobalToken, value: string | number) {
-    data.value = {
-      ...data.value,
+    dirty.value = {
+      ...dirty.value,
       [name]: value
     }
   }
+
   function reset(name: keyof GlobalToken) {
-    data.value = {
-      ...data.value,
-      [name]: original.value![name]
-    }
+    dirty.value = omit(dirty.value, name)
   }
+
   function checkDirty(name: keyof GlobalToken) {
     return computed(() => {
       return dirty.value[name as keyof GlobalToken] !== undefined
@@ -54,7 +33,7 @@ export const useEditorStore = defineStore('editor', () => {
   }
 
   return {
-    token: data,
+    token,
     dirty,
     set,
     reset,
