@@ -8,8 +8,8 @@
     <div
       :class="[
         {
-          'text-white/80': isDarkColor(value),
-          'text-black/80': !isDarkColor(value)
+          'text-white/80!': isDarkColor(value),
+          'text-black/80!': !isDarkColor(value)
         }
       ]"
     >
@@ -17,10 +17,10 @@
     </div>
     <code
       :class="[
-        'text-sm text-slate-6',
+        'text-xs! p-0! bg-transparent!',
         {
-          'text-white/80': isDarkColor(value),
-          'text-black/80': !isDarkColor(value)
+          'text-white/80!': isDarkColor(value),
+          'text-black/80!': !isDarkColor(value)
         }
       ]"
       >{{ value }}</code
@@ -29,9 +29,9 @@
 </template>
 
 <script setup lang="ts">
-import { isDarkColor } from '@/utils/color'
 import type { GlobalToken } from '@starry/theme'
 import { computed } from 'vue'
+import { isDarkColor } from '../../utils/color'
 
 const props = defineProps<{
   token: GlobalToken

@@ -48,11 +48,11 @@
 </template>
 
 <script setup lang="ts">
-import ColorPicker from '@/components/ColorPicker.vue'
 import { CaretRightOutlined } from '@ant-design/icons-vue'
 import type { GlobalToken } from '@starry/theme'
 import { Button, Collapse, CollapsePanel, InputNumber } from 'ant-design-vue'
 import { ref } from 'vue'
+import ColorPicker from '../../../components/ColorPicker.vue'
 import { useEditorStore } from '../store/useEditorStore'
 import MapTokenSubItem from './MapTokenSubItem.vue'
 

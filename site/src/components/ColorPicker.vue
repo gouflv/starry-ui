@@ -27,11 +27,11 @@
 </template>
 
 <script setup lang="ts">
-import { fixRGBA2Hex } from '@/utils/color'
 import { Popover } from 'ant-design-vue'
 import { ref } from 'vue'
 import { ColorPicker } from 'vue3-colorpicker'
 import 'vue3-colorpicker/style.css'
+import { fixRGBA2Hex } from '../utils/color'
 
 defineProps<{
   value: string

@@ -4,13 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
-    "preview": "vite preview",
-    "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --fix",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
@@ -45,6 +44,7 @@
     "unocss": "^0.63.6",
     "vite": "^5.4.8",
     "vite-plugin-vue-devtools": "^7.4.6",
+    "vitepress": "^1.4.1",
     "vue-tsc": "^2.1.6"
   }
 }
