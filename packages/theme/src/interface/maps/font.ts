@@ -13,8 +13,17 @@ export interface FontMapToken {
   //
   // Line height
 
+  /**
+   * @name 小型字体行高
+   */
   lineHeightSM: number
+  /**
+   * @name 正常字体行高
+   */
   lineHeight: number
+  /**
+   * @name 大型字体行高
+   */
   lineHeightLG: number
 
   lineHeightHeading1: number
