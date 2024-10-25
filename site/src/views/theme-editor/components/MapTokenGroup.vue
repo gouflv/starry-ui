@@ -5,8 +5,13 @@
     </div>
 
     <div v-if="data.name" class="mb-2 flex items-center justify-between">
-      <div class="text-blue-5 font-semibold">
-        {{ data.name }}
+      <div class="flex items-center">
+        <div class="text-blue-5 font-semibold">
+          {{ data.name }}
+        </div>
+        <div v-if="dirty">
+          <Button type="link" danger @click="onReset">重置</Button>
+        </div>
       </div>
       <div>
         <ColorPicker
@@ -46,7 +51,7 @@
 import ColorPicker from '@/components/ColorPicker.vue'
 import { CaretRightOutlined } from '@ant-design/icons-vue'
 import type { GlobalToken } from '@starry/theme'
-import { Collapse, CollapsePanel, InputNumber } from 'ant-design-vue'
+import { Button, Collapse, CollapsePanel, InputNumber } from 'ant-design-vue'
 import { ref } from 'vue'
 import { useEditorStore } from '../store/useEditorStore'
 import MapTokenSubItem from './MapTokenSubItem.vue'
@@ -63,6 +68,8 @@ export type MapGroupItem = TokenMeta & {
   map?: Array<TokenMeta & { name: keyof GlobalToken }>
 }
 
+const { set, reset, checkDirty } = useEditorStore()
+
 const props = defineProps<{
   token: GlobalToken
   data: MapGroupItem
@@ -72,10 +79,14 @@ const active = ref<string[]>([])
 
 const dataType = props.data.dataType || 'color'
 
-const { set } = useEditorStore()
+const dirty = checkDirty(props.data.name!)
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function onUpdate(value: any) {
   set(props.data.name!, value)
+}
+
+function onReset() {
+  reset(props.data.name!)
 }
 </script>
