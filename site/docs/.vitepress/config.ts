@@ -1,37 +1,50 @@
 import UnoCSS from 'unocss/vite'
 import { defineConfig } from 'vitepress'
 
-// https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: 'Starry UI',
   description: 'A VitePress Site',
   themeConfig: {
-    // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '首页', link: '/' },
       { text: '设计', link: '/design/' },
       { text: '研发', link: '/develop/' },
       { text: '组件', link: '/components/' },
+      { text: '工具', link: '/utilities/' },
       { text: '主题编辑', link: '/theme-editor' }
     ],
 
     sidebar: {
       '/design/': [
         {
-          text: '设计',
           items: [
-            { text: '色彩', link: '/design/colors' },
-            { text: '主题', link: '/design/theme' }
+            { text: '设计规范', link: '/design/' },
+            { text: '色彩', link: '/design/colors' }
           ]
         }
       ],
       '/develop/': [
         {
-          text: '研发',
-          items: [{ text: '快速上手' }, { text: '主题定制' }]
+          items: [
+            { text: 'Starry UI for Vue', link: '/develop/' },
+            { text: '快速上手' }
+          ]
+        },
+        {
+          items: [
+            { text: '主题', link: '/develop/theme' },
+            { text: '快速上手' }
+          ]
+        },
+        {
+          items: [{ text: '主题定制' }]
         }
       ],
-      '/components/': []
+      '/components/': [
+        {
+          items: [{ text: '组件总览', link: '/components/' }]
+        }
+      ]
     },
 
     outline: {
@@ -43,6 +56,9 @@ export default defineConfig({
     ]
   },
   vite: {
-    plugins: [UnoCSS()]
+    plugins: [
+      //@ts-ignore
+      UnoCSS()
+    ]
   }
 })
