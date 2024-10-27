@@ -27,17 +27,18 @@ export default defineConfig({
         {
           items: [
             { text: 'Starry UI for Vue', link: '/develop/' },
-            { text: '快速上手' }
+            { text: '快速上手' },
+            { text: '主题定制' }
           ]
         },
         {
           items: [
             { text: '主题', link: '/develop/theme' },
-            { text: '快速上手' }
+            { text: '在项目中引入主题', link: '/develop/use-theme' }
           ]
         },
         {
-          items: [{ text: '主题定制' }]
+          items: []
         }
       ],
       '/components/': [

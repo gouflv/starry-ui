@@ -1,10 +1,12 @@
 # 主题
 
-在 Starry UI 中，我们将主题抽象到一个独立的库 `@starry/theme` 中，以便于在不同的平台和框架中使用。 主题库 `@starry/theme` 提供了一套完整的主题方案，包括 Token、梯度算法、模式算法和 CSS-in-JS 运行时方案等，使得开发人员可以快速使用和定制主题。
+**主题** 是用于统一界面风格和视觉效果的配置集合。 其中 Design Token 是设计系统中用来存储视觉样式的最小单位，包括颜色、字体大小、边距、动画等。
+
+在 Starry UI 中，我们将主题抽象到一个独立的主题库 `@starry/theme` 中，以便于在不同的平台和框架中使用。 主题库提供了一套完整的主题方案，包括 Token、梯度算法、模式算法和 CSS-in-JS 运行时方案等，使得开发人员可以快速使用和定制主题。
 
 ## Design Token
 
-**Design Token** 是设计系统中用来存储视觉样式的最小单位，包括颜色、字体大小、边距、动画等。我们将 Design Token 抽象成三层结构，分别是 Seed Token、Map Token 和 Alias Token。
+我们将 Design Token 抽象成三层结构，分别是 Seed Token、Map Token 和 Alias Token。
 
 ::: tip
 在大部分情况下，使用 Seed Token 就可以满足定制主题的需要。
