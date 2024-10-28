@@ -1,7 +1,7 @@
-import { computed, ComputedRef, defineComponent, PropType, provide } from 'vue'
+import { computed, defineComponent, PropType, provide } from 'vue'
 import { AliasToken, MapToken, SeedToken } from '../interface'
 import defaultAlgoliaTheme from '../themes/default'
-import { DesignTokenContext, DesignTokenContextKey } from './context'
+import { DesignTokenContextKey } from './context'
 import { DerivativeFunc } from './theme/interface'
 import Theme from './theme/Theme'
 
@@ -22,7 +22,8 @@ export const DesignTokenProvider = defineComponent({
     //   DesignTokenContextKey
     // )
 
-    useDesignTokenProvider(
+    provide(
+      DesignTokenContextKey,
       computed(() => ({
         token: props.token || {},
         theme: new Theme(props.algorithm || defaultAlgoliaTheme)
@@ -33,7 +34,3 @@ export const DesignTokenProvider = defineComponent({
     }
   }
 })
-
-const useDesignTokenProvider = (value: ComputedRef<DesignTokenContext>) => {
-  provide(DesignTokenContextKey, value)
-}

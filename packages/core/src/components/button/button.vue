@@ -1,12 +1,46 @@
-<script lang="ts">
-import { defineComponent, h } from 'vue'
+<script setup lang="ts">
+import { useConfig } from '@/uses/config'
+import { cx } from '@emotion/css'
+import { useToken } from '@starry/theme'
+import { computed } from 'vue'
+import {
+  genButtonSharedStyle,
+  genButtonSizeStyle,
+  genButtonTypeStyle
+} from './button.style'
 import { propsType } from './types'
 
-export default defineComponent({
-  name: 'SButton',
-  props: propsType(),
-  setup() {
-    return () => h('button', 'Hello World')
-  }
+const { token } = useToken()
+const { config } = useConfig()
+
+defineOptions({
+  name: 'SButton'
+})
+
+const props = defineProps(propsType())
+const slots = defineSlots<{
+  default: any
+  icon: any
+}>()
+const emits = defineEmits<{
+  click: [MouseEvent]
+}>()
+
+const mergedSize = computed(() => props.size || config.value.size)
+
+const classes = computed(() => {
+  return cx(
+    `${config.value.prefixCls}-button`,
+    genButtonSharedStyle(token.value),
+    genButtonTypeStyle(token.value, props.type),
+    genButtonSizeStyle(token.value, mergedSize.value)
+  )
 })
 </script>
+
+<template>
+  <button :class="classes">
+    <slot name="icon" />
+    <slot />
+  </button>
+</template>

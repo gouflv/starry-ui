@@ -50,6 +50,7 @@
     "vue-tsc": "^2.1.6"
   },
   "dependencies": {
+    "@starry/theme": "workspace:*",
     "@emotion/css": "^11.13.4",
     "@vueuse/core": "^11.1.0",
     "vue-types": "^5.1.3"
