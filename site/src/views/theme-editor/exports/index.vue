@@ -53,12 +53,12 @@ const code = computed(() => {
     case 'less':
     case 'scss':
       return transformTokenToCSSVariable(token.value, {
-        prefix: prefix.value ? 'sy' : '',
+        prefix: prefix.value ? 'st' : '',
         lang: activeKey.value
       })
     case 'css':
       return transformTokenToCSSVariable(token.value, {
-        prefix: prefix.value ? 'sy' : '',
+        prefix: prefix.value ? 'st' : '',
         lang: activeKey.value,
         scope: ':root'
       })

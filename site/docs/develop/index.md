@@ -21,7 +21,7 @@ Starry UI for Vue 是基于设计系统的 Vue 组件库，适合企业级中后
 npm install @starry-ui/vue
 ```
 
-## 示例
+### 示例
 
 ```tsx
 import { Button } from '@starry-ui/vue'
