@@ -1,1 +1,1 @@
-export { useConfig } from './useConfig'
+export { useConfig } from './context'

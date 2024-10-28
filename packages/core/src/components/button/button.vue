@@ -4,6 +4,7 @@ import { cx } from '@emotion/css'
 import { useToken } from '@starry/theme'
 import { computed } from 'vue'
 import {
+  genButtonBlockStyle,
   genButtonSharedStyle,
   genButtonSizeStyle,
   genButtonTypeStyle
@@ -11,7 +12,7 @@ import {
 import { propsType } from './types'
 
 const { token } = useToken()
-const { config } = useConfig()
+const config = useConfig()
 
 defineOptions({
   name: 'SButton'
@@ -27,19 +28,33 @@ const emits = defineEmits<{
 }>()
 
 const mergedSize = computed(() => props.size || config.value.size)
+const mergedDisabled = computed(() => props.disabled)
 
 const classes = computed(() => {
   return cx(
-    `${config.value.prefixCls}-button`,
+    `${config.value.prefixCls}Button`,
     genButtonSharedStyle(token.value),
     genButtonTypeStyle(token.value, props.type),
-    genButtonSizeStyle(token.value, mergedSize.value)
+    genButtonSizeStyle(token.value, mergedSize.value),
+    props.block && genButtonBlockStyle(),
+    props.danger && 'danger'
   )
 })
+
+function onClick(e: MouseEvent) {
+  if (mergedDisabled.value || props.loading) return
+  emits('click', e)
+}
 </script>
 
 <template>
-  <button :class="classes">
+  <button
+    v-bind="$attrs"
+    :title="title"
+    :disabled="mergedDisabled"
+    :class="[classes, $attrs.class]"
+    @click="onClick"
+  >
     <slot name="icon" />
     <slot />
   </button>

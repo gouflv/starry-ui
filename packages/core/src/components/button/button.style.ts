@@ -44,7 +44,7 @@ const getHoverActiveStyle = (
 // Type
 
 const getSolidDisabledStyle = (token: AliasToken) => ({
-  '&:[disabled]': {
+  '&[disabled]': {
     cursor: 'not-allowed',
     borderColor: token.colorBorder,
     color: token.colorTextDisabled,
@@ -54,7 +54,7 @@ const getSolidDisabledStyle = (token: AliasToken) => ({
 })
 
 const getPureDisabledStyle = (token: AliasToken) => ({
-  '&:[disabled]': {
+  '&[disabled]': {
     cursor: 'not-allowed',
     color: token.colorTextDisabled
   }
@@ -77,7 +77,7 @@ const getDefaultStyle = (token: AliasToken) =>
       }
     ),
     ...getSolidDisabledStyle(token),
-    '.danger': {
+    '&.danger': {
       color: token.colorError,
       borderColor: token.colorError,
       ...getHoverActiveStyle(
@@ -112,17 +112,14 @@ const genPrimaryStyle = (token: AliasToken) =>
       }
     ),
     ...getSolidDisabledStyle(token),
-    '.danger': {
-      color: token.colorError,
-      borderColor: token.colorError,
+    '&.danger': {
+      backgroundColor: token.colorError,
       ...getHoverActiveStyle(
         token,
         {
-          color: token.colorErrorHover,
           backgroundColor: token.colorErrorHover
         },
         {
-          color: token.colorErrorActive,
           backgroundColor: token.colorErrorActive
         }
       ),
@@ -144,7 +141,7 @@ const genLinkStyle = (token: AliasToken) =>
       }
     ),
     ...getPureDisabledStyle(token),
-    '.danger': {
+    '&.danger': {
       color: token.colorError,
       ...getHoverActiveStyle(
         token,
@@ -176,7 +173,7 @@ const genTextStyle = (token: AliasToken) =>
       }
     ),
     ...getPureDisabledStyle(token),
-    '.danger': {
+    '&.danger': {
       color: token.colorError,
       ...getHoverActiveStyle(
         token,
@@ -264,3 +261,8 @@ export const genButtonSizeStyle = (token: AliasToken, size: SizeType) => {
   if (size === 'large') return genSizeLargeStyle(token)
   return genSizeMiddleStyle(token)
 }
+
+export const genButtonBlockStyle = () =>
+  css({
+    width: '100%'
+  })

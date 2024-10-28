@@ -1,5 +1,5 @@
 import type { SizeType } from '@/types'
-import { type ComputedRef, type InjectionKey } from 'vue'
+import { computed, inject, type ComputedRef, type InjectionKey } from 'vue'
 
 export type ConfigProviderContext = {
   prefixCls: string
@@ -7,10 +7,19 @@ export type ConfigProviderContext = {
 }
 
 export const defaultConfig: ConfigProviderContext = {
-  prefixCls: 'st',
+  prefixCls: 'S',
   size: 'middle'
 }
 
 export const ConfigProviderKey: InjectionKey<
   ComputedRef<ConfigProviderContext>
 > = Symbol('ConfigProviderKey')
+
+export function useConfig() {
+  const context = inject(
+    ConfigProviderKey,
+    computed(() => defaultConfig)
+  )
+
+  return context
+}

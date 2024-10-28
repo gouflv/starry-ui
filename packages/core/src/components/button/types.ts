@@ -2,12 +2,7 @@ import type { MouseEventHandler, SizeType } from '@/types'
 import type { ExtractPublicPropTypes } from 'vue'
 import { any, bool, func, object, oneOfType, string } from 'vue-types'
 
-export type ButtonType =
-  | 'default'
-  | 'primary'
-  | 'link'
-  // | 'ghost'
-  | 'text'
+export type ButtonType = 'default' | 'primary' | 'link' | 'text'
 
 export type ButtonShape = 'default' | 'circle' | 'round'
 
@@ -20,7 +15,6 @@ export const propsType = () => ({
   size: string<SizeType>().def('middle'),
   loading: oneOfType([bool(), object<{ delay?: number }>()]).def(false),
   disabled: bool(),
-  ghost: bool(),
   block: bool(),
   danger: bool(),
   icon: any(),
