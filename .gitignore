@@ -4,3 +4,4 @@ out/
 cache/
 *.log
 *.local
+*storybook.log
