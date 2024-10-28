@@ -1,7 +1,12 @@
-<template>button</template>
+<script lang="ts">
+import { defineComponent, h } from 'vue'
+import { propsType } from './types'
 
-<script setup lang="ts">
-import { buttonProps } from './types'
-
-const props = defineProps(buttonProps())
+export default defineComponent({
+  name: 'SButton',
+  props: propsType(),
+  setup() {
+    return () => h('button', 'Hello World')
+  }
+})
 </script>

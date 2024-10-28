@@ -1,4 +1,5 @@
 import type { MouseEventHandler, SizeType } from '@/types'
+import type { ExtractPublicPropTypes } from 'vue'
 import { any, bool, func, object, oneOfType, string } from 'vue-types'
 
 export type ButtonType =
@@ -13,12 +14,12 @@ export type ButtonShape = 'default' | 'circle' | 'round'
 
 export type ButtonHTMLType = 'submit' | 'button' | 'reset'
 
-export const buttonProps = () => ({
+export const propsType = () => ({
   type: string<ButtonType>().def('default'),
   htmlType: string<ButtonHTMLType>().def('button'),
   shape: string<ButtonShape>().def('default'),
-  size: string<SizeType>(),
-  loading: oneOfType([bool(), object<{ delay?: number }>()]).def(false),
+  size: string<SizeType>().def('middle'),
+  loading: oneOfType([bool(), object<{ delay?: number }>()]),
   disabled: bool(),
   ghost: bool(),
   block: bool(),
@@ -28,4 +29,4 @@ export const buttonProps = () => ({
   onClick: func<MouseEventHandler>()
 })
 
-export type ButtonProps = ReturnType<typeof buttonProps>
+export type ButtonProps = ExtractPublicPropTypes<ReturnType<typeof propsType>>
