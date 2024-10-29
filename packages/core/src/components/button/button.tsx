@@ -2,6 +2,7 @@ import { useConfig } from '@/uses/config'
 import { cx } from '@emotion/css'
 import { useToken } from '@starry/theme'
 import { computed, defineComponent } from 'vue'
+import LoadingIcon from './loading-icon'
 import {
   genButtonBlockStyle,
   genButtonLoadingStyle,
@@ -9,8 +10,7 @@ import {
   genButtonSharedStyle,
   genButtonSizeStyle,
   genButtonTypeStyle
-} from './button.style'
-import LoadingIcon from './loading-icon'
+} from './style'
 import { propsType } from './types'
 
 export default defineComponent({

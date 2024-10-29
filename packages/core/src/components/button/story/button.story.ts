@@ -1,7 +1,7 @@
 import { QuestionCircleOutlined } from '@ant-design/icons-vue'
 import type { Meta, StoryObj } from '@storybook/vue3'
 import { h, ref } from 'vue'
-import Button from './button'
+import Button from '../button'
 
 const meta: Meta<typeof Button> = {
   title: '通用/Button',
