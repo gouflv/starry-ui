@@ -206,15 +206,13 @@ export const genButtonTypeStyle = (
 // TODO: Implement shape styles
 const getCircularStyle = (token: AliasToken): CSSObject => ({
   minWidth: token.controlHeight,
-  paddingInlineStart: 0,
-  paddingInlineEnd: 0,
+  paddingInline: 0,
   borderRadius: '50%'
 })
 
 const getRoundStyle = (token: AliasToken): CSSObject => ({
   borderRadius: token.controlHeight,
-  paddingInlineStart: token.controlHeight / 2,
-  paddingInlineEnd: token.controlHeight / 2
+  paddingInline: token.controlHeight / 2
 })
 
 export const genButtonShapeStyle = (token: AliasToken, shape: string) => {
@@ -288,8 +286,7 @@ export const genButtonSizeStyle = (
     ...(iconOnly
       ? {
           width: token.controlHeight,
-          paddingInlineStart: 0,
-          paddingInlineEnd: 0,
+          paddingInline: 0,
           '> span': {
             transform: 'scale(1.143)'
           }

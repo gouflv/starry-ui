@@ -5,7 +5,7 @@ import { DesignTokenContextKey } from './context'
 import { type DerivativeFunc } from './theme/interface'
 import Theme from './theme/Theme'
 
-type Algorithm = DerivativeFunc<SeedToken, MapToken>
+export type Algorithm = DerivativeFunc<SeedToken, MapToken>
 
 export const DesignTokenProvider = defineComponent({
   props: {

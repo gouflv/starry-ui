@@ -24,22 +24,11 @@ export default defineComponent({
     const mergedSize = computed(() => props.size || config.value.size)
     const mergedDisabled = computed(() => props.disabled)
 
-    function onClick(e: MouseEvent) {
-      if (mergedDisabled.value || props.loading) return
-      emit('click', e)
-    }
+    const { icon = slots.icon?.() } = props
+    const isIconOnly = !slots.default?.()[0].children?.length && !!icon
 
-    return () => {
-      const { icon = slots.icon?.() } = props
-      const isIconOnly = !slots.default?.()[0].children?.length && !!icon
-      const iconNode =
-        icon && !props.loading ? (
-          icon
-        ) : (
-          <LoadingIcon existsIcon={!!icon} loading={props.loading} />
-        )
-
-      const classes = cx(
+    const classes = computed(() =>
+      cx(
         `${config.value.prefixCls}Button`,
         genButtonSharedStyle(token.value),
         genButtonTypeStyle(token.value, props.type),
@@ -49,13 +38,27 @@ export default defineComponent({
         props.danger && 'danger',
         props.loading && genButtonLoadingStyle(token.value)
       )
+    )
+
+    function onClick(e: MouseEvent) {
+      if (mergedDisabled.value || props.loading) return
+      emit('click', e)
+    }
+
+    return () => {
+      const iconNode =
+        icon && !props.loading ? (
+          icon
+        ) : (
+          <LoadingIcon existsIcon={!!icon} loading={props.loading} />
+        )
 
       return (
         <button
           {...{
             ...attrs,
             title: props.title,
-            class: [classes, attrs.class],
+            class: [classes.value, attrs.class],
             disabled: mergedDisabled.value,
             onClick
           }}

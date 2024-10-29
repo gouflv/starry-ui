@@ -28,7 +28,7 @@ export const Types: Story = {
     return {
       components: { Button },
       template: `
-        <div style="display:flex; align-items:center; gap: 8px">
+        <div class="cell">
           <Button type="primary">Primary</Button>
           <Button type="link">Link</Button>
           <Button type="text">Text</Button>
@@ -44,13 +44,12 @@ export const Size: Story = {
     return {
       components: { Button },
       template: `
-        <div style="display:flex; align-items:center; gap: 8px">
+        <div class="cell">
           <Button size="small">Small</Button>
           <Button size="middle">Middle</Button>
           <Button size="large">Large</Button>
         </div>
-        <br>
-        <div style="display:flex; align-items:center; gap: 8px">
+        <div class="cell">
           <Button size="small" block>Small</Button>
           <Button size="middle" block>Middle</Button>
           <Button size="large" block>Large</Button>
@@ -65,7 +64,7 @@ export const Loading: Story = {
     return {
       components: { Button, QuestionCircleOutlined },
       template: `
-        <div style="display:flex; align-items:center; gap: 8px">
+        <div class="cell">
           <Button :loading="loading" @click="loading=true">Loading</Button>
           <a @click="loading=!loading">toggle</a>
         </div>
@@ -84,7 +83,7 @@ export const Icon: Story = {
     return {
       components: { Button, QuestionCircleOutlined },
       template: `
-        <div style="display:flex; align-items:center; gap: 8px">
+        <div class="cell">
           <Button v-bind="args" :icon="icon" type="primary">
             Button
           </Button>
@@ -107,7 +106,7 @@ export const Disabled: Story = {
     return {
       components: { Button },
       template: `
-        <div style="display:flex; align-items:center; gap: 8px">
+        <div class="cell">
           <Button disabled>Disabled</Button>
           <Button disabled type="primary">Disabled</Button>
           <Button disabled type="link">Disabled</Button>
@@ -123,14 +122,13 @@ export const Danger: Story = {
     return {
       components: { Button },
       template: `
-        <div style="display:flex; align-items:center; gap: 8px">
+        <div class="cell">
           <Button danger>Danger</Button>
           <Button danger type="primary">Danger</Button>
           <Button danger type="link">Danger</Button>
           <Button danger type="text">Danger</Button>
         </div>
-        <br>
-        <div style="display:flex; align-items:center; gap: 8px">
+        <div class="cell">
           <Button danger disabled>Danger</Button>
           <Button danger type="primary" disabled>Danger</Button>
           <Button danger type="link" disabled>Danger</Button>
@@ -146,9 +144,9 @@ export const Shape: Story = {
     return {
       components: { Button, QuestionCircleOutlined },
       template: `
-        <div style="display:flex; align-items:center; gap: 8px">
+        <div class="cell">
           <Button shape="round">Round</Button>
-          <Button shape="circle">W</Button>
+          <Button shape="circle">A</Button>
           <Button shape="circle" :icon="icon"></Button>
         </div>
       `,
