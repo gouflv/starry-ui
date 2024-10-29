@@ -1,4 +1,4 @@
-import { DerivativeFunc, TokenType } from './interface'
+import type { DerivativeFunc, TokenType } from './interface'
 
 let uuid = 0
 

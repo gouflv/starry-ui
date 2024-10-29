@@ -1,8 +1,8 @@
-import { computed, defineComponent, PropType, provide } from 'vue'
-import { AliasToken, MapToken, SeedToken } from '../interface'
+import { computed, defineComponent, type PropType, provide } from 'vue'
+import type { AliasToken, MapToken, SeedToken } from '../interface'
 import defaultAlgoliaTheme from '../themes/default'
 import { DesignTokenContextKey } from './context'
-import { DerivativeFunc } from './theme/interface'
+import { type DerivativeFunc } from './theme/interface'
 import Theme from './theme/Theme'
 
 type Algorithm = DerivativeFunc<SeedToken, MapToken>

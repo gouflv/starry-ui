@@ -1,4 +1,4 @@
-import { AliasToken } from '../../interface'
+import type { AliasToken } from '../../interface'
 
 export const token2CSSVar = (token: string, prefix = '') => {
   return `--${prefix ? `${prefix}-` : ''}${token}`

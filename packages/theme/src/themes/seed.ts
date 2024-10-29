@@ -1,4 +1,4 @@
-import { PresetColorType, SeedToken } from '../interface'
+import type { PresetColorType, SeedToken } from '../interface'
 
 export const defaultPresetColors: PresetColorType = {
   blue: '#3A8BFF',

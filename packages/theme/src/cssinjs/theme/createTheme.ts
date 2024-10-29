@@ -1,4 +1,4 @@
-import { DerivativeFunc, TokenType } from './interface'
+import type { DerivativeFunc, TokenType } from './interface'
 import Theme from './Theme'
 
 export default function createTheme<

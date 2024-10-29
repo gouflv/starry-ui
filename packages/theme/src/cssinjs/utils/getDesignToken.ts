@@ -1,10 +1,10 @@
-import { AliasToken, MapToken, SeedToken } from '../../interface'
+import type { AliasToken, MapToken, SeedToken } from '../../interface'
 import { getComputedToken } from '../../internal'
 import defaultDerivative from '../../themes/default'
 import seedToken from '../../themes/seed'
 import formatToken from '../../utils/alias'
 import createTheme from '../theme/createTheme'
-import { DerivativeFunc } from '../theme/interface'
+import type { DerivativeFunc } from '../theme/interface'
 
 type ThemeConfig = {
   token?: Partial<AliasToken>

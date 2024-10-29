@@ -1,4 +1,4 @@
-import { DerivativeFunc } from '../../cssinjs/theme/interface'
+import type { DerivativeFunc } from '../../cssinjs/theme/interface'
 import type { MapToken, SeedToken } from '../../interface'
 import defaultAlgorithm from '../default'
 import genControlHeight from '../shared/genControlHeight'
