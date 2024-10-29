@@ -1,6 +1,5 @@
-import type { MouseEventHandler, SizeType } from '@/types'
-import type { ExtractPublicPropTypes } from 'vue'
-import { any, bool, func, object, oneOfType, string } from 'vue-types'
+import type { SizeType } from '@/types'
+import type { ExtractPublicPropTypes, PropType } from 'vue'
 
 export type ButtonType = 'default' | 'primary' | 'link' | 'text'
 
@@ -8,18 +7,29 @@ export type ButtonShape = 'default' | 'circle' | 'round'
 
 export type ButtonHTMLType = 'submit' | 'button' | 'reset'
 
-export const propsType = () => ({
-  type: string<ButtonType>().def('default'),
-  htmlType: string<ButtonHTMLType>().def('button'),
-  shape: string<ButtonShape>().def('default'),
-  size: string<SizeType>().def('middle'),
-  loading: oneOfType([bool(), object<{ delay?: number }>()]).def(false),
-  disabled: bool(),
-  block: bool(),
-  danger: bool(),
-  icon: any(),
-  title: string(),
-  onClick: func<MouseEventHandler>()
-})
+export const propsType = {
+  type: {
+    type: String as PropType<ButtonType>,
+    default: 'default'
+  },
+  htmlType: {
+    type: String as PropType<ButtonHTMLType>,
+    default: 'button'
+  },
+  shape: {
+    type: String as PropType<ButtonShape>,
+    default: 'default'
+  },
+  size: {
+    type: String as PropType<SizeType>,
+    default: 'middle'
+  },
+  loading: Boolean,
+  disabled: Boolean,
+  block: Boolean,
+  danger: Boolean,
+  icon: Object,
+  title: String
+}
 
-export type ButtonProps = ExtractPublicPropTypes<ReturnType<typeof propsType>>
+export type ButtonPropType = ExtractPublicPropTypes<typeof propsType>

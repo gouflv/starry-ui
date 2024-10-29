@@ -11,7 +11,7 @@
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
-    "sb": "storybook dev -p 6006",
+    "sb": "storybook dev -p 6006 --no-open",
     "build-sb": "storybook build"
   },
   "devDependencies": {
@@ -50,8 +50,9 @@
     "vue-tsc": "^2.1.6"
   },
   "dependencies": {
-    "@starry/theme": "workspace:*",
+    "@ant-design/icons-vue": "^7.0.1",
     "@emotion/css": "^11.13.4",
+    "@starry/theme": "workspace:*",
     "@vueuse/core": "^11.1.0",
     "vue-types": "^5.1.3"
   }

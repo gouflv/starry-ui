@@ -1,4 +1,3 @@
-import Button from './button.vue'
-
-export type { ButtonProps } from './types'
-export { Button }
+import Button from './button'
+export default Button
+export { type ButtonPropType } from './types'

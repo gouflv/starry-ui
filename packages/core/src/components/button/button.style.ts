@@ -204,11 +204,33 @@ export const genButtonTypeStyle = (
 // Shape
 
 // TODO: Implement shape styles
+const getCircularStyle = (token: AliasToken): CSSObject => ({
+  minWidth: token.controlHeight,
+  paddingInlineStart: 0,
+  paddingInlineEnd: 0,
+  borderRadius: '50%'
+})
+
+const getRoundStyle = (token: AliasToken): CSSObject => ({
+  borderRadius: token.controlHeight,
+  paddingInlineStart: token.controlHeight / 2,
+  paddingInlineEnd: token.controlHeight / 2
+})
+
+export const genButtonShapeStyle = (token: AliasToken, shape: string) => {
+  return css(
+    shape === 'circle'
+      ? getCircularStyle(token)
+      : shape === 'round'
+        ? getRoundStyle(token)
+        : {}
+  )
+}
 
 //
 // Size
 
-const getSizeBaseStyle = (token: AliasToken) => {
+const getSizeBaseStyle = (token: AliasToken): CSSObject => {
   const {
     controlHeight,
     fontSize,
@@ -224,45 +246,65 @@ const getSizeBaseStyle = (token: AliasToken) => {
   )
   const paddingHorizontal = paddingContentHorizontal - lineWidth
 
-  return css({
+  return {
     fontSize,
     height: controlHeight,
     padding: `${paddingVertical}px ${paddingHorizontal}px`,
     borderRadius
-  })
+  }
 }
 
-const genSizeMiddleStyle = (token: AliasToken) => css(getSizeBaseStyle(token))
+const getSizeMiddleStyle = (token: AliasToken) => getSizeBaseStyle(token)
 
-const genSizeSmallStyle = (token: AliasToken) =>
-  css(
-    getSizeBaseStyle({
-      ...token,
-      controlHeight: token.controlHeightSM,
-      padding: token.paddingXS,
-      paddingContentHorizontal: token.paddingContentHorizontalSM,
-      borderRadius: token.borderRadiusSM
-    })
-  )
+const getSizeSmallStyle = (token: AliasToken) =>
+  getSizeBaseStyle({
+    ...token,
+    controlHeight: token.controlHeightSM,
+    padding: token.paddingXS,
+    paddingContentHorizontal: token.paddingContentHorizontalSM,
+    borderRadius: token.borderRadiusSM
+  })
 
-const genSizeLargeStyle = (token: AliasToken) =>
-  css(
-    getSizeBaseStyle({
-      ...token,
-      controlHeight: token.controlHeightLG,
-      padding: token.paddingLG,
-      paddingContentHorizontal: token.paddingContentHorizontalLG,
-      borderRadius: token.borderRadiusLG
-    })
-  )
+const getSizeLargeStyle = (token: AliasToken) =>
+  getSizeBaseStyle({
+    ...token,
+    controlHeight: token.controlHeightLG,
+    padding: token.paddingLG,
+    paddingContentHorizontal: token.paddingContentHorizontalLG,
+    borderRadius: token.borderRadiusLG
+  })
 
-export const genButtonSizeStyle = (token: AliasToken, size: SizeType) => {
-  if (size === 'small') return genSizeSmallStyle(token)
-  if (size === 'large') return genSizeLargeStyle(token)
-  return genSizeMiddleStyle(token)
+export const genButtonSizeStyle = (
+  token: AliasToken,
+  size: SizeType,
+  iconOnly: boolean
+) => {
+  return css({
+    ...(size === 'small'
+      ? getSizeSmallStyle(token)
+      : size === 'large'
+        ? getSizeLargeStyle(token)
+        : getSizeMiddleStyle(token)),
+    ...(iconOnly
+      ? {
+          width: token.controlHeight,
+          paddingInlineStart: 0,
+          paddingInlineEnd: 0,
+          '> span': {
+            transform: 'scale(1.143)'
+          }
+        }
+      : {})
+  })
 }
 
 export const genButtonBlockStyle = () =>
   css({
     width: '100%'
+  })
+
+export const genButtonLoadingStyle = (token: AliasToken) =>
+  css({
+    opacity: 0.6,
+    cursor: 'default'
   })

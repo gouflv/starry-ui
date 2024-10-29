@@ -1,6 +1,7 @@
+import { QuestionCircleOutlined } from '@ant-design/icons-vue'
 import type { Meta, StoryObj } from '@storybook/vue3'
-
-import Button from './button.vue'
+import { h, ref } from 'vue'
+import Button from './button'
 
 const meta: Meta<typeof Button> = {
   title: '通用/Button',
@@ -14,7 +15,7 @@ export const Default: Story = {
   render: (args) => {
     return {
       components: { Button },
-      template: '<Button>Default</Button>',
+      template: '<Button v-bind="args">Default</Button>',
       setup() {
         return { args }
       }
@@ -27,7 +28,7 @@ export const Types: Story = {
     return {
       components: { Button },
       template: `
-        <div>
+        <div style="display:flex; align-items:center; gap: 8px">
           <Button type="primary">Primary</Button>
           <Button type="link">Link</Button>
           <Button type="text">Text</Button>
@@ -43,12 +44,13 @@ export const Size: Story = {
     return {
       components: { Button },
       template: `
-        <div>
+        <div style="display:flex; align-items:center; gap: 8px">
           <Button size="small">Small</Button>
           <Button size="middle">Middle</Button>
           <Button size="large">Large</Button>
         </div>
-        <div>
+        <br>
+        <div style="display:flex; align-items:center; gap: 8px">
           <Button size="small" block>Small</Button>
           <Button size="middle" block>Middle</Button>
           <Button size="large" block>Large</Button>
@@ -59,14 +61,43 @@ export const Size: Story = {
 }
 
 export const Loading: Story = {
-  render: () => {
+  render: (args) => {
     return {
-      components: { Button },
+      components: { Button, QuestionCircleOutlined },
       template: `
-        <div>
-          <Button loading>Loading</Button>
+        <div style="display:flex; align-items:center; gap: 8px">
+          <Button :loading="loading" @click="loading=true">Loading</Button>
+          <a @click="loading=!loading">toggle</a>
         </div>
-      `
+      `,
+      setup() {
+        const loading = ref(false)
+        return { loading }
+      }
+    }
+  },
+  args: { loading: true }
+}
+
+export const Icon: Story = {
+  render: (args) => {
+    return {
+      components: { Button, QuestionCircleOutlined },
+      template: `
+        <div style="display:flex; align-items:center; gap: 8px">
+          <Button v-bind="args" :icon="icon" type="primary">
+            Button
+          </Button>
+          <Button v-bind="args">
+            <QuestionCircleOutlined v-slot:icon/>
+            Button
+          </Button>
+        </div>
+      `,
+      setup() {
+        const icon = h(QuestionCircleOutlined)
+        return { args, icon }
+      }
     }
   }
 }
@@ -76,7 +107,7 @@ export const Disabled: Story = {
     return {
       components: { Button },
       template: `
-        <div>
+        <div style="display:flex; align-items:center; gap: 8px">
           <Button disabled>Disabled</Button>
           <Button disabled type="primary">Disabled</Button>
           <Button disabled type="link">Disabled</Button>
@@ -92,13 +123,39 @@ export const Danger: Story = {
     return {
       components: { Button },
       template: `
-        <div>
+        <div style="display:flex; align-items:center; gap: 8px">
           <Button danger>Danger</Button>
           <Button danger type="primary">Danger</Button>
           <Button danger type="link">Danger</Button>
           <Button danger type="text">Danger</Button>
         </div>
+        <br>
+        <div style="display:flex; align-items:center; gap: 8px">
+          <Button danger disabled>Danger</Button>
+          <Button danger type="primary" disabled>Danger</Button>
+          <Button danger type="link" disabled>Danger</Button>
+          <Button danger type="text" disabled>Danger</Button>
+        </div>
       `
+    }
+  }
+}
+
+export const Shape: Story = {
+  render: () => {
+    return {
+      components: { Button, QuestionCircleOutlined },
+      template: `
+        <div style="display:flex; align-items:center; gap: 8px">
+          <Button shape="round">Round</Button>
+          <Button shape="circle">W</Button>
+          <Button shape="circle" :icon="icon"></Button>
+        </div>
+      `,
+      setup() {
+        const icon = h(QuestionCircleOutlined)
+        return { icon }
+      }
     }
   }
 }

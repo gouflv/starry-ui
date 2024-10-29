@@ -1,7 +1,7 @@
 import type { Preview } from '@storybook/vue3'
 
 const preview: Preview = {
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   parameters: {
     controls: {
       matchers: {
