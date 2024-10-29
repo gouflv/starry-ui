@@ -3,7 +3,7 @@ import Theme from './components/Theme.vue'
 import './style.css'
 
 const preview: Preview = {
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   parameters: {
     controls: {
       matchers: {
