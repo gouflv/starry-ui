@@ -79,3 +79,28 @@ export const Align: Story = {
     dropdownWidth: 'auto'
   }
 }
+
+export const Size: Story = {
+  render: (args) => {
+    return {
+      components: { Select },
+      template: `
+        <div class="cell">
+          <Select v-bind="args" size="small" />
+          <Select v-bind="args" size="middle" />
+          <Select v-bind="args" size="large" />
+        </div>
+      `,
+      setup() {
+        return { args }
+      }
+    }
+  },
+  args: {
+    options: [
+      { label: '选项1', value: 1 },
+      { label: '选项2', value: 2 },
+      { label: '选项3', value: 3 }
+    ]
+  }
+}

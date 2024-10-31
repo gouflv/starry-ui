@@ -26,7 +26,10 @@ export const propTypes = {
     type: Boolean,
     default: true
   },
-  size: String as PropType<SizeType>,
+  size: {
+    type: String as PropType<SizeType>,
+    default: 'medium'
+  },
   listHeight: {
     type: Number,
     default: 256

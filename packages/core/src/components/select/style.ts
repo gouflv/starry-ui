@@ -1,3 +1,4 @@
+import type { SizeType } from '@/types'
 import { resetComponent, resetIcon, textEllipsis } from '@/utils/style'
 import { css } from '@emotion/css'
 import type { CSSObject } from '@emotion/css/create-instance'
@@ -9,18 +10,15 @@ export interface SelectToken extends AliasToken {
 }
 
 export function genTriggerStyle(token: SelectToken) {
-  const selectHeightWithoutBorder = token.controlHeight - token.lineWidth * 2
-  const selectionItemPadding = Math.ceil(token.fontSize * 1.25)
-
   return css({
     ...resetComponent(token),
     position: 'relative',
     display: 'inline-flex',
     backgroundColor: token.colorBgContainer,
     border: `${token.lineWidth}px ${token.lineType} ${token.colorBorder}`,
-    transition: 'all 0.3s ease-in-out',
     cursor: 'pointer',
     outline: 'none',
+    transition: 'all 0.3s ease-in-out',
 
     '&:hover, &:focus, &:active, &[data-state="open"]': {
       borderColor: token.colorPrimaryHover,
@@ -31,8 +29,6 @@ export function genTriggerStyle(token: SelectToken) {
     [`.${token.rootPrefixCls}Selection`]: {
       flex: 1,
       padding: 0,
-      paddingInlineEnd: selectionItemPadding,
-      lineHeight: `${selectHeightWithoutBorder}px`,
       textAlign: 'left',
       transition: 'all 0.3s',
       userSelect: 'none',
@@ -53,6 +49,8 @@ export function genTriggerStyle(token: SelectToken) {
       ...resetIcon(),
       position: 'absolute',
       top: '50%',
+      display: 'flex',
+      alignItems: 'center',
       insetInlineStart: 'auto',
       insetInlineEnd: token.inputPaddingHorizontalBase,
       height: token.fontSizeIcon,
@@ -61,20 +59,51 @@ export function genTriggerStyle(token: SelectToken) {
       fontSize: token.fontSizeIcon,
       lineHeight: 1,
       textAlign: 'center',
-      pointerEvents: 'none',
-      display: 'flex',
-      alignItems: 'center'
-    },
-
-    ...getSizeStyle(token)
+      pointerEvents: 'none'
+    }
   })
 }
 
-function getSizeStyle(token: SelectToken): CSSObject {
+export function genSizeStyle(token: SelectToken, size: SizeType) {
+  if (size === 'small') {
+    return css(
+      getSizeStyle({ ...token, controlHeight: token.controlHeightSM }, size)
+    )
+  }
+
+  if (size === 'large') {
+    return css(
+      getSizeStyle(
+        {
+          ...token,
+          controlHeight: token.controlHeightLG,
+          fontSize: token.fontSizeLG
+        },
+        size
+      )
+    )
+  }
+
+  return css(getSizeStyle(token, size))
+}
+
+function getSizeStyle(token: SelectToken, size: SizeType): CSSObject {
+  const { controlHeight, borderRadius, fontSize } = token
+  const selectHeightWithoutBorder = controlHeight - token.lineWidth * 2
+  const selectionItemPadding = Math.ceil(token.fontSize * 1.25)
+  const sectionPaddingInlineEnd =
+    size === 'small' ? token.fontSize * 1.5 : selectionItemPadding
+
   return {
     padding: `0 ${token.inputPaddingHorizontalBase}px`,
-    fontSize: token.fontSize,
-    borderRadius: token.borderRadius
+    fontSize: fontSize,
+    borderRadius: borderRadius,
+    // Selection
+    [`.${token.rootPrefixCls}Selection`]: {
+      padding: 0,
+      paddingInlineEnd: sectionPaddingInlineEnd,
+      lineHeight: `${selectHeightWithoutBorder}px`
+    }
   }
 }
 

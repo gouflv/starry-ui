@@ -8,6 +8,7 @@ import { Select } from 'radix-vue/namespaced'
 import { computed, ref, watch } from 'vue'
 import {
   genItemStyle,
+  genSizeStyle,
   genTriggerStyle,
   genViewportStyle,
   type SelectToken
@@ -129,7 +130,8 @@ const align = computed(() => {
 const classes = computed(() => ({
   trigger: cx([
     `${config.value.prefixCls}SelectTrigger`,
-    genTriggerStyle(token.value)
+    genTriggerStyle(token.value),
+    genSizeStyle(token.value, props.size)
   ]),
   viewport: cx([
     `${config.value.prefixCls}SelectViewport`,
