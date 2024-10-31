@@ -9,6 +9,7 @@ import { computed, ref, watch } from 'vue'
 import {
   genBorderLessStyle,
   genItemStyle,
+  genScrollAreaStyle,
   genSizeStyle,
   genTriggerStyle,
   genViewportStyle,
@@ -139,7 +140,13 @@ const classes = computed(() => ({
     `${config.value.prefixCls}SelectViewport`,
     genViewportStyle(token.value),
     css({
-      width: viewportWidth.value,
+      width: viewportWidth.value
+    })
+  ]),
+  scroll: cx([
+    `${config.value.prefixCls}SelectScroll`,
+    genScrollAreaStyle(token.value),
+    css({
       maxHeight: props.listHeight
     })
   ]),
@@ -169,15 +176,17 @@ const classes = computed(() => ({
         :align="align"
       >
         <Select.Viewport :class="classes.viewport">
-          <Select.Item
-            :class="classes.item"
-            v-for="option in options"
-            :key="option.value"
-            :value="getNormalizedValue(option.value)"
-          >
-            <Select.ItemText>{{ option.label }}</Select.ItemText>
-            <Select.ItemIndicator />
-          </Select.Item>
+          <div :class="classes.scroll">
+            <Select.Item
+              :class="classes.item"
+              v-for="option in options"
+              :key="option.value"
+              :value="getNormalizedValue(option.value)"
+            >
+              <Select.ItemText>{{ option.label }}</Select.ItemText>
+              <Select.ItemIndicator />
+            </Select.Item>
+          </div>
         </Select.Viewport>
       </Select.Content>
     </Select.Portal>

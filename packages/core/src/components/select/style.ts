@@ -111,11 +111,18 @@ export function genViewportStyle(token: SelectToken) {
   return css({
     ...resetComponent(token),
     marginTop: token.paddingXXS,
-    padding: token.paddingXXS,
     backgroundColor: token.colorBgElevated,
     borderRadius: token.borderRadiusLG,
     outline: 'none',
     boxShadow: token.boxShadowSecondary
+  })
+}
+
+export function genScrollAreaStyle(token: SelectToken) {
+  return css({
+    padding: token.paddingXXS,
+    overflowY: 'auto',
+    '-webkit-overflow-scrolling': 'touch'
   })
 }
 
