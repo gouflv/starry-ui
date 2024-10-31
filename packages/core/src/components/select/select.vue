@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useConfig } from '@/uses/config'
-import { DownOutlined } from '@ant-design/icons-vue'
+import { DownOutlined, LoadingOutlined } from '@ant-design/icons-vue'
 import { css, cx } from '@emotion/css'
 import { useToken } from '@starry/theme'
 import { useMounted, watchImmediate } from '@vueuse/core'
@@ -8,7 +8,10 @@ import { Select } from 'radix-vue/namespaced'
 import { computed, ref, watch } from 'vue'
 import {
   genBorderLessStyle,
+  genDisabledStyle,
+  genEmptyStyle,
   genItemStyle,
+  genLoadingStyle,
   genScrollAreaStyle,
   genSizeStyle,
   genTriggerStyle,
@@ -97,6 +100,27 @@ watch(
   }
 )
 
+const innerSearchValue = ref<string>()
+
+watch(
+  () => props.searchValue,
+  () => {
+    innerSearchValue.value = props.searchValue
+  }
+)
+
+//
+// Option
+
+const isFilterMode = computed(() => !!props.filterOption)
+
+const mergedOptions = computed(() => {
+  // TODO implement filter function
+  return props.options
+})
+
+const isEmpty = computed(() => mergedOptions.value.length === 0)
+
 //
 // Dropdown
 
@@ -134,7 +158,8 @@ const classes = computed(() => ({
     `${config.value.prefixCls}SelectTrigger`,
     genTriggerStyle(token.value),
     genSizeStyle(token.value, props.size),
-    !props.bordered && genBorderLessStyle(token.value)
+    !props.bordered && genBorderLessStyle(token.value),
+    props.disabled && genDisabledStyle(token.value)
   ]),
   viewport: cx([
     `${config.value.prefixCls}SelectViewport`,
@@ -150,13 +175,22 @@ const classes = computed(() => ({
       maxHeight: props.listHeight
     })
   ]),
-  item: cx([`${config.value.prefixCls}SelectItem`, genItemStyle(token.value)])
+  item: cx([`${config.value.prefixCls}SelectItem`, genItemStyle(token.value)]),
+  empty: cx([
+    `${config.value.prefixCls}SelectEmpty`,
+    genEmptyStyle(token.value)
+  ]),
+  loading: css([
+    `${config.value.prefixCls}SelectLoading`,
+    genLoadingStyle(token.value)
+  ])
 }))
 </script>
 
 <template>
   <Select.Root
     ref="trigger"
+    :disabled="disabled"
     v-model:open="innerOpen"
     v-model="innerValue"
     @update:model-value="onChange"
@@ -176,7 +210,16 @@ const classes = computed(() => ({
         :align="align"
       >
         <Select.Viewport :class="classes.viewport">
-          <div :class="classes.scroll">
+          <!-- Loading -->
+          <div v-if="loading" :class="classes.loading">
+            <LoadingOutlined />
+          </div>
+          <!-- Empty -->
+          <slot name="noFoundContent" v-else-if="isEmpty">
+            <div :class="classes.empty">{{ noFoundContent }}</div>
+          </slot>
+          <!-- Scroll -->
+          <div v-else :class="classes.scroll">
             <Select.Item
               :class="classes.item"
               v-for="option in options"

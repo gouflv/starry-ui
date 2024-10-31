@@ -20,7 +20,12 @@ export function genTriggerStyle(token: SelectToken) {
     outline: 'none',
     transition: 'all 0.3s ease-in-out',
 
-    '&:hover, &:focus, &:active, &[data-state="open"]': {
+    [[
+      '&:not([data-disabled]):hover',
+      '&:focus',
+      '&:active',
+      '&[data-state="open"]'
+    ].join(',')]: {
       borderColor: token.colorPrimaryHover,
       boxShadow: `0 0 0 ${token.controlOutlineWidth}px ${token.controlOutline}`
     },
@@ -167,5 +172,35 @@ export function genBorderLessStyle(token: SelectToken) {
     borderColor: 'transparent !important',
     backgroundColor: 'transparent !important',
     boxShadow: 'none !important'
+  })
+}
+
+export function genLoadingStyle(token: SelectToken) {
+  return css({
+    boxSizing: 'border-box',
+    padding: `${(token.controlHeight - token.fontSize * token.lineHeight) / 2}px ${token.controlPaddingHorizontal}px`,
+    height: token.controlHeight,
+    color: token.colorPrimaryText
+  })
+}
+
+export function genEmptyStyle(token: SelectToken) {
+  return css({
+    boxSizing: 'border-box',
+    padding: `${(token.controlHeight - token.fontSize * token.lineHeight) / 2}px ${token.controlPaddingHorizontal}px`,
+    height: token.controlHeight,
+    color: token.colorTextDisabled,
+    fontSize: token.fontSize,
+    userSelect: 'none'
+  })
+}
+
+export function genDisabledStyle(token: SelectToken) {
+  return css({
+    cursor: 'not-allowed',
+    borderColor: token.colorBorder,
+    color: token.colorTextDisabled,
+    backgroundColor: token.colorBgContainerDisabled,
+    boxShadow: 'none'
   })
 }

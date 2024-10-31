@@ -32,25 +32,6 @@ export const Default: Story = {
   }
 }
 
-export const Empty: Story = {
-  render: (args) => {
-    return {
-      components: { Select },
-      template: `
-        <Select v-bind="args" />
-      `,
-      setup() {
-        return { args }
-      }
-    }
-  },
-  args: {
-    open: true,
-    value: 2,
-    options: []
-  }
-}
-
 export const DropdownAlign: Story = {
   render: (args) => {
     return {
@@ -148,5 +129,58 @@ export const BorderLess: Story = {
       { label: '选项2', value: 2 },
       { label: '选项3', value: 3 }
     ]
+  }
+}
+
+export const Loading: Story = {
+  render: (args) => {
+    return {
+      components: { Select },
+      template: `
+        <Select v-bind="args" loading />
+      `,
+      setup() {
+        return { args }
+      }
+    }
+  },
+  args: {
+    open: true,
+    options: [
+      { label: '选项1', value: 1 },
+      { label: '选项2', value: 2 },
+      { label: '选项3', value: 3 }
+    ]
+  }
+}
+
+export const Empty: Story = {
+  render: (args) => {
+    return {
+      components: { Select },
+      template: `
+        <Select v-bind="args" />
+      `,
+      setup() {
+        return { args }
+      }
+    }
+  },
+  args: {
+    open: true
+  }
+}
+
+export const Disabled: Story = {
+  render: (args) => {
+    return {
+      components: { Select },
+      template: `
+        <Select v-bind="args" disabled />
+      `,
+      setup() {
+        return { args }
+      }
+    }
   }
 }

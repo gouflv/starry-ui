@@ -19,6 +19,7 @@ export const propTypes = {
   },
 
   // UI
+  loading: Boolean,
   allowClear: Boolean,
   autoFocus: Boolean,
   disabled: Boolean,
@@ -42,7 +43,10 @@ export const propTypes = {
     type: [String, Number] as PropType<'select' | 'auto' | number>,
     default: 'select'
   },
-  noFoundContent: String,
+  noFoundContent: {
+    type: String,
+    default: '暂无数据'
+  },
   placement: String as PropType<PlacementType>,
 
   // Search
