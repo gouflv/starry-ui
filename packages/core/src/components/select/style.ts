@@ -154,3 +154,11 @@ export function genItemStyle(token: SelectToken) {
     }
   })
 }
+
+export function genBorderLessStyle(token: SelectToken) {
+  return css({
+    borderColor: 'transparent !important',
+    backgroundColor: 'transparent !important',
+    boxShadow: 'none !important'
+  })
+}

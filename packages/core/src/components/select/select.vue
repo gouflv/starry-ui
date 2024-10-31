@@ -7,6 +7,7 @@ import { useMounted, watchImmediate } from '@vueuse/core'
 import { Select } from 'radix-vue/namespaced'
 import { computed, ref, watch } from 'vue'
 import {
+  genBorderLessStyle,
   genItemStyle,
   genSizeStyle,
   genTriggerStyle,
@@ -131,13 +132,15 @@ const classes = computed(() => ({
   trigger: cx([
     `${config.value.prefixCls}SelectTrigger`,
     genTriggerStyle(token.value),
-    genSizeStyle(token.value, props.size)
+    genSizeStyle(token.value, props.size),
+    !props.bordered && genBorderLessStyle(token.value)
   ]),
   viewport: cx([
     `${config.value.prefixCls}SelectViewport`,
     genViewportStyle(token.value),
     css({
-      width: viewportWidth.value
+      width: viewportWidth.value,
+      maxHeight: props.listHeight
     })
   ]),
   item: cx([`${config.value.prefixCls}SelectItem`, genItemStyle(token.value)])
@@ -159,7 +162,12 @@ const classes = computed(() => ({
       <DownOutlined :class="`${token.rootPrefixCls}Arrow`" />
     </Select.Trigger>
     <Select.Portal>
-      <Select.Content position="popper" :align="align">
+      <Select.Content
+        position="popper"
+        :avoidCollisions="true"
+        :body-lock="false"
+        :align="align"
+      >
         <Select.Viewport :class="classes.viewport">
           <Select.Item
             :class="classes.item"
