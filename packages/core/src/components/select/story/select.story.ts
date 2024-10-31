@@ -51,14 +51,14 @@ export const Empty: Story = {
   }
 }
 
-export const Align: Story = {
+export const DropdownAlign: Story = {
   render: (args) => {
     return {
       components: { Select },
       template: `
         <div class="cell">
-          <Select v-bind="args" style="width:200px" placement="bottomLeft" />
-          <Select v-bind="args" style="width:200px" placement="bottomRight" />
+          <Select v-bind="args" style="width:200px" placement="left" />
+          <Select v-bind="args" style="width:200px" placement="right" />
         </div>
       `,
       setup() {
@@ -79,7 +79,7 @@ export const Align: Story = {
   }
 }
 
-export const Align2: Story = {
+export const DropdownPlacement: Story = {
   render: (args) => {
     return {
       components: { Select },

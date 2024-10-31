@@ -85,7 +85,7 @@ onClickOutside(el, () => {
 
 <style scoped>
 .theme-switch {
-  position: absolute;
+  position: fixed;
   right: 8px;
   bottom: 8px;
   display: flex;

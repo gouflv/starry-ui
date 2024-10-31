@@ -1,2 +1,2 @@
 export type SizeType = 'small' | 'middle' | 'large'
-export type PlacementType = 'bottomLeft' | 'bottomRight'
+export type PlacementType = 'left' | 'right'

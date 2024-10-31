@@ -126,7 +126,7 @@ watch(
 // Style
 
 const align = computed(() => {
-  return props.placement === 'bottomRight' ? 'end' : 'start'
+  return props.placement === 'right' ? 'end' : 'start'
 })
 
 const classes = computed(() => ({
