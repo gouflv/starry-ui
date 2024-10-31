@@ -14,7 +14,7 @@ export const Default: Story = {
     return {
       components: { Select },
       template: `
-        <Select v-bind="args" style="width:200px" />
+        <Select v-bind="args" style="width:200px"/>
       `,
       setup() {
         return { args }
@@ -28,7 +28,8 @@ export const Default: Story = {
       { label: '选项1', value: 1 },
       { label: '选项2', value: 2 },
       { label: '选项3', value: 3 }
-    ]
+    ],
+    'onUpdate:value': (...args: any) => console.log(args)
   }
 }
 
@@ -56,7 +57,10 @@ export const Align: Story = {
     return {
       components: { Select },
       template: `
-        <Select v-bind="args" style="width:200px" />
+        <div class="cell">
+          <Select v-bind="args" style="width:200px" placement="bottomLeft" />
+          <Select v-bind="args" style="width:200px" placement="bottomRight" />
+        </div>
       `,
       setup() {
         return { args }
@@ -71,6 +75,7 @@ export const Align: Story = {
       { label: '选项2', value: 2 },
       { label: '选项3', value: 3 }
     ],
-    placement: 'bottomRight'
+
+    dropdownWidth: 'auto'
   }
 }

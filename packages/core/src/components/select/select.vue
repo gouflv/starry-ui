@@ -3,7 +3,7 @@ import { useConfig } from '@/uses/config'
 import { DownOutlined } from '@ant-design/icons-vue'
 import { css, cx } from '@emotion/css'
 import { useToken } from '@starry/theme'
-import { watchImmediate } from '@vueuse/core'
+import { useMounted, watchImmediate } from '@vueuse/core'
 import { Select } from 'radix-vue/namespaced'
 import { computed, ref, watch } from 'vue'
 import {
@@ -39,6 +39,9 @@ const slots = defineSlots<{
   noFoundContent: () => any
 }>()
 
+//
+// Value
+
 const innerValue = ref<string>()
 
 const value2RawMap = ref<Map<string, RawValue>>(new Map())
@@ -70,6 +73,18 @@ watchImmediate(
   }
 )
 
+function onChange(value: string) {
+  const rawValue = value2RawMap.value.get(value)!
+  emits(
+    'update:value',
+    rawValue,
+    props.options.find((option) => option.value === rawValue) as Option
+  )
+}
+
+//
+// State
+
 const innerOpen = ref(props.open)
 
 watch(
@@ -79,6 +94,38 @@ watch(
   }
 )
 
+//
+// Dropdown
+
+const triggerEl = ref()
+const viewportWidth = ref<string>('auto')
+const getDropdownWidth = () => {
+  if (typeof props.dropdownWidth === 'number') {
+    return `${props.dropdownWidth}px`
+  } else if (props.dropdownWidth === 'select' && triggerEl.value) {
+    return `${triggerEl.value.$el.offsetWidth}px`
+  }
+  return 'auto'
+}
+
+const mounted = useMounted()
+watch(
+  [mounted, innerOpen],
+  () => {
+    if (mounted.value && innerOpen.value) {
+      viewportWidth.value = getDropdownWidth()
+    }
+  },
+  { immediate: true, flush: 'sync' }
+)
+
+//
+// Style
+
+const align = computed(() => {
+  return props.placement === 'bottomRight' ? 'end' : 'start'
+})
+
 const classes = computed(() => ({
   trigger: cx([
     `${config.value.prefixCls}SelectTrigger`,
@@ -87,19 +134,22 @@ const classes = computed(() => ({
   viewport: cx([
     `${config.value.prefixCls}SelectViewport`,
     genViewportStyle(token.value),
-    css({})
+    css({
+      width: viewportWidth.value
+    })
   ]),
   item: cx([`${config.value.prefixCls}SelectItem`, genItemStyle(token.value)])
 }))
-
-const align = computed(() => {
-  return props.placement === 'bottomRight' ? 'end' : 'start'
-})
 </script>
 
 <template>
-  <Select.Root v-model:open="innerOpen" v-model="innerValue" ref="trigger">
-    <Select.Trigger :class="classes.trigger" v-bind="$attrs">
+  <Select.Root
+    ref="trigger"
+    v-model:open="innerOpen"
+    v-model="innerValue"
+    @update:model-value="onChange"
+  >
+    <Select.Trigger ref="triggerEl" :class="classes.trigger" v-bind="$attrs">
       <Select.Value
         :class="`${token.rootPrefixCls}Selection`"
         :placeholder="placeholder"

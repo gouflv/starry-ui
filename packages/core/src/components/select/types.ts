@@ -35,6 +35,10 @@ export const propTypes = {
     type: String,
     default: '请选择'
   },
+  dropdownWidth: {
+    type: [String, Number] as PropType<'select' | 'auto' | number>,
+    default: 'select'
+  },
   noFoundContent: String,
   placement: String as PropType<PlacementType>,
 

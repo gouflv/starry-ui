@@ -20,9 +20,11 @@ export function genTriggerStyle(token: SelectToken) {
     border: `${token.lineWidth}px ${token.lineType} ${token.colorBorder}`,
     transition: 'all 0.3s ease-in-out',
     cursor: 'pointer',
+    outline: 'none',
 
-    '&:hover, &[data-state="open"]': {
-      borderColor: token.colorPrimaryHover
+    '&:hover, &:focus, &:active, &[data-state="open"]': {
+      borderColor: token.colorPrimaryHover,
+      boxShadow: `0 0 0 ${token.controlOutlineWidth}px ${token.controlOutline}`
     },
 
     // Selection
@@ -79,6 +81,7 @@ function getSizeStyle(token: SelectToken): CSSObject {
 export function genViewportStyle(token: SelectToken) {
   return css({
     ...resetComponent(token),
+    marginTop: token.paddingXXS,
     padding: token.paddingXXS,
     backgroundColor: token.colorBgElevated,
     borderRadius: token.borderRadiusLG,
