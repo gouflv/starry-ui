@@ -1,7 +1,7 @@
 import { useConfig } from '@/uses/config'
 import { cx } from '@emotion/css'
 import { useToken } from '@starry/theme'
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, type SlotsType } from 'vue'
 import LoadingIcon from './loading-icon'
 import {
   genButtonBlockStyle,
@@ -17,6 +17,10 @@ export default defineComponent({
   name: 'SButton',
   props: propsType,
   emits: ['click'],
+  slots: Object as SlotsType<{
+    default: any
+    icon: any
+  }>,
   setup(props, { attrs, slots, emit }) {
     const { token } = useToken()
     const config = useConfig()

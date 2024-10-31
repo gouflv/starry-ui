@@ -8,6 +8,7 @@ import Theme from './theme/Theme'
 export type Algorithm = DerivativeFunc<SeedToken, MapToken>
 
 export const DesignTokenProvider = defineComponent({
+  name: 'DesignTokenProvider',
   props: {
     token: {
       type: Object as PropType<Partial<AliasToken>>
