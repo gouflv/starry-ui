@@ -37,6 +37,8 @@ export function genTriggerStyle(token: SelectToken) {
       textAlign: 'left',
       transition: 'all 0.3s',
       userSelect: 'none',
+      ...textEllipsis,
+
       '&:after': {
         display: 'inline-block',
         width: 0,

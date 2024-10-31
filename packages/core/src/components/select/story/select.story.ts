@@ -92,9 +92,9 @@ export const Size: Story = {
       components: { Select },
       template: `
         <div class="cell">
-          <Select v-bind="args" size="small" />
-          <Select v-bind="args" size="middle" />
-          <Select v-bind="args" size="large" />
+          <Select v-bind="args" size="small" style="width: 100px" />
+          <Select v-bind="args" size="middle" style="width: 100px" />
+          <Select v-bind="args" size="large" style="width: 100px" />
         </div>
       `,
       setup() {
