@@ -9,20 +9,21 @@ export interface SelectToken extends AliasToken {
   inputPaddingHorizontalBase: number
 }
 
-export function genTriggerStyle(token: SelectToken) {
+export function genSelectionStyle(token: SelectToken) {
   return css({
     ...resetComponent(token),
     position: 'relative',
     display: 'inline-flex',
     backgroundColor: token.colorBgContainer,
     border: `${token.lineWidth}px ${token.lineType} ${token.colorBorder}`,
-    cursor: 'pointer',
     outline: 'none',
     transition: 'all 0.3s ease-in-out',
+    cursor: 'pointer',
 
     [[
       '&:not([data-disabled]):hover',
-      '&:focus',
+      '&:not([data-disabled]):focus',
+      '&:not([data-disabled]):focus-within',
       '&:active',
       '&[data-state="open"]'
     ].join(',')]: {
@@ -30,24 +31,31 @@ export function genTriggerStyle(token: SelectToken) {
       boxShadow: `0 0 0 ${token.controlOutlineWidth}px ${token.controlOutline}`
     },
 
-    // Selection
-    [`.${token.rootPrefixCls}Selection`]: {
-      flex: 1,
-      padding: 0,
-      textAlign: 'left',
-      transition: 'all 0.3s',
-      userSelect: 'none',
-      ...textEllipsis,
-
-      '&:after': {
-        display: 'inline-block',
-        width: 0,
-        visibility: 'hidden',
-        content: '"\\a0"'
-      }
+    [`.${token.rootPrefixCls}Text`]: {
+      ...getTextStyle(token)
     },
 
-    [`&[data-state="open"] .${token.rootPrefixCls}Selection`]: {
+    [`.${token.rootPrefixCls}Placeholder`]: {
+      ...getTextStyle(token),
+      color: token.colorTextPlaceholder
+    },
+
+    [`.${token.rootPrefixCls}Input`]: {
+      flex: 1,
+      margin: 0,
+      padding: 0,
+      border: 'none',
+      backgroundColor: 'transparent',
+      outline: 'none',
+      color: 'inherit',
+      fontSize: 'inherit',
+      appearance: 'none'
+    },
+
+    [[
+      `&[data-state="open"] .${token.rootPrefixCls}Text`,
+      `&[data-state="open"] .${token.rootPrefixCls}Input`
+    ].join(',')]: {
       color: token.colorTextPlaceholder
     },
 
@@ -69,6 +77,23 @@ export function genTriggerStyle(token: SelectToken) {
       pointerEvents: 'none'
     }
   })
+}
+
+function getTextStyle(token: SelectToken): CSSObject {
+  return {
+    flex: 1,
+    padding: 0,
+    transition: 'color 0.5s',
+    cursor: 'pointer',
+    userSelect: 'none',
+    ...textEllipsis,
+    '&::after': {
+      display: 'inline-block',
+      width: 0,
+      visibility: 'hidden',
+      content: '"\\a0"'
+    }
+  }
 }
 
 export function genSizeStyle(token: SelectToken, size: SizeType) {
@@ -106,9 +131,14 @@ function getSizeStyle(token: SelectToken, size: SizeType): CSSObject {
     fontSize: fontSize,
     borderRadius: borderRadius,
     // Selection
-    [`.${token.rootPrefixCls}Selection`]: {
+    [[
+      `.${token.rootPrefixCls}Text`,
+      `.${token.rootPrefixCls}Placeholder`,
+      `.${token.rootPrefixCls}Input`
+    ].join(',')]: {
       padding: 0,
       paddingInlineEnd: sectionPaddingInlineEnd,
+      height: `${selectHeightWithoutBorder}px`,
       lineHeight: `${selectHeightWithoutBorder}px`
     }
   }
@@ -151,7 +181,7 @@ export function genItemStyle(token: SelectToken) {
     transition: 'background 0.3s ease',
 
     userSelect: 'none',
-    '&:hover, &:focus-visible': {
+    '&:hover, &[data-highlighted]': {
       outline: 'none',
       backgroundColor: token.controlItemBgHover
     },

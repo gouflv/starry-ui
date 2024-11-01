@@ -92,9 +92,12 @@ export const Size: Story = {
       components: { Select },
       template: `
         <div class="cell">
-          <Select v-bind="args" size="small" style="width: 100px" />
-          <Select v-bind="args" size="middle" style="width: 100px" />
-          <Select v-bind="args" size="large" style="width: 100px" />
+          <Select v-bind="args" size="small" style="width: 140px" />
+          <Select v-bind="args" size="middle" style="width: 140px" />
+          <Select v-bind="args" size="large" style="width: 140px" />
+        </div>
+        <div class="cell">
+          <Select v-bind="args" size="small" placeholder="Very looooooooog" style="width: 60px" />
         </div>
       `,
       setup() {
@@ -176,11 +179,34 @@ export const Disabled: Story = {
     return {
       components: { Select },
       template: `
-        <Select v-bind="args" disabled />
+        <div class="cell">
+          <Select v-bind="args" disabled />
+          <Select v-bind="args" disabled :bordered="false" />
+        </div>
       `,
       setup() {
         return { args }
       }
     }
+  }
+}
+
+export const Filter: Story = {
+  render: (args) => {
+    return {
+      components: { Select },
+      template: `
+        <Select v-bind="args" showSearch />
+      `,
+      setup() {
+        return { args }
+      }
+    }
+  },
+  args: {
+    options: Array.from({ length: 20 }, (_, i) => ({
+      label: `选项${i + 1}`,
+      value: i + 1
+    }))
   }
 }

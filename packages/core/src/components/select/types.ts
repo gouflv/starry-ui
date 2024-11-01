@@ -50,6 +50,7 @@ export const propTypes = {
   placement: String as PropType<PlacementType>,
 
   // Search
+  showSearch: Boolean,
   filterOption: [Boolean, Function] as PropType<
     boolean | ((input: string, option: Option) => boolean)
   >,
