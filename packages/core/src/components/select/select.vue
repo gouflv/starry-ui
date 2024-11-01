@@ -138,7 +138,7 @@ watch(
       viewportWidth.value = getDropdownWidth()
     }
   },
-  { immediate: true, flush: 'sync' }
+  { immediate: true }
 )
 
 //
@@ -184,12 +184,10 @@ const classes = computed(() => ({
 
 <template>
   <CB.Root
-    ref="trigger"
     v-model:open="innerOpen"
     v-model="innerValue"
     :display-value="getDisplayValue"
     :disabled="disabled"
-    @update:open="onOpenChange"
     @update:model-value="onValueChange"
   >
     <CB.Trigger as-child>

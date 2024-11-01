@@ -42,6 +42,7 @@ export function genSelectionStyle(token: SelectToken) {
 
     [`.${token.rootPrefixCls}Input`]: {
       flex: 1,
+      minWidth: 0,
       margin: 0,
       padding: 0,
       border: 'none',
