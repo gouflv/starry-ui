@@ -25,6 +25,9 @@ import {
   type RawValue
 } from './types'
 
+// TODO
+// 1. replace arrow icon with spin when loading, and disable dropdown open
+
 const { token: _token } = useToken()
 const token = computed<SelectToken>(() => ({
   ..._token.value,
@@ -91,6 +94,9 @@ watch(
 function onOpenChange(open: boolean) {
   innerOpen.value = open
   emits('update:open', open)
+  if (open) {
+    searchTerm.value = ''
+  }
 }
 
 const focus = ref(false)
@@ -134,9 +140,14 @@ const innerPlaceholder = computed(() => {
 const mergedDisplayValue = computed(() => {
   // search mode
   if (props.showSearch) {
-    if (hasInputSearchValue.value) return false
-
-    return displayValue.value || props.placeholder
+    // show only
+    // - placeholder
+    // - dropdown open and not input search value yet
+    if (innerOpen.value) {
+      return !hasInputSearchValue.value ? displayValue.value : false
+    } else {
+      return innerValue.value ? false : props.placeholder
+    }
   }
 
   // select mode

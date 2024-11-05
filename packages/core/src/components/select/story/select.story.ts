@@ -206,7 +206,6 @@ export const Filter: Story = {
     }
   },
   args: {
-    open: true,
     options: Array.from({ length: 20 }, (_, i) => ({
       label: `选项${i + 1}`,
       value: i + 1
