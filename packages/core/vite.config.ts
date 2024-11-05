@@ -3,7 +3,6 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
-import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -13,8 +12,7 @@ export default defineConfig({
     dts({
       tsconfigPath: './tsconfig.app.json',
       rollupTypes: true
-    }),
-    vueDevTools()
+    })
   ],
   resolve: {
     alias: {

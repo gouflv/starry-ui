@@ -1,6 +1,7 @@
 import pluginVitest from '@vitest/eslint-plugin'
 import skipFormatting from '@vue/eslint-config-prettier/skip-formatting'
 import vueTsEslintConfig from '@vue/eslint-config-typescript'
+import pluginStorybook from 'eslint-plugin-storybook'
 import pluginVue from 'eslint-plugin-vue'
 
 export default [
@@ -21,15 +22,19 @@ export default [
     ...pluginVitest.configs.recommended,
     files: ['src/**/__tests__/*']
   },
-  skipFormatting,
 
   {
-    extends: ['plugin:storybook/recommended']
+    ...pluginStorybook,
+    files: ['**/*.story.{ts,tsx}']
   },
 
   {
     rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
       'vue/multi-word-component-names': 'off'
     }
-  }
+  },
+
+  skipFormatting
 ]
