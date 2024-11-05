@@ -3,7 +3,7 @@ import { useConfig } from '@/uses/config'
 import { DownOutlined, LoadingOutlined } from '@ant-design/icons-vue'
 import { css, cx } from '@emotion/css'
 import { useToken } from '@starry/theme'
-import { useMounted, watchImmediate } from '@vueuse/core'
+import { useDebounceFn, useMounted } from '@vueuse/core'
 import { Combobox as CB } from 'radix-vue/namespaced'
 import { computed, ref, watch } from 'vue'
 import {
@@ -56,9 +56,9 @@ defineSlots<{
 //
 // Value
 
-const innerValue = ref<RawValue>()
+const innerValue = ref(props.value)
 
-watchImmediate(
+watch(
   () => props.value,
   () => {
     innerValue.value = props.value
@@ -92,9 +92,13 @@ watch(
 )
 
 function onOpenChange(open: boolean) {
+  if (props.disabled) return
+
   innerOpen.value = open
   emits('update:open', open)
+
   if (open) {
+    // clear search term when open
     searchTerm.value = ''
   }
 }
@@ -103,21 +107,21 @@ const focus = ref(false)
 
 // Search
 const searchTerm = ref<string>()
-
-/**
- * Search input active
- */
 const isSearchInputMode = computed(() => props.showSearch && innerOpen.value)
-
-/**
- * Search input has value
- */
 const hasInputSearchValue = computed(
   () => isSearchInputMode.value && !!searchTerm.value
 )
 
+const searchDebounceFn = useDebounceFn(
+  (value: string) => emits('search', value),
+  props.searchEventDebounce
+)
+
 function onSearchTermChange(value: string) {
-  searchTerm.value = value
+  searchTerm.value = value.trim()
+  if (props.showSearch && !props.filterOption) {
+    searchDebounceFn(searchTerm.value)
+  }
 }
 
 // Text
@@ -131,9 +135,7 @@ const displayValue = computed(() => {
 
 const innerPlaceholder = computed(() => {
   if (hasValue.value) return false
-
   if (hasInputSearchValue.value) return false
-
   return props.placeholder
 })
 
@@ -144,12 +146,11 @@ const mergedDisplayValue = computed(() => {
     // - placeholder
     // - dropdown open and not input search value yet
     if (innerOpen.value) {
-      return !hasInputSearchValue.value ? displayValue.value : false
+      return !hasInputSearchValue.value ? displayValue.value : ''
     } else {
-      return innerValue.value ? false : props.placeholder
+      return innerValue.value ? '' : props.placeholder
     }
   }
-
   // select mode
   else {
     return displayValue.value || props.placeholder
@@ -170,10 +171,10 @@ function getDisplayValue(value: RawValue) {
 
 // Option
 const mergedOptions = computed(() => {
-  if (!props.showSearch || !searchTerm.value) {
-    return props.options
+  if (props.showSearch && props.filterOption && searchTerm.value) {
+    return optionFilter(props.options, searchTerm.value)
   }
-  return optionFilter(props.options, searchTerm.value)
+  return props.options
 })
 
 function optionFilter(opts: Option[], term: string) {
@@ -194,6 +195,8 @@ function optionFilter(opts: Option[], term: string) {
 const defaultOptionFilter: OptionFilter = (option, term) => {
   return option.label.includes(term)
 }
+
+const isEmpty = computed(() => mergedOptions.value.length === 0)
 
 //
 // Dropdown
@@ -272,7 +275,7 @@ function onKeyUpDownEnter(e: KeyboardEvent) {
 <template>
   <CB.Root
     :open="innerOpen"
-    :value="innerValue"
+    :model-value="innerValue"
     :display-value="getDisplayValue"
     :search-term="searchTerm"
     :disabled="disabled"
@@ -305,7 +308,7 @@ function onKeyUpDownEnter(e: KeyboardEvent) {
             ])
           "
         >
-          {{ mergedDisplayValue || '' }}
+          {{ mergedDisplayValue }}
         </span>
 
         <!-- Arrow -->
@@ -326,7 +329,7 @@ function onKeyUpDownEnter(e: KeyboardEvent) {
           </div>
 
           <!-- Scroll -->
-          <div v-if="!loading" :class="classes.scroll">
+          <div v-if="!loading && !isEmpty" :class="classes.scroll">
             <CB.Item
               :class="classes.item"
               v-for="option in mergedOptions"

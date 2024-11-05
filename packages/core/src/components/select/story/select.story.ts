@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
+import { ref } from 'vue'
 import Select from '../select.vue'
 
 const meta: Meta<typeof Select> = {
@@ -22,9 +23,8 @@ export const Default: Story = {
     }
   },
   args: {
-    open: true,
     value: 2,
-    options: Array.from({ length: 20 }, (_, i) => ({
+    options: Array.from({ length: 5 }, (_, i) => ({
       label: `选项${i + 1}`,
       value: i + 1
     })),
@@ -48,8 +48,6 @@ export const DropdownAlign: Story = {
     }
   },
   args: {
-    open: true,
-    value: 2,
     options: [
       { label: '选项1', value: 1 },
       { label: '选项2', value: 2 },
@@ -76,8 +74,6 @@ export const DropdownPlacement: Story = {
     }
   },
   args: {
-    open: true,
-    value: 2,
     options: Array.from({ length: 20 }, (_, i) => ({
       label: `选项${i + 1}`,
       value: i + 1
@@ -148,7 +144,6 @@ export const Loading: Story = {
     }
   },
   args: {
-    open: true,
     options: [
       { label: '选项1', value: 1 },
       { label: '选项2', value: 2 },
@@ -168,9 +163,6 @@ export const Empty: Story = {
         return { args }
       }
     }
-  },
-  args: {
-    open: true
   }
 }
 
@@ -180,14 +172,17 @@ export const Disabled: Story = {
       components: { Select },
       template: `
         <div class="cell">
-          <Select v-bind="args" disabled />
-          <Select v-bind="args" disabled :bordered="false" />
+          <Select v-bind="args" />
+          <Select v-bind="args" :bordered="false" />
         </div>
       `,
       setup() {
         return { args }
       }
     }
+  },
+  args: {
+    disabled: true
   }
 }
 
@@ -197,7 +192,7 @@ export const Filter: Story = {
       components: { Select },
       template: `
         <div class="cell">
-          <Select v-bind="args" showSearch style="width: 200px">
+          <Select v-bind="args" style="width: 200px" />
         </div>
       `,
       setup() {
@@ -209,6 +204,44 @@ export const Filter: Story = {
     options: Array.from({ length: 20 }, (_, i) => ({
       label: `选项${i + 1}`,
       value: i + 1
-    }))
+    })),
+    showSearch: true
+  }
+}
+
+export const Search: Story = {
+  render: (args) => {
+    return {
+      components: { Select },
+      template: `
+        <div class="cell">
+          <Select :options="options" :loading="loading" v-bind="args" style="width: 200px" @search="onSearch" />
+        </div>
+      `,
+      setup() {
+        function createOptions() {
+          return Array.from({ length: 10 }, (_, i) => ({
+            label: `选项${i + 1}`,
+            value: i + 1
+          }))
+        }
+
+        const loading = ref(false)
+        const options = ref(createOptions())
+        function onSearch(value: string) {
+          console.info('search:', value)
+          loading.value = true
+          setTimeout(() => {
+            options.value = createOptions()
+            loading.value = false
+          }, 1000)
+        }
+        return { options, loading, onSearch, args }
+      }
+    }
+  },
+  args: {
+    showSearch: true,
+    filterOption: false
   }
 }

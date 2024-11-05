@@ -56,5 +56,9 @@ export const propTypes = {
   filterOption: {
     type: [Boolean, Function] as PropType<boolean | OptionFilter>,
     default: true
+  },
+  searchEventDebounce: {
+    type: Number,
+    default: 300
   }
 }
