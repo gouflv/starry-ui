@@ -57,13 +57,32 @@ export default defineComponent({
           <LoadingIcon existsIcon={!!icon} loading={props.loading} />
         )
 
+      const commonProps = {
+        ...attrs,
+        title: props.title,
+        class: [classes.value, attrs.class],
+        disabled: mergedDisabled.value || undefined
+      }
+
+      if (props.href) {
+        return (
+          <a
+            {...{
+              ...commonProps,
+              href: props.href,
+              target: props.target
+            }}
+          >
+            {iconNode}
+            {slots.default?.()}
+          </a>
+        )
+      }
+
       return (
         <button
           {...{
-            ...attrs,
-            title: props.title,
-            class: [classes.value, attrs.class],
-            disabled: mergedDisabled.value,
+            ...commonProps,
             onClick
           }}
         >

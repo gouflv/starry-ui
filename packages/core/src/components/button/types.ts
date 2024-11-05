@@ -29,7 +29,9 @@ export const propsType = {
   block: Boolean,
   danger: Boolean,
   icon: Object,
-  title: String
+  title: String,
+  href: String,
+  target: String
 }
 
 export type ButtonPropType = ExtractPublicPropTypes<typeof propsType>

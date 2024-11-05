@@ -1,4 +1,5 @@
 import type { SizeType } from '@/types'
+import { resetComponent } from '@/utils/style'
 import { css } from '@emotion/css'
 import type { CSSObject } from '@emotion/css/create-instance'
 import type { AliasToken } from '@starry/theme'
@@ -6,6 +7,8 @@ import type { ButtonType } from './types'
 
 export const genButtonSharedStyle = (token: AliasToken) =>
   css({
+    ...resetComponent(token),
+
     // Positioning
     position: 'relative',
     display: 'inline-block',
@@ -24,6 +27,9 @@ export const genButtonSharedStyle = (token: AliasToken) =>
     lineHeight: token.lineHeight,
     whiteSpace: 'nowrap',
     textAlign: 'center',
+    '&:is(a)': {
+      textDecoration: 'none'
+    },
 
     // User interaction
     userSelect: 'none',

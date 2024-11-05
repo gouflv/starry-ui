@@ -157,3 +157,17 @@ export const Shape: Story = {
     }
   }
 }
+
+export const Href: Story = {
+  render: () => {
+    return {
+      components: { Button },
+      template: `
+        <div class="cell">
+          <Button type="primary" href="https://www.bing.com" target="_blank">Bing</Button>
+          <Button href="https://www.bing.com" target="_blank">Bing</Button>
+        </div>
+      `
+    }
+  }
+}
