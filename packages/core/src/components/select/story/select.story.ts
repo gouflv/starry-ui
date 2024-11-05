@@ -196,7 +196,9 @@ export const Filter: Story = {
     return {
       components: { Select },
       template: `
-        <Select v-bind="args" showSearch />
+        <div class="cell">
+          <Select v-bind="args" showSearch style="width: 200px">
+        </div>
       `,
       setup() {
         return { args }
@@ -204,6 +206,7 @@ export const Filter: Story = {
     }
   },
   args: {
+    open: true,
     options: Array.from({ length: 20 }, (_, i) => ({
       label: `选项${i + 1}`,
       value: i + 1

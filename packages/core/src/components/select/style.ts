@@ -31,33 +31,38 @@ export function genSelectionStyle(token: SelectToken) {
       boxShadow: `0 0 0 ${token.controlOutlineWidth}px ${token.controlOutline}`
     },
 
+    // Text
     [`.${token.rootPrefixCls}Text`]: {
-      ...getTextStyle(token)
-    },
-
-    [`.${token.rootPrefixCls}Placeholder`]: {
       ...getTextStyle(token),
+      '&.placeholder': {
+        color: token.colorTextPlaceholder
+      }
+    },
+
+    [`&[data-state="open"] .${token.rootPrefixCls}Text`]: {
       color: token.colorTextPlaceholder
     },
 
+    // Input
     [`.${token.rootPrefixCls}Input`]: {
-      flex: 1,
-      minWidth: 0,
-      margin: 0,
-      padding: 0,
-      border: 'none',
-      backgroundColor: 'transparent',
-      outline: 'none',
-      color: 'inherit',
-      fontSize: 'inherit',
-      appearance: 'none'
-    },
+      position: 'absolute',
+      top: 0,
+      bottom: 0,
+      insetInline: token.inputPaddingHorizontalBase,
 
-    [[
-      `&[data-state="open"] .${token.rootPrefixCls}Text`,
-      `&[data-state="open"] .${token.rootPrefixCls}Input`
-    ].join(',')]: {
-      color: token.colorTextPlaceholder
+      input: {
+        margin: 0,
+        padding: 0,
+        minWidth: 0,
+        width: '100%',
+        border: 'none',
+        backgroundColor: 'transparent',
+        outline: 'none',
+        appearance: 'none',
+        cursor: 'auto',
+        color: 'inherit',
+        fontSize: 'inherit'
+      }
     },
 
     // Arrow
@@ -132,15 +137,16 @@ function getSizeStyle(token: SelectToken, size: SizeType): CSSObject {
     fontSize: fontSize,
     borderRadius: borderRadius,
     // Selection
-    [[
-      `.${token.rootPrefixCls}Text`,
-      `.${token.rootPrefixCls}Placeholder`,
-      `.${token.rootPrefixCls}Input`
-    ].join(',')]: {
+    [`.${token.rootPrefixCls}Text`]: {
       padding: 0,
       paddingInlineEnd: sectionPaddingInlineEnd,
-      height: `${selectHeightWithoutBorder}px`,
+      height: selectHeightWithoutBorder,
       lineHeight: `${selectHeightWithoutBorder}px`
+    },
+    [`.${token.rootPrefixCls}Input`]: {
+      input: {
+        height: selectHeightWithoutBorder
+      }
     }
   }
 }

@@ -9,6 +9,8 @@ export type Option = {
   disabled?: boolean
 }
 
+export type OptionFilter = (option: Option, input: string) => boolean
+
 export const propTypes = {
   // Basic
   open: Boolean,
@@ -51,8 +53,8 @@ export const propTypes = {
 
   // Search
   showSearch: Boolean,
-  filterOption: [Boolean, Function] as PropType<
-    boolean | ((input: string, option: Option) => boolean)
-  >,
-  searchValue: String
+  filterOption: {
+    type: [Boolean, Function] as PropType<boolean | OptionFilter>,
+    default: true
+  }
 }

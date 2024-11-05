@@ -18,7 +18,12 @@ import {
   genViewportStyle,
   type SelectToken
 } from './style'
-import { propTypes, type Option, type RawValue } from './types'
+import {
+  propTypes,
+  type Option,
+  type OptionFilter,
+  type RawValue
+} from './types'
 
 const { token: _token } = useToken()
 const token = computed<SelectToken>(() => ({
@@ -40,7 +45,7 @@ const emits = defineEmits<{
   search: [search: string]
 }>()
 
-const slots = defineSlots<{
+defineSlots<{
   option: (option: Option) => any
   noFoundContent: () => any
 }>()
@@ -58,6 +63,10 @@ watchImmediate(
 )
 
 function onValueChange(value: RawValue) {
+  // set
+  innerValue.value = value
+
+  // emit
   emits(
     'update:value',
     value,
@@ -68,35 +77,72 @@ function onValueChange(value: RawValue) {
 //
 // State
 
-// open
+// Open
 const innerOpen = ref(props.open)
-function onOpenChange(open: boolean) {
-  emits('update:open', open)
-}
+
 watch(
+  // sync inner state
   () => props.open,
   () => {
     innerOpen.value = props.open
   }
 )
 
-// search
-const innerSearchValue = ref<string>()
-function onSearchValueChange(search: string) {
-  innerSearchValue.value = search
-  emits('update:searchValue', search)
-  emits('search', search)
+function onOpenChange(open: boolean) {
+  innerOpen.value = open
+  emits('update:open', open)
 }
-watch(
-  () => props.searchValue,
-  () => {
-    innerSearchValue.value = props.searchValue
-  }
+
+const focus = ref(false)
+
+// Search
+const searchTerm = ref<string>()
+
+/**
+ * Search input active
+ */
+const isSearchInputMode = computed(() => props.showSearch && innerOpen.value)
+
+/**
+ * Search input has value
+ */
+const hasInputSearchValue = computed(
+  () => isSearchInputMode.value && !!searchTerm.value
 )
 
+function onSearchTermChange(value: string) {
+  searchTerm.value = value
+}
+
+// Text
+
+const hasValue = computed(() => innerValue.value !== undefined)
+
 const displayValue = computed(() => {
-  if (innerValue.value === undefined) return
-  return getDisplayValue(innerValue.value) || innerValue.value
+  if (!hasValue.value) return
+  return getDisplayValue(innerValue.value!) || innerValue.value
+})
+
+const innerPlaceholder = computed(() => {
+  if (hasValue.value) return false
+
+  if (hasInputSearchValue.value) return false
+
+  return props.placeholder
+})
+
+const mergedDisplayValue = computed(() => {
+  // search mode
+  if (props.showSearch) {
+    if (hasInputSearchValue.value) return false
+
+    return displayValue.value || props.placeholder
+  }
+
+  // select mode
+  else {
+    return displayValue.value || props.placeholder
+  }
 })
 
 function getDisplayValue(value: RawValue) {
@@ -104,17 +150,39 @@ function getDisplayValue(value: RawValue) {
   return option ? option.label : ''
 }
 
-//
+// Search and Text model switch
+// 1. show search on mount
+// 2. if search term change, filter options, hide display-value
+// 3. if option selected change, clean search term, show display-value behind search input
+// 4. if focus on search, fade display-value
+// 5. if blur on search, show display-value, clean search term
+
 // Option
-
-const isFilterMode = computed(() => !!props.filterOption)
-
 const mergedOptions = computed(() => {
-  // TODO implement filter function
-  return props.options
+  if (!props.showSearch || !searchTerm.value) {
+    return props.options
+  }
+  return optionFilter(props.options, searchTerm.value)
 })
 
-const isEmpty = computed(() => mergedOptions.value.length === 0)
+function optionFilter(opts: Option[], term: string) {
+  console.log('optionFilter', opts, term)
+
+  if (props.filterOption) {
+    const func =
+      typeof props.filterOption === 'function'
+        ? props.filterOption
+        : defaultOptionFilter
+    return opts.filter((option) => func(option, term))
+  } else {
+    emits('search', term)
+    return []
+  }
+}
+
+const defaultOptionFilter: OptionFilter = (option, term) => {
+  return option.label.includes(term)
+}
 
 //
 // Dropdown
@@ -180,36 +248,57 @@ const classes = computed(() => ({
     genLoadingStyle(token.value)
   ])
 }))
+
+function onKeyUpDownEnter(e: KeyboardEvent) {
+  if (props.disabled) return
+  if (props.showSearch) return
+  e.preventDefault()
+  innerOpen.value = true
+  // TODO make arrow key work in menu
+}
 </script>
 
 <template>
   <CB.Root
-    v-model:open="innerOpen"
-    v-model="innerValue"
+    :open="innerOpen"
+    :value="innerValue"
     :display-value="getDisplayValue"
+    :search-term="searchTerm"
     :disabled="disabled"
+    @update:open="onOpenChange"
     @update:model-value="onValueChange"
+    @update:search-term="onSearchTermChange"
   >
     <CB.Trigger as-child>
       <CB.Anchor
-        as="div"
         ref="selectionRef"
+        as="div"
         :class="classes.selection"
+        :tabindex="showSearch ? -1 : 0"
         v-bind="$attrs"
+        @focus="focus = true"
+        @blur="focus = false"
+        @keydown.up.down.enter="onKeyUpDownEnter"
       >
-        <CB.Input
-          :class="`${token.rootPrefixCls}Input`"
-          :placeholder="placeholder"
-        />
-        <!-- <template v-else>
-          <span v-if="displayValue" :class="`${token.rootPrefixCls}Text`">
-            {{ displayValue }}
-          </span>
-          <span v-else :class="`${token.rootPrefixCls}Placeholder`">
-            {{ placeholder }}
-          </span>
-        </template> -->
-        <DownOutlined :class="`${token.rootPrefixCls}Arrow`" /> </CB.Anchor
+        <!-- Input -->
+        <div v-if="showSearch" :class="`${token.rootPrefixCls}Input`">
+          <CB.Input />
+        </div>
+
+        <!-- Text -->
+        <span
+          :class="
+            cx([
+              `${token.rootPrefixCls}Text`,
+              innerPlaceholder && 'placeholder'
+            ])
+          "
+        >
+          {{ mergedDisplayValue || '' }}
+        </span>
+
+        <!-- Arrow -->
+        <DownOutlined :class="`${token.rootPrefixCls}Arrow`" />
       </CB.Anchor>
     </CB.Trigger>
     <CB.Portal>
@@ -224,21 +313,23 @@ const classes = computed(() => ({
           <div v-if="loading" :class="classes.loading">
             <LoadingOutlined />
           </div>
-          <!-- Empty -->
-          <slot name="noFoundContent" v-else-if="isEmpty">
-            <div :class="classes.empty">{{ noFoundContent }}</div>
-          </slot>
+
           <!-- Scroll -->
-          <div v-else :class="classes.scroll">
+          <div v-if="!loading" :class="classes.scroll">
             <CB.Item
               :class="classes.item"
-              v-for="option in options"
+              v-for="option in mergedOptions"
               :key="option.value"
               :value="option.value"
             >
               {{ option.label }}
             </CB.Item>
           </div>
+
+          <!-- Empty -->
+          <CB.Empty v-if="!loading">
+            <div :class="classes.empty">{{ noFoundContent }}</div>
+          </CB.Empty>
         </CB.Viewport>
       </CB.Content>
     </CB.Portal>
