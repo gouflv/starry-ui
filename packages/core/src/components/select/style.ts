@@ -44,6 +44,9 @@ export function genSelectionStyle(token: SelectToken) {
     },
 
     // Input
+    '&.show-search': {
+      cursor: 'text'
+    },
     [`.${token.rootPrefixCls}Input`]: {
       position: 'absolute',
       top: 0,

@@ -4,7 +4,7 @@ import { DownOutlined, LoadingOutlined } from '@ant-design/icons-vue'
 import { css, cx } from '@emotion/css'
 import { useToken } from '@starry/theme'
 import { useDebounceFn, useMounted } from '@vueuse/core'
-import { Combobox as CB } from 'radix-vue/namespaced'
+import { Combobox as Comb } from 'radix-vue/namespaced'
 import { computed, ref, watch } from 'vue'
 import {
   genBorderLessStyle,
@@ -233,6 +233,7 @@ const align = computed(() => {
 const classes = computed(() => ({
   selection: cx([
     `${config.value.prefixCls}Selection`,
+    props.showSearch && 'show-search',
     genSelectionStyle(token.value),
     genSizeStyle(token.value, props.size),
     !props.bordered && genBorderLessStyle(token.value),
@@ -273,7 +274,7 @@ function onKeyUpDownEnter(e: KeyboardEvent) {
 </script>
 
 <template>
-  <CB.Root
+  <Comb.Root
     :open="innerOpen"
     :model-value="innerValue"
     :display-value="getDisplayValue"
@@ -283,20 +284,22 @@ function onKeyUpDownEnter(e: KeyboardEvent) {
     @update:model-value="onValueChange"
     @update:search-term="onSearchTermChange"
   >
-    <CB.Trigger as-child>
-      <CB.Anchor
+    <Comb.Trigger as-child>
+      <Comb.Anchor
         ref="selectionRef"
         as="div"
         :class="classes.selection"
-        :tabindex="showSearch ? -1 : 0"
-        v-bind="$attrs"
+        v-bind="{
+          ...$attrs,
+          tabindex: showSearch ? -1 : 0
+        }"
         @focus="focus = true"
         @blur="focus = false"
         @keydown.up.down.enter="onKeyUpDownEnter"
       >
         <!-- Input -->
         <div v-if="showSearch" :class="`${token.rootPrefixCls}Input`">
-          <CB.Input />
+          <Comb.Input />
         </div>
 
         <!-- Text -->
@@ -313,16 +316,16 @@ function onKeyUpDownEnter(e: KeyboardEvent) {
 
         <!-- Arrow -->
         <DownOutlined :class="`${token.rootPrefixCls}Arrow`" />
-      </CB.Anchor>
-    </CB.Trigger>
-    <CB.Portal>
-      <CB.Content
+      </Comb.Anchor>
+    </Comb.Trigger>
+    <Comb.Portal>
+      <Comb.Content
         position="popper"
         :avoidCollisions="true"
         :body-lock="false"
         :align="align"
       >
-        <CB.Viewport :class="classes.viewport">
+        <Comb.Viewport :class="classes.viewport">
           <!-- Loading -->
           <div v-if="loading" :class="classes.loading">
             <LoadingOutlined />
@@ -330,22 +333,22 @@ function onKeyUpDownEnter(e: KeyboardEvent) {
 
           <!-- Scroll -->
           <div v-if="!loading && !isEmpty" :class="classes.scroll">
-            <CB.Item
+            <Comb.Item
               :class="classes.item"
               v-for="option in mergedOptions"
               :key="option.value"
               :value="option.value"
             >
               {{ option.label }}
-            </CB.Item>
+            </Comb.Item>
           </div>
 
           <!-- Empty -->
-          <CB.Empty v-if="!loading">
+          <Comb.Empty v-if="!loading">
             <div :class="classes.empty">{{ noFoundContent }}</div>
-          </CB.Empty>
-        </CB.Viewport>
-      </CB.Content>
-    </CB.Portal>
-  </CB.Root>
+          </Comb.Empty>
+        </Comb.Viewport>
+      </Comb.Content>
+    </Comb.Portal>
+  </Comb.Root>
 </template>
