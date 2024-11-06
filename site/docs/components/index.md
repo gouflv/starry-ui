@@ -2,9 +2,9 @@
 
 ## 通用
 
-- Button
+- [Button](./button.md)
 - Icon
-- Typography
+- [Typography](./typography.md)
 
 ## 布局
 
@@ -32,29 +32,7 @@
 - Input
 - InputNumber
 - Radio
-- Select
-- Slider
-- Switch
-- TimePicker
-- TreeSelect
-- Upload
-
-## 数据展示
-
-- Badge
-- Card
-  Collapse
-
-## 数据录入
-
-- Cascader
-- Checkbox
-- DatePicker
-- Form
-- Input
-- InputNumber
-- Radio
-- Select
+- [Select](./select.md)
 - Slider
 - Switch
 - TimePicker
@@ -75,7 +53,7 @@
 - QRCode
 - Segmented
 - Statistic
-- Table
+- [Table](./table.md)
 - Tabs
 - Tag
 - Tooltip
@@ -97,5 +75,5 @@
 ## 其他
 
 - Affix
+- ConfigProvider
 - DesignTokenProvider
-- ScrollArea
