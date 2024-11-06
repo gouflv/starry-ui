@@ -37,14 +37,13 @@ const token = computed<SelectToken>(() => ({
 
 const config = useConfig()
 
-defineOptions({ name: 'ASelect' })
+defineOptions({ name: 'ASelect', inheritAttrs: false })
 
 const props = defineProps(propTypes)
 
 const emits = defineEmits<{
   'update:open': [open: boolean]
   'update:value': [value: RawValue, option: Option]
-  'update:searchValue': [search: string]
   search: [search: string]
 }>()
 

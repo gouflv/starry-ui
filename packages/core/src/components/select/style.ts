@@ -243,6 +243,12 @@ export function genDisabledStyle(token: SelectToken) {
     borderColor: token.colorBorder,
     color: token.colorTextDisabled,
     backgroundColor: token.colorBgContainerDisabled,
-    boxShadow: 'none'
+    boxShadow: 'none',
+    '&.show-search': {
+      cursor: 'not-allowed',
+      '& .${token.rootPrefixCls}Input': {
+        cursor: 'not-allowed'
+      }
+    }
   })
 }
