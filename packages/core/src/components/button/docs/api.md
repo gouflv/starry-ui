@@ -10,7 +10,7 @@
 | disabled | boolean                                    | false     | 禁用状态           |
 | block    | boolean                                    | false     | 块级按钮           |
 | danger   | boolean                                    | false     | 危险按钮           |
-| icon     | VNode                                      | -         | 图标               |
+| icon     | vnode \| slot                              | -         | 图标               |
 | title    | string                                     | -         | HTML标题属性       |
 | href     | string                                     | -         | a 链接跳转地址     |
 | target   | string                                     | -         | a 链接 target 属性 |

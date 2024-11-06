@@ -10,6 +10,11 @@ const preview: Preview = {
         color: /(background|color)$/i,
         date: /Date$/i
       }
+    },
+    options: {
+      storySort: {
+        order: ['通用', '导航', '布局', '数据录入', '数据展示', '其他']
+      }
     }
   },
   decorators: [

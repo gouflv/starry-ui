@@ -27,3 +27,9 @@
 | update:open  | 下拉菜单开关时触发   | function(open)  |
 | update:value | 选中值发生变化时触发 | function(value) |
 | search       | 搜索时触发           | function(input) |
+
+## Slots
+
+| 名称   | 说明           | 插槽数据   |
+| ------ | -------------- | ---------- |
+| option | 自定义选项内容 | { option } |

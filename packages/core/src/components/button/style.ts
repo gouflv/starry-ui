@@ -209,7 +209,6 @@ export const genButtonTypeStyle = (
 //
 // Shape
 
-// TODO: Implement shape styles
 const getCircularStyle = (token: AliasToken): CSSObject => ({
   minWidth: token.controlHeight,
   paddingInline: 0,

@@ -47,9 +47,8 @@ const emits = defineEmits<{
   search: [search: string]
 }>()
 
-defineSlots<{
+const slots = defineSlots<{
   option: (option: Option) => any
-  noFoundContent: () => any
 }>()
 
 //
