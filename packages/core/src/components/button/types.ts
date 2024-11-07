@@ -34,4 +34,4 @@ export const propsType = {
   target: String
 }
 
-export type ButtonPropType = ExtractPublicPropTypes<typeof propsType>
+export type ButtonPropsType = ExtractPublicPropTypes<typeof propsType>
