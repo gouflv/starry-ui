@@ -1,10 +1,10 @@
 import type { SizeType } from '@/types'
 import type { Paths } from 'type-fest'
-import type { PropType } from 'vue'
+import type { ExtractPublicPropTypes, PropType } from 'vue'
 
 export type DefaultRecordType = any
 
-export const tablePropTypes = <RecordType extends DefaultRecordType>() => ({
+export const propsType = <RecordType extends DefaultRecordType>() => ({
   // Data
   dataSource: {
     type: Array as PropType<RecordType[]>,
@@ -45,12 +45,13 @@ export const tablePropTypes = <RecordType extends DefaultRecordType>() => ({
   scroll: {
     type: Object as PropType<ScrollType>
   },
-  bordered: {
-    type: Boolean,
-    default: true
-  },
+  bordered: Boolean,
   emptyText: String
 })
+
+export type TablePropsType = ExtractPublicPropTypes<
+  ReturnType<typeof propsType>
+>
 
 export type ColumnType<RecordType extends DefaultRecordType> = {
   // Data

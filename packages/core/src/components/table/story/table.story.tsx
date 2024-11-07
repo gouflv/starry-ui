@@ -19,7 +19,7 @@ const defaultColumns: ColumnType<Data>[] = [
   { title: 'Action', key: 'action' }
 ]
 
-const defaultDataSource: Data[] = Array.from({ length: 20 }, (_, i) => ({
+const defaultDataSource: Data[] = Array.from({ length: 10 }, (_, i) => ({
   id: i + 1,
   name: `Name ${i + 1}`,
   age: 20 + i
@@ -33,6 +33,22 @@ export const Default: Story = {
           <Table<Data>
             columns={defaultColumns}
             dataSource={defaultDataSource}
+            {...(args as any)}
+          />
+        )
+      }
+    }
+  }
+}
+export const Bordered: Story = {
+  render: (args) => {
+    return {
+      setup() {
+        return () => (
+          <Table<Data>
+            columns={defaultColumns}
+            dataSource={defaultDataSource}
+            bordered
             {...(args as any)}
           />
         )

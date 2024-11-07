@@ -39,16 +39,18 @@ import { cx } from '@emotion/css'
 import { useToken } from '@starry/theme'
 import { FlexRender, getCoreRowModel, useVueTable } from '@tanstack/vue-table'
 import { computed } from 'vue'
+import { provideTableContext } from './context'
 import { tableTokenFactory } from './styles'
+import { genBorderedStyle } from './styles/bordered'
 import { genTableStyle } from './styles/table'
 import {
-  tablePropTypes,
+  propsType,
   type DefaultRecordType,
   type SelectionChangeEvent
 } from './types'
 import { crateColumnsDef } from './utils'
 
-const props = defineProps(tablePropTypes<Record>())
+const props = defineProps(propsType<Record>())
 
 const emits = defineEmits<{
   change: []
@@ -66,7 +68,13 @@ const tableToken = computed(() =>
 
 const classes = computed(() => {
   return {
-    table: cx(genTableStyle(tableToken.value))
+    table: cx([
+      `${config.value.prefixCls}Table`,
+      props.bordered && `${config.value.prefixCls}Table--bordered`,
+
+      genTableStyle(tableToken.value),
+      props.bordered && genBorderedStyle(tableToken.value)
+    ])
   }
 })
 
@@ -81,4 +89,6 @@ const table = useVueTable({
   },
   getCoreRowModel: getCoreRowModel()
 })
+
+provideTableContext(computed(() => ({ table })))
 </script>

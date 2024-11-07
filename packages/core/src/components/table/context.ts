@@ -1,8 +1,9 @@
-import { inject, provide, type InjectionKey } from 'vue'
+import type { Table } from '@tanstack/vue-table'
+import { inject, provide, type ComputedRef, type InjectionKey } from 'vue'
 
-export type TableContext = {
-  api: any
-}
+export type TableContext = ComputedRef<{
+  table: Table<any>
+}>
 
 const TableInjectionKey: InjectionKey<TableContext> =
   Symbol('TableInjectionKey')
