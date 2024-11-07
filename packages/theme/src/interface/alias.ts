@@ -74,6 +74,8 @@ export interface AliasToken extends MapToken {
   marginXL: number
   marginXXL: number
 
+  opacityLoading: number
+
   boxShadow: string
   boxShadowSecondary: string
   boxShadowTertiary: string

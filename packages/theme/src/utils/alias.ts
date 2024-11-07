@@ -111,7 +111,7 @@ export default function formatToken(
 
     fontWeightStrong: 600,
 
-    // opacityLoading: 0.65,
+    opacityLoading: 0.65,
 
     linkDecoration: 'none',
     linkHoverDecoration: 'none',

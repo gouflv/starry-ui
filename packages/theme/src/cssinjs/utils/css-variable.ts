@@ -85,7 +85,7 @@ const unitlessToken: {
   lineHeightHeading3: true,
   lineHeightHeading4: true,
   lineHeightHeading5: true,
-  // opacityLoading: true,
+  opacityLoading: true,
   fontWeightStrong: true,
   zIndexPopupBase: true,
   zIndexBase: true
