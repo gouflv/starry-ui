@@ -17,7 +17,7 @@ export const propsType = <RecordType extends DefaultRecordType>() => ({
     default: 'id'
   },
   columns: {
-    type: Array as PropType<MergedColumnType<RecordType>[]>,
+    type: Array as PropType<CombinedColumnType<RecordType>[]>,
     default: () => []
   },
 
@@ -35,12 +35,11 @@ export const propsType = <RecordType extends DefaultRecordType>() => ({
 
   // Style
   tableLayout: {
-    type: String as PropType<'auto' | 'fixed'>,
-    default: 'auto'
+    type: String as PropType<'auto' | 'fixed'>
   },
   size: {
     type: String as PropType<SizeType>,
-    default: 'middle'
+    default: 'large'
   },
   scroll: {
     type: Object as PropType<ScrollType>
@@ -58,14 +57,14 @@ export type ColumnType<RecordType extends DefaultRecordType> = {
   dataIndex?: Paths<RecordType>
   key?: string
   title?: string
+  customRender?: (props: {
+    text: any
+    record: RecordType
+    index: number
+    column: ColumnType<RecordType>
+  }) => any
 
   // Interaction
-  customRender?: (
-    text: any,
-    record: RecordType,
-    index: number,
-    column: any
-  ) => any
   defaultSortOrder?: 'ascend' | 'descend'
   sorter?: object
   resizable?: boolean
@@ -78,7 +77,7 @@ export type ColumnType<RecordType extends DefaultRecordType> = {
   maxWidth?: number
   minWidth?: number
   responsive?: object
-  width?: number | string
+  width?: number
 }
 
 export type GroupColumnType<RecordType extends DefaultRecordType> = {
@@ -86,7 +85,7 @@ export type GroupColumnType<RecordType extends DefaultRecordType> = {
   children: ColumnType<RecordType>[]
 }
 
-export type MergedColumnType<RecordType extends DefaultRecordType> =
+export type CombinedColumnType<RecordType extends DefaultRecordType> =
   | ColumnType<RecordType>
   | GroupColumnType<RecordType>
 
@@ -102,8 +101,8 @@ export type SelectionType<RecordType extends DefaultRecordType> = {
 
 export type ScrollType = {
   scrollOnChange?: boolean
-  x?: number | string | 'max-content'
-  y?: number | string
+  x?: number
+  y?: number
 }
 
 export type SelectionChangeEvent<RecordType extends DefaultRecordType> = {

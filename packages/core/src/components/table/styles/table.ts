@@ -9,20 +9,20 @@ export function genTableStyle(token: TableToken) {
     ...resetComponent(token),
     fontSize: token.tableFontSize,
     backgroundColor: token.tableBg,
-    borderStartStartRadius: token.tableRadius,
-    borderStartEndRadius: token.tableRadius,
 
     table: {
       width: '100%',
+      textAlign: 'start',
       borderCollapse: 'collapse',
-      borderSpacing: 0,
-      borderRadius: `${token.tableRadius}px ${token.tableRadius}px 0 0`
+      borderSpacing: 0
     },
 
+    // Cell
     [`
       thead > tr > th, 
       tbody > tr > td
     `]: {
+      ...resetComponent(token),
       position: 'relative',
       padding: `${token.paddingContentVerticalLG}px ${token.tablePaddingHorizontal}px`,
       overflowWrap: 'break-word'
@@ -32,11 +32,11 @@ export function genTableStyle(token: TableToken) {
     thead: {
       [`> tr > th`]: {
         position: 'relative',
-        borderBottom: tableBorder,
         color: token.tableHeaderTextColor,
         fontWeight: token.fontWeightStrong,
         textAlign: 'start',
         backgroundColor: token.tableHeaderBg,
+        borderBottom: tableBorder,
         transition: 'background 0.3s ease',
 
         '&[colspan]:not([colspan="1"])': {
@@ -52,10 +52,19 @@ export function genTableStyle(token: TableToken) {
           height: '1.6em',
           backgroundColor: token.tableHeaderCellSplitColor,
           content: '""'
-        },
+        }
+      }
+    },
+
+    // Radius
+    [`&:not(.${token.componentCls}--bordered)`]: {
+      thead: {
         ['tr:first-child']: {
           '> th:first-child': {
-            // borderStartStartRadius: token.tableRadius
+            borderStartStartRadius: token.tableRadius
+          },
+          '> th:last-child': {
+            borderStartEndRadius: token.tableRadius
           }
         }
       }
@@ -63,11 +72,14 @@ export function genTableStyle(token: TableToken) {
 
     tbody: {
       '> tr': {
+        // Border
         '> td': {
+          backgroundColor: token.tableBg,
           borderBottom: tableBorder,
           transition: 'background 0.3s, border-color 0.3s'
         },
 
+        // Hover
         '&:hover > td, &[data-hover] > td': {
           background: token.tableRowHoverBg
         },
