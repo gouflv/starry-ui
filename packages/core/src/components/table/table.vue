@@ -10,6 +10,7 @@
             v-for="header in headerGroup.headers"
             :key="header.id"
             :colSpan="header.colSpan"
+            :rowSpan="header.rowSpan || 1"
             :style="{
               width: `${header.getSize()}px`,
               ...getPinningState(header.column).style
@@ -244,6 +245,8 @@ const pinningRightColumns = computed(
     fixedColumns.value.right.length > 0 &&
     containerScrollLeft.value + containerWidth.value < tableWidth.value - 10 // add threshold to right side scrolling
 )
+
+function getHeaderRowSpan() {}
 
 //
 // Table

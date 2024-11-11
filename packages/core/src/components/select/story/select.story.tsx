@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 import { ref } from 'vue'
-import Select from '../select.vue'
+import Select from '../Select.vue'
 
 const meta: Meta<typeof Select> = {
   title: '数据录入/Select',

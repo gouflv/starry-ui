@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import Table from '../table.vue'
+import Table from '../Table.vue'
 import type { ColumnType } from '../types'
 
 const meta: Meta<typeof Table> = {
@@ -259,14 +259,6 @@ export const FixedColumns: Story = {
   render: (args) => {
     return {
       setup() {
-        const data = Array.from({ length: 20 }, (_, i) => ({
-          id: i + 1,
-          ...Array.from({ length: 10 }, (_, j) => ({
-            [`name${j + 1}`]: `Name ${j + 1}`
-          })).reduce((acc, cur) => ({ ...acc, ...cur }), {}),
-          age: 20 + i
-        }))
-
         return () => (
           <>
             <h3>Fixed</h3>
@@ -283,7 +275,13 @@ export const FixedColumns: Story = {
                 { title: 'Age', dataIndex: 'age', fixed: 'right', width: 80 },
                 { title: 'Action', key: 'action', fixed: 'right', width: 80 }
               ]}
-              dataSource={data}
+              dataSource={Array.from({ length: 20 }, (_, i) => ({
+                id: i + 1,
+                ...Array.from({ length: 10 }, (_, j) => ({
+                  [`name${j + 1}`]: `Name ${j + 1}`
+                })).reduce((acc, cur) => ({ ...acc, ...cur }), {}),
+                age: 20 + i
+              }))}
             />
           </>
         )
@@ -292,5 +290,57 @@ export const FixedColumns: Story = {
   },
   args: {
     scroll: { x: 500, y: 300 }
+  }
+}
+
+export const HeaderGroup: Story = {
+  render: (args) => {
+    return {
+      setup() {
+        return () => (
+          <Table
+            {...(args as any)}
+            columns={[
+              {
+                title: 'ID',
+                dataIndex: 'id',
+                rowSpan: 2
+              },
+              {
+                title: 'Name',
+                children: [
+                  { title: 'First Name', dataIndex: 'firstName' },
+                  { title: 'Last Name', dataIndex: 'lastName' }
+                ]
+              },
+              {
+                title: 'Info',
+                children: [
+                  { title: 'Age', dataIndex: 'age' },
+                  { title: 'Address', dataIndex: 'address' }
+                ]
+              }
+            ]}
+            dataSource={[
+              {
+                id: 1,
+                firstName: 'John',
+                lastName: 'Brown',
+                age: 32,
+                address: 'New York No. 1 Lake Park'
+              },
+              {
+                id: 2,
+                firstName: 'Jim',
+                lastName: 'Green',
+                age: 42,
+                address: 'London No. 1 Lake Park'
+              }
+            ]}
+            tableLayout="auto"
+          />
+        )
+      }
+    }
   }
 }

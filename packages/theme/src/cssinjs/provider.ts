@@ -18,7 +18,7 @@ export const DesignTokenProvider = defineComponent({
     }
   },
   setup(props, { slots }) {
-    // TODO: support nested provider, need to merge token and theme
+    // TODO: To support nested provider, should merge token and theme
     // const parent = inject<ComputedRef<DesignTokenContext>>(
     //   DesignTokenContextKey
     // )

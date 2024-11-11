@@ -79,8 +79,7 @@ function transformColumns<R>(
       id,
       header: column.title,
       cell: cellRender,
-      ...colSize,
-      meta: { column }
+      ...colSize
     })
   }
 
@@ -88,8 +87,7 @@ function transformColumns<R>(
     id,
     header: column.title,
     cell: cellRender,
-    ...colSize,
-    meta: { column }
+    ...colSize
   })
 }
 
