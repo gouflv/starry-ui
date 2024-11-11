@@ -7,6 +7,21 @@ import {
 import { get, isObject } from 'lodash-es'
 import type { ColumnType, CombinedColumnType, GroupColumnType } from './types'
 
+export function normalizeColumnsKey<R>(columns: ColumnType<R>[]) {
+  const keys: Record<string, boolean> = {}
+  return columns.map((column) => {
+    let mergedKey = String(column.dataIndex || column.key || '_INNER_COLUMN')
+    while (keys[mergedKey]) {
+      mergedKey = `${mergedKey}_next`
+    }
+    keys[mergedKey] = true
+    return {
+      ...column,
+      key: mergedKey
+    } satisfies ColumnType<R>
+  })
+}
+
 export function isGroupColumn<R>(
   column: CombinedColumnType<R>
 ): column is GroupColumnType<R> {

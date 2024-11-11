@@ -28,7 +28,8 @@ export function genStickyStyle(token: TableToken) {
       transition: 'box-shadow 0.5s',
       pointerEvents: 'none'
     },
-    [`.${token.componentCls}Cell--fixed-right-first::before`]: {
+
+    [`.${token.componentCls}Cell--fixed-right-first::after`]: {
       content: '""',
       position: 'absolute',
       top: 0,
@@ -45,8 +46,9 @@ export function genStickyStyle(token: TableToken) {
         boxShadow: `inset 10px 0 8px -8px ${token.colorSplit}`
       }
     },
+
     [`&.${token.componentCls}--pinning-right`]: {
-      [`.${token.componentCls}Cell--fixed-right-first::before`]: {
+      [`.${token.componentCls}Cell--fixed-right-first::after`]: {
         boxShadow: `inset -10px 0 8px -8px ${token.colorSplit}`
       }
     }

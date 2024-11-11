@@ -35,7 +35,6 @@
             v-for="cell in row.getVisibleCells()"
             :key="cell.id"
             :class="{
-              [`${componentCls}Cell--ellipsis`]: isEllipsis(cell.column.id),
               ...getPinningState(cell.column).classes
             }"
             :style="{
@@ -43,10 +42,19 @@
               ...getPinningState(cell.column).style
             }"
           >
-            <FlexRender
-              :render="cell.column.columnDef.cell"
-              :props="cell.getContext()"
-            />
+            <span
+              :class="[
+                `${componentCls}Cell-content`,
+                {
+                  [`${componentCls}Cell--ellipsis`]: isEllipsis(cell.column.id)
+                }
+              ]"
+            >
+              <FlexRender
+                :render="cell.column.columnDef.cell"
+                :props="cell.getContext()"
+              />
+            </span>
           </td>
         </tr>
       </tbody>
@@ -81,7 +89,12 @@ import {
   type DefaultRecordType,
   type SelectionChangeEvent
 } from './types'
-import { crateColumnsDef, flatColumns, toSizeValue } from './utils'
+import {
+  crateColumnsDef,
+  flatColumns,
+  normalizeColumnsKey,
+  toSizeValue
+} from './utils'
 
 const props = defineProps(propsType<Record>())
 
@@ -102,7 +115,9 @@ const config = useConfig()
 const containerRef = ref<HTMLElement>()
 const tableRef = ref<HTMLTableElement>()
 
-const flattenColumns = computed(() => flatColumns(props.columns))
+const flattenColumns = computed(() =>
+  normalizeColumnsKey(flatColumns(props.columns))
+)
 
 const fixedColumns = computed(() => {
   return {
@@ -119,7 +134,7 @@ const shouldScrollY = computed(() => isNumber(props.scroll?.y))
 const hasFixColumn = computed(
   () =>
     shouldScrollX.value &&
-    [...fixedColumns.value.left, ...fixedColumns.value.right].length > 0
+    (fixedColumns.value.left.length || fixedColumns.value.right.length)
 )
 
 const fixHeader = computed(() => shouldScrollY.value)
@@ -212,7 +227,7 @@ function getPinningState(column: Column<Record>) {
     },
     style: {
       left: pinned === 'left' ? `${column.getStart('left')}px` : undefined,
-      right: pinned === 'right' ? `${column.getStart('right')}px` : undefined
+      right: pinned === 'right' ? `${column.getAfter('right')}px` : undefined
     } satisfies CSSProperties
   }
 }
@@ -227,30 +242,26 @@ const pinningLeftColumns = computed(
 const pinningRightColumns = computed(
   () =>
     fixedColumns.value.right.length > 0 &&
-    containerScrollLeft.value + containerWidth.value < tableWidth.value - 10
+    containerScrollLeft.value + containerWidth.value < tableWidth.value - 10 // add threshold to right side scrolling
 )
 
 //
 // Table
 
-const columns = computed(() => crateColumnsDef(props.columns))
+const columnsDef = computed(() => crateColumnsDef(props.columns))
 
 const table = useVueTable({
   get data() {
     return props.dataSource
   },
   get columns() {
-    return columns.value
+    return columnsDef.value
   },
   state: {
     get columnPinning() {
       return {
-        left: fixedColumns.value.left.map(
-          (column) => (column.dataIndex as string) || column.key!
-        ),
-        right: fixedColumns.value.right.map(
-          (column) => (column.dataIndex as string) || column.key!
-        )
+        left: fixedColumns.value.left.map((column) => column.key!),
+        right: fixedColumns.value.right.map((column) => column.key!)
       }
     }
   },

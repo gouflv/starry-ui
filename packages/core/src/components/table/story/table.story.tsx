@@ -186,7 +186,7 @@ export const Scroll: Story = {
 
         return () => (
           <>
-            <h3>Layout auto</h3>
+            <h3>Default</h3>
             <Table
               {...(args as any)}
               columns={[
@@ -200,7 +200,7 @@ export const Scroll: Story = {
               dataSource={data}
             />
 
-            <h3>Fixed width</h3>
+            <h3>Auto layout</h3>
             <Table
               {...(args as any)}
               columns={[
@@ -212,7 +212,7 @@ export const Scroll: Story = {
                 { title: 'Age', dataIndex: 'age' }
               ]}
               dataSource={data}
-              tableLayout={'fixed'}
+              tableLayout="auto"
             />
 
             <h3>Ellipsis</h3>
@@ -225,12 +225,12 @@ export const Scroll: Story = {
                   dataIndex: `name${i + 1}`,
                   ellipsis: true
                 })),
-                { title: 'Age', dataIndex: 'age' }
+                { title: 'Age', dataIndex: 'age', width: 80 }
               ]}
               dataSource={data}
             />
 
-            <h3>Scroll X</h3>
+            <h3>Scroll X only</h3>
             <Table
               {...(args as any)}
               scroll={{ x: 500 }}
@@ -269,7 +269,7 @@ export const FixedColumns: Story = {
 
         return () => (
           <>
-            <h3>Fixed first</h3>
+            <h3>Fixed</h3>
             <Table
               {...(args as any)}
               columns={[
@@ -277,9 +277,11 @@ export const FixedColumns: Story = {
                 ...Array.from({ length: 10 }, (_, i) => ({
                   title: `Name ${i + 1}`,
                   dataIndex: `name${i + 1}`,
-                  ellipsis: true
+                  ellipsis: true,
+                  fixed: !i
                 })),
-                { title: 'Age', dataIndex: 'age', fixed: 'right' }
+                { title: 'Age', dataIndex: 'age', fixed: 'right', width: 80 },
+                { title: 'Action', key: 'action', fixed: 'right', width: 80 }
               ]}
               dataSource={data}
             />

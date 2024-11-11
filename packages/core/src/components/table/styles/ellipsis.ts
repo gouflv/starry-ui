@@ -5,8 +5,9 @@ import type { TableToken } from '.'
 export function genEllipsisStyle(token: TableToken) {
   return css({
     [`.${token.componentCls}Cell--ellipsis`]: {
-      ...textEllipsis,
-      wordBreak: 'break-all'
+      display: 'block',
+      wordBreak: 'break-all',
+      ...textEllipsis
     }
   })
 }
