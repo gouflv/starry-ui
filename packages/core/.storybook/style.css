@@ -1,6 +1,7 @@
 body {
   box-sizing: border-box;
   min-height: 100vh;
+  padding: 2rem !important;
 }
 .cell {
   display: flex;
