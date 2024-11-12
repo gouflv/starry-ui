@@ -2,7 +2,7 @@ import { useConfig } from '@/uses/config'
 import { cx } from '@emotion/css'
 import { useToken } from '@starry/theme'
 import { computed, defineComponent, type SlotsType } from 'vue'
-import LoadingIcon from './loading-icon'
+import LoadingIcon from './LoadingIcon'
 import {
   genButtonBlockStyle,
   genButtonLoadingStyle,

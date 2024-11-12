@@ -77,19 +77,19 @@ import {
 import { useElementSize } from '@vueuse/core'
 import { isNumber } from 'lodash-es'
 import { computed, ref, watchEffect, type CSSProperties } from 'vue'
-import { provideTableContext } from './context'
-import { tableTokenFactory } from './styles'
-import { genBorderedStyle } from './styles/bordered'
-import { genEllipsisStyle } from './styles/ellipsis'
-import { genStickyStyle } from './styles/fixed'
-import { genSizeStyle } from './styles/size'
-import { genTableStyle } from './styles/table'
+import { tableTokenFactory } from '../styles'
+import { genBorderedStyle } from '../styles/bordered'
+import { genEllipsisStyle } from '../styles/ellipsis'
+import { genStickyStyle } from '../styles/fixed'
+import { genSizeStyle } from '../styles/size'
+import { genTableStyle } from '../styles/table'
 import {
   propsType,
   type ColumnType,
   type DefaultRecordType,
   type SelectionChangeEvent
-} from './types'
+} from '../types'
+import { provideTableContext } from './context'
 import {
   crateColumnsDef,
   flatColumns,
@@ -106,7 +106,16 @@ const emits = defineEmits<{
   selectionChange: [e: SelectionChangeEvent<Record>]
 }>()
 
-const slots = defineSlots()
+const slots = defineSlots<{
+  empty(): any
+  bodyCell(props: {
+    text: any
+    value: any
+    record: Record
+    index: number
+    column: ColumnType<Record>
+  }): any
+}>()
 
 const { token } = useToken()
 

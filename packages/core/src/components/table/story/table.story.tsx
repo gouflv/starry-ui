@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import Table from '../Table.vue'
-import type { ColumnType } from '../types'
+import { Table, type ColumnType } from '..'
 
 const meta: Meta<typeof Table> = {
   title: '数据展示/Table',
@@ -15,8 +14,7 @@ type Data = { id: number; name: string; age: number }
 const defaultColumns: ColumnType<Data>[] = [
   { title: 'ID', dataIndex: 'id' },
   { title: 'Name', dataIndex: 'name' },
-  { title: 'Age', dataIndex: 'age' },
-  { title: 'Action', key: 'action' }
+  { title: 'Age', dataIndex: 'age' }
 ]
 
 const defaultDataSource: Data[] = Array.from({ length: 10 }, (_, i) => ({
@@ -31,7 +29,7 @@ export const Default: Story = {
       setup() {
         return () => (
           <Table<Data>
-            {...(args as any)}
+            {...args}
             columns={defaultColumns}
             dataSource={defaultDataSource}
           />
@@ -47,7 +45,7 @@ export const Bordered: Story = {
       setup() {
         return () => (
           <Table<Data>
-            {...(args as any)}
+            {...args}
             columns={defaultColumns}
             dataSource={defaultDataSource}
             bordered
@@ -67,7 +65,7 @@ export const Size: Story = {
             <div style="margin-bottom: 20px">
               <h3>Middle</h3>
               <Table<Data>
-                {...(args as any)}
+                {...args}
                 columns={defaultColumns}
                 dataSource={defaultDataSource.slice(0, 5)}
                 size="middle"
@@ -76,7 +74,7 @@ export const Size: Story = {
             <div>
               <h3>Small</h3>
               <Table<Data>
-                {...(args as any)}
+                {...args}
                 columns={defaultColumns}
                 dataSource={defaultDataSource.slice(0, 5)}
                 size="small"
@@ -93,50 +91,73 @@ export const ColumnDef: Story = {
   render: (args) => {
     return {
       setup() {
+        const data: any[] = [
+          {
+            id: 1,
+            user: {
+              name: 'Name 1'
+            },
+            address: [{ name: 'Address 1' }]
+          },
+          {
+            id: 2
+          }
+        ]
         return () => (
           <>
-            <h3>DataIndex paths and CustomRender</h3>
+            <h3>Data index as paths</h3>
             <Table<{
               id: number
               user?: { name: string }
               address: { name: string }[]
             }>
-              {...(args as any)}
+              {...args}
               columns={[
                 { title: 'ID', dataIndex: 'id' },
                 {
-                  title: 'Name',
+                  title: 'Name (user.name)',
                   dataIndex: 'user.name',
-                  customRender: ({ text, column }) =>
-                    text ||
-                    `Value not found by accessor \`${column.dataIndex}\``
+                  customRender: ({ text }) => text || '-'
                 },
                 {
-                  title: 'Address',
-                  dataIndex: 'address.[0].name',
-                  customRender: ({ text, column }) =>
-                    text ||
-                    `Value not found by accessor \`${column.dataIndex}\``
-                },
-                {
-                  title: 'Action',
-                  key: 'action',
-                  width: 100
+                  title: 'Address (address.[0].name)',
+                  dataIndex: 'address.0.name',
+                  customRender: ({ text }) =>
+                    text || <span style="color:#e21">empty</span>
                 }
               ]}
-              dataSource={[
-                {
-                  id: 1,
-                  user: {
-                    name: 'Name 1'
-                  },
-                  address: [{ name: 'Address 1' }]
-                },
-                {
-                  id: 2
-                }
-              ]}
+              dataSource={data}
             />
+
+            <h3>Custom render slot</h3>
+            <Table<{
+              id: number
+              user?: { name: string }
+              address: { name: string }[]
+            }>
+              {...args}
+              columns={[
+                { title: 'ID', dataIndex: 'id' },
+                {
+                  title: 'Name (user.name)',
+                  dataIndex: 'user.name'
+                },
+                {
+                  title: 'Address (address.[0].name)',
+                  dataIndex: 'address'
+                }
+              ]}
+              dataSource={data}
+            >
+              {{
+                //@ts-ignore
+                bodyCell: ({ column, record }) => {
+                  if (column.dataIndex === 'address') {
+                    return <div>{record[0].name}</div>
+                  }
+                }
+              }}
+            </Table>
           </>
         )
       }
@@ -154,7 +175,7 @@ export const Ellipsis: Story = {
             name: string
             age: number
           }>
-            {...(args as any)}
+            {...args}
             columns={[
               { title: 'ID', dataIndex: 'id' },
               { title: 'Name', dataIndex: 'name', width: 80, ellipsis: true },
@@ -176,7 +197,7 @@ export const Scroll: Story = {
   render: (args) => {
     return {
       setup() {
-        const data = Array.from({ length: 20 }, (_, i) => ({
+        const data: any[] = Array.from({ length: 20 }, (_, i) => ({
           id: i + 1,
           ...Array.from({ length: 10 }, (_, j) => ({
             [`name${j + 1}`]: `Name ${j + 1} lorem ipsum dolor sit amet consectetur adipisicing elit. Similique accusantium ipsam.`
@@ -188,7 +209,7 @@ export const Scroll: Story = {
           <>
             <h3>Default</h3>
             <Table
-              {...(args as any)}
+              {...args}
               columns={[
                 { title: 'ID', dataIndex: 'id' },
                 ...Array.from({ length: 10 }, (_, i) => ({
@@ -202,7 +223,7 @@ export const Scroll: Story = {
 
             <h3>Auto layout</h3>
             <Table
-              {...(args as any)}
+              {...args}
               columns={[
                 { title: 'ID', dataIndex: 'id' },
                 ...Array.from({ length: 10 }, (_, i) => ({
@@ -217,7 +238,7 @@ export const Scroll: Story = {
 
             <h3>Ellipsis</h3>
             <Table
-              {...(args as any)}
+              {...args}
               columns={[
                 { title: 'ID', dataIndex: 'id' },
                 ...Array.from({ length: 10 }, (_, i) => ({
@@ -232,7 +253,7 @@ export const Scroll: Story = {
 
             <h3>Scroll X only</h3>
             <Table
-              {...(args as any)}
+              {...args}
               scroll={{ x: 500 }}
               columns={[
                 { title: 'ID', dataIndex: 'id' },
@@ -259,7 +280,7 @@ export const FixedColumns: Story = {
   render: (args) => {
     return {
       setup() {
-        const data = Array.from({ length: 20 }, (_, i) => ({
+        const data: any[] = Array.from({ length: 20 }, (_, i) => ({
           id: i + 1,
           ...Array.from({ length: 10 }, (_, j) => ({
             [`name${j + 1}`]: `Name ${j + 1}`
@@ -270,7 +291,7 @@ export const FixedColumns: Story = {
           <>
             <h3>Fixed</h3>
             <Table
-              {...(args as any)}
+              {...args}
               columns={[
                 { title: 'ID', dataIndex: 'id', fixed: true },
                 ...Array.from({ length: 10 }, (_, i) => ({
@@ -288,7 +309,7 @@ export const FixedColumns: Story = {
 
             <h3>Scroll X only</h3>
             <Table
-              {...(args as any)}
+              {...args}
               columns={[
                 { title: 'ID', dataIndex: 'id', fixed: true },
                 ...Array.from({ length: 10 }, (_, i) => ({
@@ -318,7 +339,7 @@ export const Grouping: Story = {
           <>
             <h3>Header Group</h3>
             <Table
-              {...(args as any)}
+              {...args}
               columns={[
                 {
                   title: 'ID',
@@ -359,7 +380,7 @@ export const Grouping: Story = {
 
             <h3>Fixed</h3>
             <Table
-              {...(args as any)}
+              {...args}
               columns={[
                 {
                   title: 'ID',

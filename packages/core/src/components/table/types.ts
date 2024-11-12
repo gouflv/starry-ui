@@ -1,5 +1,5 @@
 import type { SizeType } from '@/types'
-import type { Paths } from 'type-fest'
+import type { IfAny, Paths } from 'type-fest'
 import type { ExtractPublicPropTypes, PropType } from 'vue'
 
 export type DefaultRecordType = any
@@ -54,15 +54,17 @@ export type TablePropsType = ExtractPublicPropTypes<
 
 export type ColumnType<RecordType extends DefaultRecordType> = {
   // Data
-  dataIndex?: Paths<RecordType>
+  dataIndex?: IfAny<RecordType, string, Paths<RecordType>>
   key?: string
   title?: string
-  customRender?: (props: {
-    text: any
-    record: RecordType
-    index: number
-    column: ColumnType<RecordType>
-  }) => any
+  customRender?:
+    | string
+    | ((props: {
+        text: any
+        record: RecordType
+        index: number
+        column: ColumnType<RecordType>
+      }) => any)
 
   // Interaction
   defaultSortOrder?: 'ascend' | 'descend'

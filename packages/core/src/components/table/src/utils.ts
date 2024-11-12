@@ -7,7 +7,7 @@ import {
   type HeaderGroup
 } from '@tanstack/vue-table'
 import { get, isObject } from 'lodash-es'
-import type { ColumnType, CombinedColumnType, GroupColumnType } from './types'
+import type { ColumnType, CombinedColumnType, GroupColumnType } from '../types'
 
 export function normalizeColumnsKey<R>(
   columns: ColumnType<R>[]
@@ -57,7 +57,7 @@ function transformColumns<R>(
   const id = String(column.dataIndex || column.key || unsafeRowKey)
 
   const cellRender = (ctx: CellContext<R, any>) => {
-    if (column.customRender) {
+    if (typeof column.customRender === 'function') {
       return column.customRender({
         text: ctx.getValue(),
         record: ctx.row.original,
@@ -66,10 +66,7 @@ function transformColumns<R>(
       })
     }
     const value = ctx.getValue()
-    if (isObject(value)) {
-      return JSON.stringify(value)
-    }
-    return value
+    return isObject(value) ? JSON.stringify(value) : value
   }
 
   const colSize: ColumnSizingColumnDef = {
@@ -83,7 +80,8 @@ function transformColumns<R>(
       id,
       header: column.title,
       cell: cellRender,
-      ...colSize
+      ...colSize,
+      meta: { column }
     })
   }
 
@@ -91,7 +89,8 @@ function transformColumns<R>(
     id,
     header: column.title,
     cell: cellRender,
-    ...colSize
+    ...colSize,
+    meta: { column }
   })
 }
 
@@ -117,6 +116,8 @@ export function toSizeValue(num?: number | string) {
 }
 
 /**
+ * Calculate the colSpan for the header cell
+ *
  * @see https://github.com/TanStack/table/issues/5202#issuecomment-2027529717
  */
 export function mergeHeaderGroups<R = any>(
