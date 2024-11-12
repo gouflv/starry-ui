@@ -54,7 +54,11 @@ export type TablePropsType = ExtractPublicPropTypes<
 
 export type ColumnType<RecordType extends DefaultRecordType> = {
   // Data
-  dataIndex?: IfAny<RecordType, string, Paths<RecordType>>
+  dataIndex?: IfAny<
+    RecordType,
+    string,
+    Paths<RecordType, { bracketNotation: true }>
+  >
   key?: string
   title?: string
   customRender?:
@@ -114,4 +118,15 @@ export type SelectionChangeEvent<RecordType extends DefaultRecordType> = {
     rowKey: string
     record: RecordType
   }[]
+}
+
+export type TableSlots<R> = {
+  bodyCell?: (props: {
+    text: any
+    value: any
+    record: R
+    index: number
+    column: ColumnType<R>
+  }) => any
+  empty?: () => any
 }

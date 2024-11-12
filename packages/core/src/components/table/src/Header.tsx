@@ -4,6 +4,7 @@ import { useTableContext } from './context'
 import { getPinningState, mergeHeaderGroups } from './utils'
 
 export default defineComponent({
+  name: 'STableHeader',
   setup() {
     const context = useTableContext()
     const headerGroup = computed(() =>
@@ -26,6 +27,7 @@ export default defineComponent({
 })
 
 const Cell = defineComponent({
+  name: 'STableHeaderCell',
   props: {
     header: {
       type: Object as PropType<TSHeader<any, any>>,

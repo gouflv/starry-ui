@@ -3,11 +3,13 @@ import { inject, provide, type ComputedRef, type InjectionKey } from 'vue'
 import type {
   ColumnType,
   CombinedColumnType,
-  DefaultRecordType
+  DefaultRecordType,
+  TableSlots
 } from '../types'
 
 export type TableContext<R extends DefaultRecordType = any> = ComputedRef<{
   componentCls: string
+  slots: TableSlots<R>
   columns: CombinedColumnType<R>[]
   flattenColumns: ColumnType<R>[]
   table: TSTable<R>

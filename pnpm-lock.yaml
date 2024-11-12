@@ -20,6 +20,9 @@ importers:
       '@emotion/css':
         specifier: ^11.13.4
         version: 11.13.4
+      '@skirtle/vue-vnode-utils':
+        specifier: ^0.2.0
+        version: 0.2.0(vue@3.5.12(typescript@5.6.3))
       '@starry/theme':
         specifier: workspace:*
         version: link:../theme
@@ -1200,6 +1203,11 @@ packages:
 
   '@simonwep/pickr@1.8.2':
     resolution: {integrity: sha512-/l5w8BIkrpP6n1xsetx9MWPWlU6OblN5YgZZphxan0Tq4BByTCETL6lyIeY8lagalS2Nbt4F2W034KHLIiunKA==}
+
+  '@skirtle/vue-vnode-utils@0.2.0':
+    resolution: {integrity: sha512-smvpAC0SUSdHHTO6cHf//fqhMdEojxMxcvqFrtni3yYINzfmDB8Nhsa7ZBjaPpkLdYhoqfKSF+PY4tN/4Dw/Yg==}
+    peerDependencies:
+      vue: ^3.2.0
 
   '@storybook/addon-a11y@8.4.2':
     resolution: {integrity: sha512-v6Tl+qr3Eslf06qmt2hq1ticYi7oRLIFosePQUOlW1+cgdIbV+r1IxsZ7creCDWX4kIMTbUFhbET9LTYGHem1A==}
@@ -5340,6 +5348,10 @@ snapshots:
     dependencies:
       core-js: 3.38.1
       nanopop: 2.4.2
+
+  '@skirtle/vue-vnode-utils@0.2.0(vue@3.5.12(typescript@5.6.3))':
+    dependencies:
+      vue: 3.5.12(typescript@5.6.3)
 
   '@storybook/addon-a11y@8.4.2(storybook@8.4.2(prettier@3.3.3))':
     dependencies:

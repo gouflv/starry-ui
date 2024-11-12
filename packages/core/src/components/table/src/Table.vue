@@ -15,9 +15,9 @@ import { genSizeStyle } from '../styles/size'
 import { genTableStyle } from '../styles/table'
 import {
   propsType,
-  type ColumnType,
   type DefaultRecordType,
-  type SelectionChangeEvent
+  type SelectionChangeEvent,
+  type TableSlots
 } from '../types'
 import SBody from './Body'
 import { provideTableContext } from './context'
@@ -30,6 +30,8 @@ import {
   toSizeValue
 } from './utils'
 
+defineOptions({ name: 'STable' })
+
 const props = defineProps(propsType<Record>())
 
 const emits = defineEmits<{
@@ -37,16 +39,7 @@ const emits = defineEmits<{
   selectionChange: [e: SelectionChangeEvent<Record>]
 }>()
 
-const slots = defineSlots<{
-  empty(): any
-  bodyCell(props: {
-    text: any
-    value: any
-    record: Record
-    index: number
-    column: ColumnType<Record>
-  }): any
-}>()
+const slots = defineSlots<TableSlots<Record>>()
 
 const { token } = useToken()
 
@@ -202,6 +195,7 @@ const table = useVueTable({
 provideTableContext(
   computed(() => ({
     componentCls: componentCls.value,
+    slots,
     columns: props.columns,
     flattenColumns: flattenColumns.value,
     table

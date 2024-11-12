@@ -105,7 +105,7 @@ export const ColumnDef: Story = {
         ]
         return () => (
           <>
-            <h3>Data index as paths</h3>
+            <h3>Data index</h3>
             <Table<{
               id: number
               user?: { name: string }
@@ -120,8 +120,8 @@ export const ColumnDef: Story = {
                   customRender: ({ text }) => text || '-'
                 },
                 {
-                  title: 'Address (address.[0].name)',
-                  dataIndex: 'address.0.name',
+                  title: 'Address (address[0].name)',
+                  dataIndex: 'address[0].name',
                   customRender: ({ text }) =>
                     text || <span style="color:#e21">empty</span>
                 }
@@ -143,7 +143,7 @@ export const ColumnDef: Story = {
                   dataIndex: 'user.name'
                 },
                 {
-                  title: 'Address (address.[0].name)',
+                  title: 'Address (Custom slot)',
                   dataIndex: 'address'
                 }
               ]}
@@ -151,9 +151,12 @@ export const ColumnDef: Story = {
             >
               {{
                 //@ts-ignore
-                bodyCell: ({ column, record }) => {
+                bodyCell: ({ column, record, value }) => {
+                  if (column.dataIndex === 'user.name') {
+                    return value || '-'
+                  }
                   if (column.dataIndex === 'address') {
-                    return <div>{record[0].name}</div>
+                    return JSON.stringify(record)
                   }
                 }
               }}

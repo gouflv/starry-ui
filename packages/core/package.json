@@ -55,6 +55,7 @@
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
     "@emotion/css": "^11.13.4",
+    "@skirtle/vue-vnode-utils": "^0.2.0",
     "@starry/theme": "workspace:*",
     "@tanstack/vue-table": "^8.20.5",
     "@vueuse/core": "^11.1.0",

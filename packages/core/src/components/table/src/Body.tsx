@@ -1,9 +1,11 @@
+import { isEmpty } from '@skirtle/vue-vnode-utils'
 import { FlexRender, type Cell as TSCell } from '@tanstack/vue-table'
-import { defineComponent, type PropType } from 'vue'
+import { computed, defineComponent, type PropType } from 'vue'
 import { useTableContext } from './context'
 import { getPinningState } from './utils'
 
 export default defineComponent({
+  name: 'STableBody',
   props: {
     getRowKey: {
       type: Function,
@@ -12,11 +14,9 @@ export default defineComponent({
   },
   setup(props) {
     const context = useTableContext()
-
     return () => {
       const { getRowKey } = props
       const { table } = context.value
-
       return (
         <tbody>
           {table.getRowModel().rows.map((row) => (
@@ -33,6 +33,7 @@ export default defineComponent({
 })
 
 const RowCell = defineComponent({
+  name: 'STableBodyCell',
   props: {
     cell: {
       type: Object as PropType<TSCell<any, any>>,
@@ -50,16 +51,15 @@ const RowCell = defineComponent({
     return () => {
       const { cell } = props
       const { componentCls } = context.value
+      const pinningState = getPinningState(cell.column, componentCls)
 
       return (
         <td
           key={cell.id}
-          class={{
-            ...getPinningState(cell.column, componentCls).classes
-          }}
+          class={{ ...pinningState.classes }}
           style={{
             width: `${cell.column.getSize()}px`,
-            ...getPinningState(cell.column, componentCls).style
+            ...pinningState.style
           }}
         >
           <span
@@ -70,13 +70,56 @@ const RowCell = defineComponent({
               }
             ]}
           >
-            <FlexRender
-              render={cell.column.columnDef.cell}
-              props={cell.getContext()}
-            />
+            <SlotRender cell={cell}>
+              {{
+                default: () => (
+                  <FlexRender
+                    render={cell.column.columnDef.cell}
+                    props={cell.getContext()}
+                  />
+                )
+              }}
+            </SlotRender>
           </span>
         </td>
       )
+    }
+  }
+})
+
+const SlotRender = defineComponent({
+  props: {
+    cell: {
+      type: Object as PropType<TSCell<any, any>>,
+      required: true
+    }
+  },
+  setup(props, { slots }) {
+    const context = useTableContext()
+    const contextSlots = computed(() => context.value.slots)
+
+    return () => {
+      const { cell } = props
+      const bodyCellSlot = contextSlots.value.bodyCell
+
+      let child
+
+      if (bodyCellSlot) {
+        console.log(cell.getContext())
+        child = bodyCellSlot({
+          text: cell.getValue(),
+          value: cell.getValue(),
+          record: cell.row.original,
+          index: cell.row.index,
+          column: (cell.column.columnDef.meta as any).column
+        })
+      }
+
+      if (!child || isEmpty(child)) {
+        child = slots.default?.()
+      }
+
+      return child
     }
   }
 })
