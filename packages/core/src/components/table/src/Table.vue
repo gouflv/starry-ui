@@ -1,79 +1,9 @@
-<template>
-  <div ref="containerRef" :class="classes.table" :style="scrollStyle">
-    <table ref="tableRef" :style="tableStyle">
-      <thead>
-        <tr
-          v-for="headerGroup in mergeHeaderGroups(table.getHeaderGroups())"
-          :key="headerGroup.id"
-        >
-          <th
-            v-for="header in headerGroup.headers"
-            :key="header.id"
-            :colSpan="header.colSpan || 1"
-            :rowSpan="header.rowSpan || 1"
-            :style="{
-              width: `${header.getSize()}px`,
-              ...getPinningState(header.column).style
-            }"
-            :class="{
-              ...getPinningState(header.column).classes
-            }"
-          >
-            <FlexRender
-              v-if="!header.isPlaceholder"
-              :render="header.column.columnDef.header"
-              :props="header.getContext()"
-            />
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="row in table.getRowModel().rows"
-          :key="getRowKey(row.original)"
-        >
-          <td
-            v-for="cell in row.getVisibleCells()"
-            :key="cell.id"
-            :class="{
-              ...getPinningState(cell.column).classes
-            }"
-            :style="{
-              width: `${cell.column.getSize()}px`,
-              ...getPinningState(cell.column).style
-            }"
-          >
-            <span
-              :class="[
-                `${componentCls}Cell-content`,
-                {
-                  [`${componentCls}Cell--ellipsis`]: isEllipsis(cell.column.id)
-                }
-              ]"
-            >
-              <FlexRender
-                :render="cell.column.columnDef.cell"
-                :props="cell.getContext()"
-              />
-            </span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</template>
-
 <script setup lang="ts" generic="Record extends DefaultRecordType = any">
 import { useConfig } from '@/uses/config'
 import { useElementScroll } from '@/uses/dom/useElementScroll'
 import { cx } from '@emotion/css'
 import { useToken } from '@starry/theme'
-import {
-  FlexRender,
-  getCoreRowModel,
-  useVueTable,
-  type Column
-} from '@tanstack/vue-table'
+import { getCoreRowModel, useVueTable } from '@tanstack/vue-table'
 import { useElementSize } from '@vueuse/core'
 import { isNumber } from 'lodash-es'
 import { computed, ref, watchEffect, type CSSProperties } from 'vue'
@@ -89,12 +19,13 @@ import {
   type DefaultRecordType,
   type SelectionChangeEvent
 } from '../types'
+import SBody from './Body'
 import { provideTableContext } from './context'
+import SHeader from './Header'
 import {
   crateColumnsDef,
   flatColumns,
   isGroupColumn,
-  mergeHeaderGroups,
   normalizeColumnsKey,
   toSizeValue
 } from './utils'
@@ -120,6 +51,9 @@ const slots = defineSlots<{
 const { token } = useToken()
 
 const config = useConfig()
+
+const getRowKey = (row: Record) =>
+  typeof props.rowKey === 'function' ? props.rowKey(row) : props.rowKey
 
 //
 // State
@@ -228,26 +162,6 @@ watchEffect(() => {
   }
 })
 
-function getPinningState(column: Column<Record>) {
-  const pinned = column.getIsPinned()
-  const isLastLeft = pinned === 'left' && column.getIsLastColumn('left')
-  const isFirstRight = pinned === 'right' && column.getIsFirstColumn('right')
-  return {
-    isFirstRight,
-    isLastLeft,
-    classes: {
-      [`${componentCls.value}Cell--fixed-left`]: pinned === 'left',
-      [`${componentCls.value}Cell--fixed-right`]: pinned === 'right',
-      [`${componentCls.value}Cell--fixed-left-last`]: isLastLeft,
-      [`${componentCls.value}Cell--fixed-right-first`]: isFirstRight
-    },
-    style: {
-      left: pinned === 'left' ? `${column.getStart('left')}px` : undefined,
-      right: pinned === 'right' ? `${column.getAfter('right')}px` : undefined
-    } satisfies CSSProperties
-  }
-}
-
 const { left: containerScrollLeft } = useElementScroll(containerRef)
 const { width: containerWidth } = useElementSize(containerRef)
 const { width: tableWidth } = useElementSize(tableRef)
@@ -285,18 +199,21 @@ const table = useVueTable({
   columnResizeMode: 'onChange'
 })
 
-provideTableContext(computed(() => ({ table })))
-
-//
-// Helper
-
-const getRowKey = (row: Record) =>
-  typeof props.rowKey === 'function' ? props.rowKey(row) : props.rowKey
-
-function isEllipsis(key: string) {
-  const originColumnDef = (props.columns as ColumnType<any>[]).find(
-    (column) => (column.dataIndex || column.key) === key
-  )
-  return !!originColumnDef?.ellipsis
-}
+provideTableContext(
+  computed(() => ({
+    componentCls: componentCls.value,
+    columns: props.columns,
+    flattenColumns: flattenColumns.value,
+    table
+  }))
+)
 </script>
+
+<template>
+  <div ref="containerRef" :class="classes.table" :style="scrollStyle">
+    <table ref="tableRef" :style="tableStyle">
+      <SHeader />
+      <SBody :getRowKey="getRowKey" />
+    </table>
+  </div>
+</template>

@@ -1,12 +1,14 @@
 import {
   createColumnHelper,
   type CellContext,
+  type Column,
   type ColumnDef,
   type ColumnSizingColumnDef,
   type Header,
   type HeaderGroup
 } from '@tanstack/vue-table'
 import { get, isObject } from 'lodash-es'
+import type { CSSProperties } from 'vue'
 import type { ColumnType, CombinedColumnType, GroupColumnType } from '../types'
 
 export function normalizeColumnsKey<R>(
@@ -147,4 +149,24 @@ export function mergeHeaderGroups<R = any>(
         })
     }
   })
+}
+
+export function getPinningState(column: Column<any>, componentCls: string) {
+  const pinned = column.getIsPinned()
+  const isLastLeft = pinned === 'left' && column.getIsLastColumn('left')
+  const isFirstRight = pinned === 'right' && column.getIsFirstColumn('right')
+  return {
+    isFirstRight,
+    isLastLeft,
+    classes: {
+      [`${componentCls}Cell--fixed-left`]: pinned === 'left',
+      [`${componentCls}Cell--fixed-right`]: pinned === 'right',
+      [`${componentCls}Cell--fixed-left-last`]: isLastLeft,
+      [`${componentCls}Cell--fixed-right-first`]: isFirstRight
+    },
+    style: {
+      left: pinned === 'left' ? `${column.getStart('left')}px` : undefined,
+      right: pinned === 'right' ? `${column.getAfter('right')}px` : undefined
+    } satisfies CSSProperties
+  }
 }

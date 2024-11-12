@@ -1,8 +1,16 @@
-import type { Table } from '@tanstack/vue-table'
+import type { Table as TSTable } from '@tanstack/vue-table'
 import { inject, provide, type ComputedRef, type InjectionKey } from 'vue'
+import type {
+  ColumnType,
+  CombinedColumnType,
+  DefaultRecordType
+} from '../types'
 
-export type TableContext = ComputedRef<{
-  table: Table<any>
+export type TableContext<R extends DefaultRecordType = any> = ComputedRef<{
+  componentCls: string
+  columns: CombinedColumnType<R>[]
+  flattenColumns: ColumnType<R>[]
+  table: TSTable<R>
 }>
 
 const TableInjectionKey: InjectionKey<TableContext> =
@@ -13,5 +21,5 @@ export function provideTableContext(props: TableContext) {
 }
 
 export function useTableContext() {
-  return inject(TableInjectionKey)
+  return inject(TableInjectionKey)!
 }
