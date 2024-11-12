@@ -48,7 +48,7 @@ const emits = defineEmits<{
 }>()
 
 const slots = defineSlots<{
-  option: (option: Option) => any
+  option?: (props: { option: Option }) => any
 }>()
 
 //
