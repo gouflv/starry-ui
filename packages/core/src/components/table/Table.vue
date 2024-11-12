@@ -3,13 +3,13 @@
     <table ref="tableRef" :style="tableStyle">
       <thead>
         <tr
-          v-for="headerGroup in table.getHeaderGroups()"
+          v-for="headerGroup in mergeHeaderGroups(table.getHeaderGroups())"
           :key="headerGroup.id"
         >
           <th
             v-for="header in headerGroup.headers"
             :key="header.id"
-            :colSpan="header.colSpan"
+            :colSpan="header.colSpan || 1"
             :rowSpan="header.rowSpan || 1"
             :style="{
               width: `${header.getSize()}px`,
@@ -81,8 +81,8 @@ import { provideTableContext } from './context'
 import { tableTokenFactory } from './styles'
 import { genBorderedStyle } from './styles/bordered'
 import { genEllipsisStyle } from './styles/ellipsis'
+import { genStickyStyle } from './styles/fixed'
 import { genSizeStyle } from './styles/size'
-import { genStickyStyle } from './styles/sticky'
 import { genTableStyle } from './styles/table'
 import {
   propsType,
@@ -93,6 +93,8 @@ import {
 import {
   crateColumnsDef,
   flatColumns,
+  isGroupColumn,
+  mergeHeaderGroups,
   normalizeColumnsKey,
   toSizeValue
 } from './utils'
@@ -115,6 +117,10 @@ const config = useConfig()
 
 const containerRef = ref<HTMLElement>()
 const tableRef = ref<HTMLTableElement>()
+
+const hasGroupHeader = computed(() =>
+  props.columns.some((column) => isGroupColumn(column))
+)
 
 const flattenColumns = computed(() =>
   normalizeColumnsKey(flatColumns(props.columns))
@@ -155,7 +161,7 @@ const classes = computed(() => {
       genSizeStyle(tableToken.value, props.size),
       genEllipsisStyle(tableToken.value),
       genStickyStyle(tableToken.value),
-      ...(props.bordered
+      ...(props.bordered || hasGroupHeader.value
         ? [
             `${componentCls.value}--bordered`,
             genBorderedStyle(tableToken.value)
@@ -245,8 +251,6 @@ const pinningRightColumns = computed(
     fixedColumns.value.right.length > 0 &&
     containerScrollLeft.value + containerWidth.value < tableWidth.value - 10 // add threshold to right side scrolling
 )
-
-function getHeaderRowSpan() {}
 
 //
 // Table

@@ -259,6 +259,13 @@ export const FixedColumns: Story = {
   render: (args) => {
     return {
       setup() {
+        const data = Array.from({ length: 20 }, (_, i) => ({
+          id: i + 1,
+          ...Array.from({ length: 10 }, (_, j) => ({
+            [`name${j + 1}`]: `Name ${j + 1}`
+          })).reduce((acc, cur) => ({ ...acc, ...cur }), {}),
+          age: 20 + i
+        }))
         return () => (
           <>
             <h3>Fixed</h3>
@@ -275,70 +282,125 @@ export const FixedColumns: Story = {
                 { title: 'Age', dataIndex: 'age', fixed: 'right', width: 80 },
                 { title: 'Action', key: 'action', fixed: 'right', width: 80 }
               ]}
-              dataSource={Array.from({ length: 20 }, (_, i) => ({
-                id: i + 1,
-                ...Array.from({ length: 10 }, (_, j) => ({
-                  [`name${j + 1}`]: `Name ${j + 1}`
-                })).reduce((acc, cur) => ({ ...acc, ...cur }), {}),
-                age: 20 + i
-              }))}
+              dataSource={data}
+              scroll={{ x: 500, y: 300 }}
+            />
+
+            <h3>Scroll X only</h3>
+            <Table
+              {...(args as any)}
+              columns={[
+                { title: 'ID', dataIndex: 'id', fixed: true },
+                ...Array.from({ length: 10 }, (_, i) => ({
+                  title: `Name ${i + 1}`,
+                  dataIndex: `name${i + 1}`,
+                  ellipsis: true,
+                  fixed: !i
+                })),
+                { title: 'Age', dataIndex: 'age', fixed: 'right', width: 80 },
+                { title: 'Action', key: 'action', fixed: 'right', width: 80 }
+              ]}
+              dataSource={data}
+              scroll={{ x: 500 }}
             />
           </>
         )
       }
     }
-  },
-  args: {
-    scroll: { x: 500, y: 300 }
   }
 }
 
-export const HeaderGroup: Story = {
+export const Grouping: Story = {
   render: (args) => {
     return {
       setup() {
         return () => (
-          <Table
-            {...(args as any)}
-            columns={[
-              {
-                title: 'ID',
-                dataIndex: 'id',
-                rowSpan: 2
-              },
-              {
-                title: 'Name',
-                children: [
-                  { title: 'First Name', dataIndex: 'firstName' },
-                  { title: 'Last Name', dataIndex: 'lastName' }
-                ]
-              },
-              {
-                title: 'Info',
-                children: [
-                  { title: 'Age', dataIndex: 'age' },
-                  { title: 'Address', dataIndex: 'address' }
-                ]
-              }
-            ]}
-            dataSource={[
-              {
-                id: 1,
-                firstName: 'John',
-                lastName: 'Brown',
-                age: 32,
-                address: 'New York No. 1 Lake Park'
-              },
-              {
-                id: 2,
-                firstName: 'Jim',
-                lastName: 'Green',
-                age: 42,
-                address: 'London No. 1 Lake Park'
-              }
-            ]}
-            tableLayout="auto"
-          />
+          <>
+            <h3>Header Group</h3>
+            <Table
+              {...(args as any)}
+              columns={[
+                {
+                  title: 'ID',
+                  dataIndex: 'id'
+                },
+                {
+                  title: 'Name',
+                  children: [
+                    { title: 'First Name', dataIndex: 'firstName' },
+                    { title: 'Last Name', dataIndex: 'lastName' }
+                  ]
+                },
+                {
+                  title: 'Info',
+                  children: [
+                    { title: 'Age', dataIndex: 'age' },
+                    { title: 'Address', dataIndex: 'address' }
+                  ]
+                }
+              ]}
+              dataSource={[
+                {
+                  id: 1,
+                  firstName: 'John',
+                  lastName: 'Brown',
+                  age: 32,
+                  address: 'New York No. 1 Lake Park'
+                },
+                {
+                  id: 2,
+                  firstName: 'Jim',
+                  lastName: 'Green',
+                  age: 42,
+                  address: 'London No. 1 Lake Park'
+                }
+              ]}
+            />
+
+            <h3>Fixed</h3>
+            <Table
+              {...(args as any)}
+              columns={[
+                {
+                  title: 'ID',
+                  dataIndex: 'id',
+                  fixed: true
+                },
+                {
+                  title: 'Name',
+                  children: [
+                    { title: 'First Name', dataIndex: 'firstName', width: 300 },
+                    { title: 'Last Name', dataIndex: 'lastName', width: 300 }
+                  ]
+                },
+                {
+                  title: 'Info',
+                  children: [
+                    { title: 'Age', dataIndex: 'age', width: 300 },
+                    { title: 'Address', dataIndex: 'address', width: 300 }
+                  ]
+                },
+                { title: 'Action', key: 'action', fixed: 'right', width: 80 }
+              ]}
+              dataSource={[
+                {
+                  id: 1,
+                  firstName: 'John',
+                  lastName: 'Brown',
+                  age: 32,
+                  address: 'New York No. 1 Lake Park'
+                },
+                {
+                  id: 2,
+                  firstName: 'Jim',
+                  lastName: 'Green',
+                  age: 42,
+                  address: 'London No. 1 Lake Park'
+                }
+              ]}
+              scroll={{ x: 500 }}
+            />
+          </>
         )
       }
     }

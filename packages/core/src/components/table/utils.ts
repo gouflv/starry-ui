@@ -2,12 +2,16 @@ import {
   createColumnHelper,
   type CellContext,
   type ColumnDef,
-  type ColumnSizingColumnDef
+  type ColumnSizingColumnDef,
+  type Header,
+  type HeaderGroup
 } from '@tanstack/vue-table'
 import { get, isObject } from 'lodash-es'
 import type { ColumnType, CombinedColumnType, GroupColumnType } from './types'
 
-export function normalizeColumnsKey<R>(columns: ColumnType<R>[]) {
+export function normalizeColumnsKey<R>(
+  columns: ColumnType<R>[]
+): ColumnType<R>[] {
   const keys: Record<string, boolean> = {}
   return columns.map((column) => {
     let mergedKey = String(column.dataIndex || column.key || '_INNER_COLUMN')
@@ -18,7 +22,7 @@ export function normalizeColumnsKey<R>(columns: ColumnType<R>[]) {
     return {
       ...column,
       key: mergedKey
-    } satisfies ColumnType<R>
+    }
   })
 }
 
@@ -110,4 +114,36 @@ export function toSizeValue(num?: number | string) {
     return num
   }
   return 'auto'
+}
+
+/**
+ * @see https://github.com/TanStack/table/issues/5202#issuecomment-2027529717
+ */
+export function mergeHeaderGroups<R = any>(
+  hg: HeaderGroup<R>[]
+): HeaderGroup<R>[] {
+  if (hg.length === 1) return hg
+
+  const idCache = new Set<string>()
+
+  return hg.map((group, depth, { length: totalDepth }) => {
+    return {
+      ...group,
+      headers: group.headers
+        .filter((hd) => !idCache.has(hd.column.id))
+        .map((hd: Header<R, any>) => {
+          idCache.add(hd.column.id)
+          return hd.isPlaceholder
+            ? {
+                ...hd,
+                isPlaceholder: false,
+                rowSpan: totalDepth - depth
+              }
+            : {
+                ...hd,
+                rowSpan: 1
+              }
+        })
+    }
+  })
 }

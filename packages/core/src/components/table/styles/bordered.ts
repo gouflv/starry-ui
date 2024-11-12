@@ -8,20 +8,26 @@ export function genBorderedStyle(token: TableToken) {
     borderInlineStart: tableBorder,
 
     table: {
-      borderTop: tableBorder,
+      borderTop: tableBorder
+    },
 
-      [`
-        thead > tr > th,
-        tbody > tr > td
-      `]: {
-        borderInlineEnd: tableBorder
-      },
+    [`
+      thead > tr > th,
+      tbody > tr > td
+    `]: {
+      borderInlineEnd: tableBorder
+    },
 
-      thead: {
-        '> tr > th::before': {
-          backgroundColor: 'transparent !important'
-        }
+    // hide split line
+    thead: {
+      '> tr > th::before': {
+        backgroundColor: 'transparent !important'
       }
+    },
+
+    // FIXME: not work
+    [`.${token.componentCls}Cell--fixed-right-first::after`]: {
+      borderInlineEnd: tableBorder
     }
   })
 }

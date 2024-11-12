@@ -72,6 +72,7 @@ export type ColumnType<RecordType extends DefaultRecordType> = {
   // Style
   align?: 'left' | 'center' | 'right'
   colSpan?: number
+  rowSpan?: number
   ellipsis?: boolean
   fixed?: boolean | 'left' | 'right'
   maxWidth?: number
