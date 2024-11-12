@@ -1,4 +1,4 @@
-<script setup lang="ts" generic="Record extends DefaultRecordType = any">
+<script setup lang="ts" generic="Record extends DefaultRecordType">
 import { useConfig } from '@/uses/config'
 import { useElementScroll } from '@/uses/dom/useElementScroll'
 import { cx } from '@emotion/css'

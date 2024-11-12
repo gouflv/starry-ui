@@ -4,9 +4,9 @@ import { transformToken } from './utils/css-variable'
 import getDesignToken from './utils/getDesignToken'
 
 export {
-  Algorithm,
   DesignTokenProvider,
   getDesignToken,
   transformToken as transformTokenToCSSVariable,
-  useToken
+  useToken,
+  type Algorithm
 }

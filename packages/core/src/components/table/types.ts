@@ -1,5 +1,4 @@
 import type { SizeType } from '@/types'
-import type { IfAny, Paths } from 'type-fest'
 import type { ExtractPublicPropTypes, PropType } from 'vue'
 
 export type DefaultRecordType = any
@@ -52,13 +51,9 @@ export type TablePropsType = ExtractPublicPropTypes<
   ReturnType<typeof propsType>
 >
 
-export type ColumnType<RecordType extends DefaultRecordType> = {
+export type ColumnType<RecordType> = {
   // Data
-  dataIndex?: IfAny<
-    RecordType,
-    string,
-    Paths<RecordType, { bracketNotation: true }>
-  >
+  dataIndex?: string
   key?: string
   title?: string
   customRender?:
@@ -87,16 +82,16 @@ export type ColumnType<RecordType extends DefaultRecordType> = {
   width?: number
 }
 
-export type GroupColumnType<RecordType extends DefaultRecordType> = {
+export type GroupColumnType<RecordType> = {
   title: string
   children: ColumnType<RecordType>[]
 }
 
-export type CombinedColumnType<RecordType extends DefaultRecordType> =
+export type CombinedColumnType<RecordType> =
   | ColumnType<RecordType>
   | GroupColumnType<RecordType>
 
-export type SelectionType<RecordType extends DefaultRecordType> = {
+export type SelectionType<RecordType> = {
   columnTitle?: string
   columnWidth?: number
   fixed?: boolean
@@ -112,7 +107,7 @@ export type ScrollType = {
   y?: number
 }
 
-export type SelectionChangeEvent<RecordType extends DefaultRecordType> = {
+export type SelectionChangeEvent<RecordType> = {
   rows: {
     selected: boolean
     rowKey: string
@@ -120,13 +115,13 @@ export type SelectionChangeEvent<RecordType extends DefaultRecordType> = {
   }[]
 }
 
-export type TableSlots<R> = {
+export type TableSlots<RecordType> = {
   bodyCell?: (props: {
     text: any
     value: any
-    record: R
+    record: RecordType
     index: number
-    column: ColumnType<R>
+    column: ColumnType<RecordType>
   }) => any
   empty?: () => any
 }

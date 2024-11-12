@@ -105,7 +105,6 @@ const SlotRender = defineComponent({
       let child
 
       if (bodyCellSlot) {
-        console.log(cell.getContext())
         child = bodyCellSlot({
           text: cell.getValue(),
           value: cell.getValue(),

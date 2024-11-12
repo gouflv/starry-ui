@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { Table, type ColumnType } from '..'
+import Table, { type ColumnType } from '..'
 
 const meta: Meta<typeof Table> = {
   title: '数据展示/Table',
