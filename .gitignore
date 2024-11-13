@@ -5,3 +5,5 @@ cache/
 *.log
 *.local
 *storybook.log
+# Local Netlify folder
+.netlify
