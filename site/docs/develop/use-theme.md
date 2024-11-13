@@ -54,6 +54,7 @@ Token 支持的格式：`CSS Variable`、`SCSS`、`LESS`。
   --color-info: #3a8bff;
   --color-text-base: #000;
   --color-bg-base: #fff;
+  ...
 }
 
 /* pageA.css */
@@ -62,3 +63,8 @@ Token 支持的格式：`CSS Variable`、`SCSS`、`LESS`。
   background-color: var(--color-bg-base);
 }
 ```
+
+## 参考
+
+- [emotion](https://emotion.sh/)
+- [panda](https://panda-css.com/)
