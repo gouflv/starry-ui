@@ -71,5 +71,5 @@ export default defineConfig({
   ignoreDeadLinks: true,
   lastUpdated: true,
   lang: 'zh-CN',
-  outDir: 'dist'
+  outDir: '../dist'
 })
