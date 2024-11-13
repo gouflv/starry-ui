@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
+    "netlify-cli": "^17.37.2",
     "prettier": "^3.3.3"
   }
 }

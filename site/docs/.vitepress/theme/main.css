@@ -1,3 +1,7 @@
+:root {
+  --vp-c-brand-1: #3a8bff;
+}
+
 * {
   border-width: 0;
   border-style: solid;

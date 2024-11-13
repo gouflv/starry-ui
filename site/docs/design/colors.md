@@ -2,10 +2,8 @@
 
 ## 基础色板
 
->
-
 <ColorTokens />
 
 <script setup>
-import ColorTokens from '../../src/views/preset-colors/PresetColors.vue'
+import ColorTokens from '@/components/preset-colors/PresetColors.vue'
 </script>

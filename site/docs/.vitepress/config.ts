@@ -1,3 +1,4 @@
+import { fileURLToPath, URL } from 'node:url'
 import UnoCSS from 'unocss/vite'
 import { defineConfig } from 'vitepress'
 
@@ -60,6 +61,15 @@ export default defineConfig({
     plugins: [
       //@ts-ignore
       UnoCSS()
-    ]
-  }
+    ],
+    resolve: {
+      alias: {
+        '@': fileURLToPath(new URL('../../src', import.meta.url))
+      }
+    }
+  },
+  ignoreDeadLinks: true,
+  lastUpdated: true,
+  lang: 'zh-CN',
+  outDir: 'dist'
 })

@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "exports": {
     ".": {
-      "import": "./src/index.ts"
+      "import": "./src/index.ts",
+      "require": "./dist/index.js"
     }
   },
   "scripts": {
