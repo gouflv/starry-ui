@@ -18,10 +18,20 @@ export default defineConfig({
     sidebar: {
       '/design/': [
         {
+          items: [{ text: '介绍', link: '/design/' }]
+        },
+        {
+          text: '样式',
           items: [
-            { text: '设计规范', link: '/design/' },
-            { text: '色彩', link: '/design/colors' }
+            { text: '色彩', link: '/design/colors' },
+            { text: '布局' },
+            { text: '字体' },
+            { text: '图标' }
           ]
+        },
+        {
+          text: '模版',
+          items: []
         }
       ],
       '/develop/': [
@@ -33,13 +43,11 @@ export default defineConfig({
           ]
         },
         {
+          text: '主题',
           items: [
-            { text: '主题', link: '/develop/theme' },
-            { text: '在项目中引入主题', link: '/develop/use-theme' }
+            { text: '介绍', link: '/develop/theme' },
+            { text: '在项目中使用主题', link: '/develop/use-theme' }
           ]
-        },
-        {
-          items: []
         }
       ],
       '/components/': [

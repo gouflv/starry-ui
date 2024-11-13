@@ -1,16 +1,8 @@
-# 在项目中引入主题
+# 使用主题
 
-## 静态引入
+在 Starry UI 中，我们将主题抽象到一个独立的主题库 `@starry/theme` 中，以便于在组件之外使用。
 
-可通过 [主题编辑器](../theme-editor.md) 的导出功能，获取全部 Design Token。
-
-支持一下
-
-### 原生 CSS
-
-推荐使用 `CSS Variable`
-
-### SCSS、LESS 等预编译工具
+主题库提供了一套完整的主题方案，包括 Token、梯度算法、模式算法和 CSS-in-JS 运行时方案等。
 
 ## 动态引入
 
@@ -21,11 +13,52 @@ import { getDesignToken } from '@starry/theme'
 
 const token = getDesignToken({
   token: {
-    colorPrimary: 'red'
+    colorPrimary: '#F00'
   }
 })
 
-console.log(token.colorPrimary) // red
+console.log(token.colorPrimary) // #F00
+console.log(token.colorPrimaryTextHover) // #FC2F28
 ```
 
-之后通过 `CSS-in-JS` 方式，在界面上使用。
+也可以指定主题算法：
+
+```ts
+import { getDesignToken, themes } from '@starry/theme'
+
+const token = getDesignToken({
+  token: {
+    colorPrimary: 'red'
+  },
+  derivative: [themes.default, themes.loosen] // 指定`关怀模式`
+})
+```
+
+之后通过 `CSS-in-JS` 运行时方案，如 `emotion`、`panda` 等，将主题应用到 `Vue`、`React` 等应用中。
+
+## 静态消费
+
+当使用传统样式方案时，可通过 [主题编辑器](../theme-editor.md) 导出全部的 Design Token。
+
+Token 支持的格式：`CSS Variable`、`SCSS`、`LESS`。
+
+### 示例
+
+```css
+/* global.css */
+:root {
+  --color-primary: #3a8bff;
+  --color-success: #52c41a;
+  --color-warning: #faad14;
+  --color-error: #ff4d4f;
+  --color-info: #3a8bff;
+  --color-text-base: #000;
+  --color-bg-base: #fff;
+}
+
+/* pageA.css */
+.page {
+  color: var(--color-text-base);
+  background-color: var(--color-bg-base);
+}
+```
