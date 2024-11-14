@@ -5,7 +5,11 @@ import type { CSSObject } from '@emotion/css/create-instance'
 import type { AliasToken } from '@starry-ui/theme'
 import type { ButtonType } from './types'
 
-export const genButtonSharedStyle = (token: AliasToken) =>
+export interface ButtonToken extends AliasToken {
+  componentCls: string
+}
+
+export const genButtonSharedStyle = (token: ButtonToken) =>
   css({
     ...resetComponent(token),
 
@@ -34,11 +38,18 @@ export const genButtonSharedStyle = (token: AliasToken) =>
     // User interaction
     userSelect: 'none',
     cursor: 'pointer',
-    transition: 'all 0.3s ease-in-out'
+    transition: 'all 0.3s ease-in-out',
+
+    span: {
+      display: 'inline-block'
+    },
+    '> span + span': {
+      marginInlineStart: token.marginXS
+    }
   })
 
 const getHoverActiveStyle = (
-  token: AliasToken,
+  token: ButtonToken,
   hover: CSSObject,
   active: CSSObject
 ) => ({
@@ -49,7 +60,7 @@ const getHoverActiveStyle = (
 //
 // Type
 
-const getSolidDisabledStyle = (token: AliasToken) => ({
+const getSolidDisabledStyle = (token: ButtonToken) => ({
   '&[disabled]': {
     cursor: 'not-allowed',
     borderColor: token.colorBorder,
@@ -59,7 +70,7 @@ const getSolidDisabledStyle = (token: AliasToken) => ({
   }
 })
 
-const getPureDisabledStyle = (token: AliasToken) => ({
+const getPureDisabledStyle = (token: ButtonToken) => ({
   '&[disabled]': {
     cursor: 'not-allowed',
     color: token.colorTextDisabled
@@ -67,7 +78,7 @@ const getPureDisabledStyle = (token: AliasToken) => ({
 })
 
 // Type: default
-const getDefaultStyle = (token: AliasToken) =>
+const getDefaultStyle = (token: ButtonToken) =>
   css({
     backgroundColor: token.colorBgContainer,
     borderColor: token.colorBorder,
@@ -102,7 +113,7 @@ const getDefaultStyle = (token: AliasToken) =>
   })
 
 // Type: primary
-const genPrimaryStyle = (token: AliasToken) =>
+const genPrimaryStyle = (token: ButtonToken) =>
   css({
     color: token.colorTextLightSolid,
     backgroundColor: token.colorPrimary,
@@ -134,7 +145,7 @@ const genPrimaryStyle = (token: AliasToken) =>
   })
 
 // Type: link
-const genLinkStyle = (token: AliasToken) =>
+const genLinkStyle = (token: ButtonToken) =>
   css({
     color: token.colorLink,
     ...getHoverActiveStyle(
@@ -163,7 +174,7 @@ const genLinkStyle = (token: AliasToken) =>
   })
 
 // Type: text
-const genTextStyle = (token: AliasToken) =>
+const genTextStyle = (token: ButtonToken) =>
   css({
     border: 'none',
     backgroundColor: 'transparent',
@@ -197,7 +208,7 @@ const genTextStyle = (token: AliasToken) =>
   })
 
 export const genButtonTypeStyle = (
-  token: AliasToken,
+  token: ButtonToken,
   type: ButtonType = 'default'
 ) => {
   if (type === 'primary') return genPrimaryStyle(token)
@@ -209,18 +220,18 @@ export const genButtonTypeStyle = (
 //
 // Shape
 
-const getCircularStyle = (token: AliasToken): CSSObject => ({
+const getCircularStyle = (token: ButtonToken): CSSObject => ({
   minWidth: token.controlHeight,
   paddingInline: 0,
   borderRadius: '50%'
 })
 
-const getRoundStyle = (token: AliasToken): CSSObject => ({
+const getRoundStyle = (token: ButtonToken): CSSObject => ({
   borderRadius: token.controlHeight,
   paddingInline: token.controlHeight / 2
 })
 
-export const genButtonShapeStyle = (token: AliasToken, shape: string) => {
+export const genButtonShapeStyle = (token: ButtonToken, shape: string) => {
   return css(
     shape === 'circle'
       ? getCircularStyle(token)
@@ -233,7 +244,7 @@ export const genButtonShapeStyle = (token: AliasToken, shape: string) => {
 //
 // Size
 
-const getSizeBaseStyle = (token: AliasToken): CSSObject => {
+const getSizeBaseStyle = (token: ButtonToken): CSSObject => {
   const {
     controlHeight,
     fontSize,
@@ -257,9 +268,9 @@ const getSizeBaseStyle = (token: AliasToken): CSSObject => {
   }
 }
 
-const getSizeMiddleStyle = (token: AliasToken) => getSizeBaseStyle(token)
+const getSizeMiddleStyle = (token: ButtonToken) => getSizeBaseStyle(token)
 
-const getSizeSmallStyle = (token: AliasToken) =>
+const getSizeSmallStyle = (token: ButtonToken) =>
   getSizeBaseStyle({
     ...token,
     controlHeight: token.controlHeightSM,
@@ -268,7 +279,7 @@ const getSizeSmallStyle = (token: AliasToken) =>
     borderRadius: token.borderRadiusSM
   })
 
-const getSizeLargeStyle = (token: AliasToken) =>
+const getSizeLargeStyle = (token: ButtonToken) =>
   getSizeBaseStyle({
     ...token,
     controlHeight: token.controlHeightLG,
@@ -277,26 +288,20 @@ const getSizeLargeStyle = (token: AliasToken) =>
     borderRadius: token.borderRadiusLG
   })
 
-export const genButtonSizeStyle = (
-  token: AliasToken,
-  size: SizeType,
-  iconOnly: boolean
-) => {
+export const genButtonSizeStyle = (token: ButtonToken, size: SizeType) => {
   return css({
     ...(size === 'small'
       ? getSizeSmallStyle(token)
       : size === 'large'
         ? getSizeLargeStyle(token)
         : getSizeMiddleStyle(token)),
-    ...(iconOnly
-      ? {
-          width: token.controlHeight,
-          paddingInline: 0,
-          '> span': {
-            transform: 'scale(1.143)'
-          }
-        }
-      : {})
+    [`&.${token.componentCls}--icon-only`]: {
+      width: token.controlHeight,
+      paddingInline: 0,
+      '> span': {
+        transform: 'scale(1.143)'
+      }
+    }
   })
 }
 
@@ -305,7 +310,7 @@ export const genButtonBlockStyle = () =>
     width: '100%'
   })
 
-export const genButtonLoadingStyle = (token: AliasToken) =>
+export const genButtonLoadingStyle = (token: ButtonToken) =>
   css({
     opacity: 0.6,
     cursor: 'default'
