@@ -10,8 +10,7 @@ export default defineConfig({
       { text: '首页', link: '/' },
       { text: '设计', link: '/design/' },
       { text: '研发', link: '/develop/' },
-      { text: '组件', link: '/components/' },
-      { text: '工具', link: '/utilities/' },
+      { text: '组件', link: '//starry-ui-sb.netlify.app/' },
       { text: '主题编辑', link: '/theme-editor' }
     ],
 
@@ -38,21 +37,20 @@ export default defineConfig({
         {
           items: [
             { text: 'Starry UI for Vue', link: '/develop/' },
-            { text: '快速上手' },
-            { text: '主题定制' }
+            { text: '快速上手', link: '/develop/getting-started' },
+            { text: '主题定制', link: '/develop/custom-theme' }
           ]
         },
         {
           text: '主题',
           items: [
-            { text: '介绍', link: '/develop/theme' },
-            { text: '在项目中使用主题', link: '/develop/use-theme' }
+            { text: '介绍', link: '/develop/theme-pkg/' },
+            { text: '在项目中使用主题', link: '/develop/theme-pkg/usage' }
           ]
-        }
-      ],
-      '/components/': [
+        },
         {
-          items: [{ text: '组件总览', link: '/components/' }]
+          text: '@starry-ui/theme',
+          link: '/develop/theme-pkg/api'
         }
       ]
     },

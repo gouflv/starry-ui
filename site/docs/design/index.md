@@ -14,7 +14,7 @@ WIP
 
 ## 参考
 
-- [Ant Design](https://ant.design/docs/spec/introduce-cn)
-- [Semi Design](https://semi.design/zh-CN/)
-- [DevUI](https://devui.design/home)
-- [iDux](https://idux.site/)
+- [蚂蚁 Ant Design](https://ant.design/docs/spec/introduce-cn)
+- [抖音 Semi Design](https://semi.design/zh-CN/)
+- [华为 DevUI](https://devui.design/home)
+- [深信服 iDux](https://idux.site/)

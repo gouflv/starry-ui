@@ -7,14 +7,14 @@
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
     "@ctrl/tinycolor": "^4.1.0",
-    "@starry/theme": "workspace:*",
+    "@starry-ui/theme": "workspace:*",
     "ant-design-vue": "^4.2.5",
     "lodash-es": "^4.17.21",
     "pinia": "^2.2.4",
@@ -33,6 +33,8 @@
     "@unocss/transformer-directives": "^0.63.6",
     "@vitejs/plugin-vue": "^5.1.4",
     "@vitejs/plugin-vue-jsx": "^4.0.1",
+    "@vitepress-demo-preview/component": "^2.3.2",
+    "@vitepress-demo-preview/plugin": "^1.2.3",
     "@vue/eslint-config-prettier": "^10.0.0",
     "@vue/eslint-config-typescript": "^14.0.1",
     "@vue/tsconfig": "^0.5.1",
