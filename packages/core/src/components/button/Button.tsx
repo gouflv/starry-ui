@@ -1,6 +1,6 @@
 import { useConfig } from '@/uses/config'
 import { cx } from '@emotion/css'
-import { useToken } from '@starry/theme'
+import { useToken } from '@starry-ui/theme'
 import { computed, defineComponent, type SlotsType } from 'vue'
 import LoadingIcon from './LoadingIcon'
 import {

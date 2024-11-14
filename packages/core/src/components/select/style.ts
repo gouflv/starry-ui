@@ -2,7 +2,7 @@ import type { SizeType } from '@/types'
 import { resetComponent, resetIcon, textEllipsis } from '@/utils/style'
 import { css } from '@emotion/css'
 import type { CSSObject } from '@emotion/css/create-instance'
-import type { AliasToken } from '@starry/theme'
+import type { AliasToken } from '@starry-ui/theme'
 
 export interface SelectToken extends AliasToken {
   rootPrefixCls: string

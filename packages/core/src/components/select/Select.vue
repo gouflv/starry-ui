@@ -2,7 +2,7 @@
 import { useConfig } from '@/uses/config'
 import { DownOutlined, LoadingOutlined } from '@ant-design/icons-vue'
 import { css, cx } from '@emotion/css'
-import { useToken } from '@starry/theme'
+import { useToken } from '@starry-ui/theme'
 import { useDebounceFn, useMounted } from '@vueuse/core'
 import { Combobox as Comb } from 'radix-vue/namespaced'
 import { computed, ref, watch } from 'vue'

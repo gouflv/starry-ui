@@ -5,7 +5,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@starry/theme": "workspace:*",
+    "@starry-ui/theme": "workspace:*",
     "vue": "^3.5.12"
   },
   "devDependencies": {

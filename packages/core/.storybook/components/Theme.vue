@@ -54,7 +54,7 @@ import {
   DesignTokenProvider,
   getDesignToken,
   themes
-} from '@starry/theme'
+} from '@starry-ui/theme'
 import { onClickOutside } from '@vueuse/core'
 import { ref } from 'vue'
 

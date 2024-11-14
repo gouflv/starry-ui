@@ -1,5 +1,5 @@
 import type { CSSObject } from '@emotion/css/create-instance'
-import type { AliasToken } from '@starry/theme'
+import type { AliasToken } from '@starry-ui/theme'
 
 export const resetComponent = (token: AliasToken): CSSObject => ({
   boxSizing: 'border-box',

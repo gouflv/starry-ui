@@ -1,4 +1,4 @@
-import { themes } from '@starry/theme'
+import { themes } from '@starry-ui/theme'
 import { beforeEach, expect, test } from 'vitest'
 import getDesignToken from '../../packages/theme/src/cssinjs/utils/getDesignToken'
 import { GlobalToken } from '../../packages/theme/src/interface'

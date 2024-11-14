@@ -1,7 +1,7 @@
 import { useConfig } from '@/uses/config'
 import { LoadingOutlined } from '@ant-design/icons-vue'
 import { css } from '@emotion/css'
-import { useToken } from '@starry/theme'
+import { useToken } from '@starry-ui/theme'
 import { computed, defineComponent } from 'vue'
 
 export default defineComponent({

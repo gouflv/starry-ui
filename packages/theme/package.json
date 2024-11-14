@@ -1,5 +1,5 @@
 {
-  "name": "@starry/theme",
+  "name": "@starry-ui/theme",
   "version": "0.0.1",
   "exports": {
     ".": {

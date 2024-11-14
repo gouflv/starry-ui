@@ -1,4 +1,4 @@
-import { type AliasToken, TinyColor } from '@starry/theme'
+import { type AliasToken, TinyColor } from '@starry-ui/theme'
 
 export interface TableToken extends AliasToken {
   componentCls: string

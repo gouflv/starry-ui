@@ -2,7 +2,7 @@
 import { useConfig } from '@/uses/config'
 import { useElementScroll } from '@/uses/dom/useElementScroll'
 import { cx } from '@emotion/css'
-import { useToken } from '@starry/theme'
+import { useToken } from '@starry-ui/theme'
 import { getCoreRowModel, useVueTable } from '@tanstack/vue-table'
 import { useElementSize } from '@vueuse/core'
 import { isNumber } from 'lodash-es'

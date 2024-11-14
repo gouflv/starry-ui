@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { useToken } from '@starry/theme'
+import { useToken } from '@starry-ui/theme'
 import { reduce } from 'lodash-es'
 import { computed } from 'vue'
 const { token } = useToken()

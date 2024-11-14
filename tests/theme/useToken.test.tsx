@@ -1,4 +1,4 @@
-import { DesignTokenProvider } from '@starry/theme'
+import { DesignTokenProvider } from '@starry-ui/theme'
 import { mount } from '@vue/test-utils'
 import { expect, test } from 'vitest'
 import TokenRender from './components/TokenRender.vue'
