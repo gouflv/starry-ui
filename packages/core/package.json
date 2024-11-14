@@ -11,8 +11,8 @@
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
-    "sb": "storybook dev -p 6006 --no-open",
-    "build-sb": "storybook build"
+    "sb:dev": "storybook dev -p 6006 --no-open",
+    "sb:build": "storybook build -o .storybook/dist"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.2",
