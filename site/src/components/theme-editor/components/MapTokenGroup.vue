@@ -49,7 +49,7 @@
 
 <script setup lang="ts">
 import { CaretRightOutlined } from '@ant-design/icons-vue'
-import type { GlobalToken } from '@starry/theme'
+import type { GlobalToken } from '@starry-ui/theme'
 import { Button, Collapse, CollapsePanel, InputNumber } from 'ant-design-vue'
 import { ref } from 'vue'
 import ColorPicker from '../../common/ColorPicker.vue'

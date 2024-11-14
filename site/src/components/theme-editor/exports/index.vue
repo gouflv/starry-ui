@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { transformTokenToCSSVariable } from '@starry/theme'
+import { transformTokenToCSSVariable } from '@starry-ui/theme'
 import {
   Button,
   Checkbox,

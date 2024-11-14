@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import type { GlobalToken } from '@starry/theme'
+import type { GlobalToken } from '@starry-ui/theme'
 import { computed } from 'vue'
 import { isDarkColor } from '../../utils/color'
 

@@ -1,4 +1,4 @@
-import { getDesignToken, type GlobalToken } from '@starry/theme'
+import { getDesignToken, type GlobalToken } from '@starry-ui/theme'
 import { omit } from 'lodash-es'
 import { defineStore } from 'pinia'
 import { computed, ref, watch } from 'vue'

@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import { PresetColors, useToken } from '@starry/theme'
+import { PresetColors, useToken } from '@starry-ui/theme'
 import Color from './Color.vue'
 
 const { token } = useToken()
