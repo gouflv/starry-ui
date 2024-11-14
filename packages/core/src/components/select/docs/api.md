@@ -4,7 +4,7 @@
 | ------------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------- | --------- |
 | open                | 是否打开下拉菜单                                                                                               | boolean                                     | false     |
 | value               | 选中的值                                                                                                       | string \| number                            |           |
-| options             | 选择框的选项                                                                                                   | array<option>                               | []        |
+| options             | 选择框的选项                                                                                                   | array\<Option\>                             | []        |
 | loading             | 是否显示加载状态                                                                                               | boolean                                     | false     |
 | allowClear          | 是否允许清除选择                                                                                               | boolean                                     | false     |
 | autoFocus           | 是否自动聚焦                                                                                                   | boolean                                     | false     |
@@ -20,16 +20,24 @@
 | filterOption        | 根据输入关键字过滤本地选项。当为 `false` 时，禁用过滤，当为 `true` 时，按 label 字段匹配，也可传入自定义方法。 | boolean \| function(input, option): boolean | true      |
 | searchEventDebounce | 搜索事件的防抖时间(ms)                                                                                         | number                                      | 300       |
 
+### Option
+
+| 名称     | 说明     | 类型             |
+| -------- | -------- | ---------------- |
+| value    | 选项值   | string \| number |
+| label    | 选项文本 | string           |
+| disabled | 是否禁用 | boolean          |
+
 ## Events
 
-| 名称         | 说明                 | 回调参数        |
-| ------------ | -------------------- | --------------- |
-| update:open  | 下拉菜单开关时触发   | function(open)  |
-| update:value | 选中值发生变化时触发 | function(value) |
-| search       | 搜索时触发           | function(input) |
+| 名称         | 说明                 | 回调参数                        |
+| ------------ | -------------------- | ------------------------------- |
+| update:open  | 下拉菜单开关时触发   | function(open: boolean)         |
+| update:value | 选中值发生变化时触发 | function(value: string\|number) |
+| search       | 搜索时触发           | function(input: string)         |
 
 ## Slots
 
-| 名称   | 说明           | 插槽数据   |
-| ------ | -------------- | ---------- |
-| option | 自定义选项内容 | { option } |
+| 名称   | 说明           | 插槽数据           |
+| ------ | -------------- | ------------------ |
+| option | 自定义选项内容 | { option: Option } |

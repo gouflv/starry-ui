@@ -3,7 +3,7 @@ import Theme from './components/Theme.vue'
 import './style.css'
 
 const preview: Preview = {
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   parameters: {
     controls: {
       matchers: {
@@ -13,7 +13,7 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        order: ['通用', '导航', '布局', '数据录入', '数据展示', '其他']
+        order: ['Docs', '通用', '导航', '布局', '数据录入', '数据展示', '其他']
       }
     }
   },

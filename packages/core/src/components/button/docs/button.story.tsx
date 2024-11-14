@@ -94,8 +94,10 @@ export const Icon: Story = {
           <Button {...args} icon={icon} type="primary">
             Button
           </Button>
-          <Button {...args}>
-            <QuestionCircleOutlined v-slot="{icon}" />
+          <Button
+            {...args}
+            v-slots={{ icon: () => <QuestionCircleOutlined /> }}
+          >
             Button
           </Button>
         </div>

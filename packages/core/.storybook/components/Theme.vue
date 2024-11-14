@@ -86,6 +86,7 @@ onClickOutside(el, () => {
 <style scoped>
 .theme-switch {
   position: fixed;
+  z-index: 999;
   right: 8px;
   bottom: 8px;
   display: flex;
