@@ -7,7 +7,7 @@ import {
   type ExtractPublicPropTypes,
   type PropType
 } from 'vue'
-import { genTextStyle } from './style'
+import { genEllipsisStyle, genTextStyle } from './style'
 
 export type TextType =
   | 'primary'
@@ -30,16 +30,24 @@ export const propsType = {
     type: String,
     required: true
   },
-  ellipsis: Object as PropType<EllipsisType>,
+  ellipsis: [Boolean, Object] as PropType<boolean | EllipsisType>,
   strong: Boolean,
   type: String as PropType<TextType>
+}
+
+const DefaultEllipsisOption: EllipsisType = {
+  rows: 1,
+  expandable: false,
+  symbol: '展开',
+  onEllipsis: () => {},
+  onExpand: () => {}
 }
 
 export type TextProps = ExtractPublicPropTypes<typeof propsType>
 
 export default defineComponent({
   props: propsType,
-  setup(props) {
+  setup(props, { attrs }) {
     const { token } = useToken()
     const config = useConfig()
 
@@ -49,10 +57,21 @@ export default defineComponent({
       componentCls: componentCls.value
     }))
 
+    const ellipsisOption = computed(() => {
+      if (!props.ellipsis) return
+      if (typeof props.ellipsis === 'boolean') return DefaultEllipsisOption
+      return { ...DefaultEllipsisOption, ...props.ellipsis }
+    })
+
+    const isExpandable = computed(() => ellipsisOption.value?.expandable)
+
     const classes = computed(() => {
       const { componentCls } = textToken.value
       return cx([
         genTextStyle(textToken.value),
+        ellipsisOption.value &&
+          !isExpandable.value &&
+          genEllipsisStyle(textToken.value, ellipsisOption.value),
         props.type === 'primary' && `${componentCls}--primary`,
         props.type === 'secondary' && `${componentCls}--secondary`,
         props.type === 'success' && `${componentCls}--success`,

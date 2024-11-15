@@ -2,26 +2,29 @@
 
 ### Props
 
-| 名称     | 类型                                                                         | 描述     | 默认值 |
-| -------- | ---------------------------------------------------------------------------- | -------- | ------ |
-| strong   | boolean                                                                      | 是否加粗 |        |
-| type     | 'primary' \| 'secondary' \| 'success' \| 'warning' \| 'danger' \| 'disabled' | 文本类型 |        |
-| ellipsis | EllipsisType                                                                 | 折叠选项 |        |
+| 名称     | 说明                                                                  | 类型                                                                         | 默认值 |
+| -------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ------ |
+| strong   | 是否加粗                                                              | boolean                                                                      |        |
+| type     | 文本类型                                                              | 'primary' \| 'secondary' \| 'success' \| 'warning' \| 'danger' \| 'disabled' |        |
+| ellipsis | 折叠选项，当传入 `true` 时，将设置为 `{ rows: 1, expandable: false }` | boolean \|EllipsisType                                                       |        |
 
 ### EllipsisType
 
-| 名称       | 类型       | 描述             | 默认值 |
-| ---------- | ---------- | ---------------- | ------ |
-| rows       | number     | 折叠行数         |        |
-| expandable | boolean    | 是否可展开       | false  |
-| symbol     | string     | 展开按钮描述文案 | '展开' |
-| onEllipsis | () => void | 折叠回调         |        |
-| onExpand   | () => void | 展开回调         |        |
+| 名称       | 类型            | 描述             | 默认值 |
+| ---------- | --------------- | ---------------- | ------ |
+| rows       | number          | 折叠行数         | 1      |
+| expandable | boolean         | 是否可展开       | false  |
+| symbol     | string \| vnode | 展开按钮描述文案 | '展开' |
+| onEllipsis | () => void      | 折叠回调         |        |
+| onExpand   | () => void      | 展开回调         |        |
 
 ## Title
 
 ### Props
 
-| 名称  | 类型   | 描述             | 默认值 |
-| ----- | ------ | ---------------- | ------ |
-| level | number | 标题等级 h1...h5 | 1      |
+| 名称         | 类型              | 描述             | 默认值 |
+| ------------ | ----------------- | ---------------- | ------ |
+| level        | number            | 标题等级 h1...h5 | 1      |
+| borderBottom | 'inline'\|'full'  | 下边框           |        |
+| prefix       | v-slot \| 'solid' | 前缀             |        |
+| suffix       | v-slot            | 后缀             |        |
