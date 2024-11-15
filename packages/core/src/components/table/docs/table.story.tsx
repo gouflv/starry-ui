@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import Table, { type ColumnType } from '..'
+import Table, { type ColumnType, type TableBodySlotsProps } from '..'
 
 const meta: Meta<typeof Table> = {
   title: '数据展示/Table',
@@ -150,10 +150,9 @@ export const ColumnDef: Story = {
               dataSource={data}
             >
               {{
-                //@ts-ignore
-                bodyCell: ({ column, record, value }) => {
+                bodyCell: ({ column, record, text }: TableBodySlotsProps) => {
                   if (column.dataIndex === 'user.name') {
-                    return value || '-'
+                    return text || '-'
                   }
                   if (column.dataIndex === 'address') {
                     return JSON.stringify(record)

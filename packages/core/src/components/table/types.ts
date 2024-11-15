@@ -102,7 +102,7 @@ export type SelectionType<RecordType> = {
 }
 
 export type ScrollType = {
-  scrollOnChange?: boolean
+  scrollTopOnChange?: boolean
   x?: number
   y?: number
 }
@@ -115,13 +115,14 @@ export type SelectionChangeEvent<RecordType> = {
   }[]
 }
 
+export type TableBodySlotsProps<RecordType = any> = {
+  text: any
+  record: RecordType
+  index: number
+  column: ColumnType<RecordType>
+}
+
 export type TableSlots<RecordType> = {
-  bodyCell?: (props: {
-    text: any
-    value: any
-    record: RecordType
-    index: number
-    column: ColumnType<RecordType>
-  }) => any
+  bodyCell?: (props: TableBodySlotsProps<RecordType>) => any
   empty?: () => any
 }

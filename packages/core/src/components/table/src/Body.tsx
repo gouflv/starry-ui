@@ -107,7 +107,6 @@ const SlotRender = defineComponent({
       if (bodyCellSlot) {
         child = bodyCellSlot({
           text: cell.getValue(),
-          value: cell.getValue(),
           record: cell.row.original,
           index: cell.row.index,
           column: (cell.column.columnDef.meta as any).column
