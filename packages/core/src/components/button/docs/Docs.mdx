@@ -1,7 +1,11 @@
-import { Canvas, Controls, Story, Meta, Markdown } from '@storybook/blocks'
-import * as S from './button.story'
+import { Canvas, Controls, Markdown, Meta, Story } from '@storybook/blocks'
 import API from './api.md?raw'
+import * as S from './button.story'
 
 <Meta of={S} />
+
+# Button
+
+<Canvas of={S.Default} />
 
 <Markdown>{API}</Markdown>

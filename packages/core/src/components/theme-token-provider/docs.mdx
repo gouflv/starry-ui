@@ -1,0 +1,26 @@
+import { Canvas, Controls, Markdown, Meta, Story } from '@storybook/blocks'
+import API from './api.md?raw'
+
+<Meta title="其他/ThemeTokenProvider" />
+
+# ThemeTokenProvider
+
+<Markdown>{API}</Markdown>
+
+## 示例
+
+```vue
+<script setup lang="ts">
+import { type AliasToken, DesignTokenProvider, themes } from '@starry-ui/core'
+const customToken = ref<Partial<AliasToken>>({ colorPrimary: 'red' })
+</script>
+
+<template>
+  <DesignTokenProvider
+    :token="customToken"
+    :algorithm="[themes.default, thems.loose]"
+  >
+    <Button>Button</Button>
+  </DesignTokenProvider>
+</template>
+```

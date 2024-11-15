@@ -1,7 +1,5 @@
 # 快速上手
 
-`@starry-ui/core` 提供了 **Starry UI** 的基础组件。
-
 ## 安装
 
 ```bash

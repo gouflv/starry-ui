@@ -1,10 +1,10 @@
 # 主题定制
 
-Starry UI 依赖主题库 `@starry-ui/theme`
+Starry UI 使用 `@starry-ui/theme` 作为主题系统，支持运行时动态切换主题。
 
-## 修改主题变量
+## 配置主题变量
 
-`@starry-ui/core` 提供了 `DesignTokenProvider` 组件，用于配置组件的主题。
+使用 `DesignTokenProvider` 组件包裹应用根节点，通过 `token` 属性配置主题变量：
 
 ```vue
 <!-- App.vue -->
@@ -53,5 +53,3 @@ function setLoose() {
 }
 </script>
 ```
-
-Token 变量和算法详情可以前往 [@starry-ui/theme](./theme-pkg/api.md) 进行查看。

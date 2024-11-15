@@ -50,7 +50,7 @@ export default defineConfig({
         },
         {
           text: '@starry-ui/theme',
-          link: '/develop/theme-pkg/api'
+          link: 'https://github.com/gouflv/starry-ui/tree/main/packages/theme/'
         }
       ]
     },
@@ -60,7 +60,7 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'github', link: 'https://github.com/gouflv/starry-ui' }
     ]
   },
   vite: {
