@@ -1,5 +1,5 @@
 import type { PlacementType, SizeType } from '@/types'
-import type { PropType } from 'vue'
+import type { ExtractPublicPropTypes, PropType } from 'vue'
 
 export type RawValue = string | number
 
@@ -62,3 +62,5 @@ export const propTypes = {
     default: 300
   }
 }
+
+export type SelectPropTypes = ExtractPublicPropTypes<typeof propTypes>

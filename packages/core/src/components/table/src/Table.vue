@@ -7,18 +7,18 @@ import { getCoreRowModel, useVueTable } from '@tanstack/vue-table'
 import { useElementSize } from '@vueuse/core'
 import { isNumber } from 'lodash-es'
 import { computed, ref, watchEffect, type CSSProperties } from 'vue'
-import { tableTokenFactory } from '../styles'
-import { genBorderedStyle } from '../styles/bordered'
-import { genEllipsisStyle } from '../styles/ellipsis'
-import { genStickyStyle } from '../styles/fixed'
-import { genSizeStyle } from '../styles/size'
-import { genTableStyle } from '../styles/table'
+import { tableTokenFactory } from '../style'
+import { genBorderedStyle } from '../style/bordered'
+import { genEllipsisStyle } from '../style/ellipsis'
+import { genStickyStyle } from '../style/fixed'
+import { genSizeStyle } from '../style/size'
+import { genTableStyle } from '../style/table'
 import {
-  propsType,
+  propTypes,
   type DefaultRecordType,
   type SelectionChangeEvent,
   type TableSlots
-} from '../types'
+} from '../type'
 import SBody from './Body'
 import { provideTableContext } from './context'
 import SHeader from './Header'
@@ -32,7 +32,7 @@ import {
 
 defineOptions({ name: 'STable' })
 
-const props = defineProps(propsType<Record>())
+const props = defineProps(propTypes<Record>())
 
 const emits = defineEmits<{
   change: []

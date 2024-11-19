@@ -23,7 +23,7 @@ import {
   type Option,
   type OptionFilter,
   type RawValue
-} from './types'
+} from './type'
 
 // TODO
 // 1. replace arrow icon with spin when loading, and disable dropdown open

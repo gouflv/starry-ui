@@ -3,7 +3,7 @@ import { resetComponent } from '@/utils/style'
 import { css } from '@emotion/css'
 import type { CSSObject } from '@emotion/css/create-instance'
 import type { AliasToken } from '@starry-ui/theme'
-import type { ButtonType } from './types'
+import type { ButtonType } from './type'
 
 export interface ButtonToken extends AliasToken {
   componentCls: string

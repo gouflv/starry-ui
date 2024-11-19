@@ -1,4 +1,4 @@
 import Table from './src/Table.vue'
 
-export * from './types'
+export * from './type'
 export default Table

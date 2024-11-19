@@ -1,4 +1,4 @@
 import Select from './Select.vue'
 
-export * from './types'
+export * from './type'
 export default Select

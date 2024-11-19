@@ -5,7 +5,7 @@ import type {
   CombinedColumnType,
   DefaultRecordType,
   TableSlots
-} from '../types'
+} from '../type'
 
 export type TableContext<R extends DefaultRecordType = any> = ComputedRef<{
   componentCls: string

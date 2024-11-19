@@ -9,7 +9,7 @@ import {
 } from '@tanstack/vue-table'
 import { get, isObject } from 'lodash-es'
 import type { CSSProperties } from 'vue'
-import type { ColumnType, CombinedColumnType, GroupColumnType } from '../types'
+import type { ColumnType, CombinedColumnType, GroupColumnType } from '../type'
 
 export function normalizeColumnsKey<R>(
   columns: ColumnType<R>[]

@@ -3,7 +3,7 @@ import type { ExtractPublicPropTypes, PropType } from 'vue'
 
 export type DefaultRecordType = any
 
-export const propsType = <RecordType extends DefaultRecordType>() => ({
+export const propTypes = <RecordType extends DefaultRecordType>() => ({
   // Data
   dataSource: {
     type: Array as PropType<RecordType[]>,
@@ -47,8 +47,8 @@ export const propsType = <RecordType extends DefaultRecordType>() => ({
   emptyText: String
 })
 
-export type TablePropsType = ExtractPublicPropTypes<
-  ReturnType<typeof propsType>
+export type TablePropTypes = ExtractPublicPropTypes<
+  ReturnType<typeof propTypes>
 >
 
 export type ColumnType<RecordType> = {
