@@ -26,6 +26,9 @@ export default defineComponent({
     footer?: () => any
   }>,
   setup(props, { attrs, slots, emit }) {
+    //
+    // state
+
     const innerOpen = ref(props.open)
     watch(
       () => props.open,
@@ -36,6 +39,9 @@ export default defineComponent({
       () => emit('update:open', innerOpen.value)
     )
 
+    //
+    // event
+
     // mask click event
     const modalRef = ref()
     function handleMaskClick(e: any) {
@@ -45,8 +51,18 @@ export default defineComponent({
     }
     onClickOutside(modalRef, handleMaskClick)
 
+    function handleOk() {
+      emit('ok')
+    }
+
+    function handleCancel() {
+      innerOpen.value = false
+      emit('cancel')
+    }
+
     //
     // style
+
     const { token } = useToken()
     const config = useConfig()
     const componentCls = computed(() => `${config.value.prefixCls}Dialog`)
@@ -102,12 +118,14 @@ export default defineComponent({
           slots.footer()
         ) : (
           <div class={classes.value.footer}>
-            <Dialog.Close asChild>
-              <Button aria-label="Close" {...props.cancelButtonProps}>
-                取消
-              </Button>
-            </Dialog.Close>
-            <Button type={'primary'} {...props.okButtonProps}>
+            <Button onClick={handleCancel} {...props.cancelButtonProps}>
+              取消
+            </Button>
+            <Button
+              type={'primary'}
+              onClick={handleOk}
+              {...props.okButtonProps}
+            >
               确定
             </Button>
           </div>
