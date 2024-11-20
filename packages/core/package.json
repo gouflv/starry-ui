@@ -59,7 +59,7 @@
     "@tanstack/vue-table": "^8.20.5",
     "@vueuse/core": "^11.1.0",
     "lodash-es": "^4.17.21",
-    "radix-vue": "^1.9.8",
+    "radix-vue": "^1.9.10",
     "vue-types": "^5.1.3"
   }
 }
