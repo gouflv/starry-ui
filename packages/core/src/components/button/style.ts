@@ -1,5 +1,5 @@
 import type { SizeType } from '@/types'
-import { resetComponent } from '@/utils/style'
+import { getFocusStyle, resetComponent } from '@/utils/style'
 import { css } from '@emotion/css'
 import type { CSSObject } from '@emotion/css/create-instance'
 import type { AliasToken } from '@starry-ui/theme'
@@ -45,6 +45,10 @@ export const genButtonSharedStyle = (token: ButtonToken) =>
     },
     '> span + span': {
       marginInlineStart: token.marginXS
+    },
+
+    '&:not(:disabled)': {
+      ...getFocusStyle(token)
     }
   })
 

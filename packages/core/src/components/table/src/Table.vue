@@ -30,7 +30,7 @@ import {
   toSizeValue
 } from './utils'
 
-defineOptions({ name: 'STable' })
+defineOptions({ name: 'STable', inheritAttrs: false })
 
 const props = defineProps(propTypes<Record>())
 

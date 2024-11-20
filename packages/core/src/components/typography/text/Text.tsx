@@ -46,8 +46,9 @@ const DefaultEllipsisOption: EllipsisType = {
 export type TextPropTypes = ExtractPublicPropTypes<typeof propTypes>
 
 export default defineComponent({
+  name: 'SText',
   props: propTypes,
-  setup(props, { attrs }) {
+  setup(props) {
     const { token } = useToken()
     const config = useConfig()
 

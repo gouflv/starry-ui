@@ -37,7 +37,7 @@ const token = computed<SelectToken>(() => ({
 
 const config = useConfig()
 
-defineOptions({ name: 'ASelect', inheritAttrs: false })
+defineOptions({ name: 'SSelect', inheritAttrs: false })
 
 const props = defineProps(propTypes)
 

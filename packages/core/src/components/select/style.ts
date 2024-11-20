@@ -169,7 +169,7 @@ export function genScrollAreaStyle(token: SelectToken) {
   return css({
     padding: token.paddingXXS,
     overflowY: 'auto',
-    '-webkit-overflow-scrolling': 'touch'
+    WebkitOverflowScrolling: 'touch'
   })
 }
 

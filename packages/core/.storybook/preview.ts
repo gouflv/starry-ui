@@ -13,7 +13,16 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        order: ['Docs', '通用', '导航', '布局', '数据录入', '数据展示', '其他']
+        order: [
+          'Docs',
+          '通用',
+          '导航',
+          '布局',
+          '数据录入',
+          '数据展示',
+          '反馈',
+          '其他'
+        ]
       }
     }
   },
