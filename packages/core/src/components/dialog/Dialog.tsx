@@ -7,6 +7,7 @@ import { Dialog } from 'radix-vue/namespaced'
 import { computed, defineComponent, ref, watch, type SlotsType } from 'vue'
 import Button from '../button'
 import {
+  genFullScreenStyle,
   genMaskStyle,
   genModalCenterStyle,
   genModalStyle,
@@ -75,7 +76,8 @@ export default defineComponent({
       wrap: cx([
         `${componentCls.value}Wrap`,
         genModalStyle(modalToken.value),
-        props.centered && genModalCenterStyle(modalToken.value),
+        props.centered && !props.full && genModalCenterStyle(modalToken.value),
+        props.full && genFullScreenStyle(modalToken.value),
         css({
           zIndex: props.zIndex
         })
@@ -132,32 +134,40 @@ export default defineComponent({
         )
       }
 
+      let closer = null
+      if (props.closeable) {
+        closer = (
+          <Dialog.Close aria-label="Close" class={classes.value.close}>
+            <CloseOutlined />
+          </Dialog.Close>
+        )
+      }
+
+      const wrap = (
+        <Dialog.Content class={classes.value.wrap}>
+          <div class={classes.value.modal} ref={modalRef}>
+            <div class={classes.value.content}>
+              {closer}
+
+              {headerNode}
+
+              {/* Body */}
+              <div class={classes.value.body}>
+                {slots.default?.({
+                  open: innerOpen.value
+                })}
+              </div>
+
+              {footerNode}
+            </div>
+          </div>
+        </Dialog.Content>
+      )
+
       const portal = (
         <Dialog.Portal to={props.container}>
           {props.mask && <Dialog.Overlay class={classes.value.mask} />}
-
-          <Dialog.Content class={classes.value.wrap}>
-            <div class={classes.value.modal} ref={modalRef}>
-              <div class={classes.value.content}>
-                {props.closeable && (
-                  <Dialog.Close aria-label="Close" class={classes.value.close}>
-                    <CloseOutlined />
-                  </Dialog.Close>
-                )}
-
-                {headerNode}
-
-                {/* Body */}
-                <div class={classes.value.body}>
-                  {slots.default?.({
-                    open: innerOpen.value
-                  })}
-                </div>
-
-                {footerNode}
-              </div>
-            </div>
-          </Dialog.Content>
+          {wrap}
         </Dialog.Portal>
       )
 

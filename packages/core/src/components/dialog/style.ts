@@ -174,5 +174,43 @@ export function genModalStyle(token: ModalToken) {
 }
 
 export function genModalCenterStyle(token: ModalToken) {
-  return css({})
+  return css({
+    textAlign: 'center',
+    '&::before': {
+      display: 'inline-block',
+      width: 0,
+      height: '100%',
+      verticalAlign: 'middle',
+      content: '""'
+    },
+    [`& .${token.componentCls}Modal`]: {
+      top: 0,
+      display: 'inline-block',
+      paddingBottom: 0,
+      textAlign: 'start',
+      verticalAlign: 'middle'
+    }
+  })
+}
+
+export function genFullScreenStyle(token: ModalToken) {
+  return css({
+    [`& .${token.componentCls}Modal`]: {
+      top: 0,
+      maxWidth: '100%',
+      height: '100%',
+      margin: 0,
+      paddingBottom: 0
+    },
+    [`& .${token.componentCls}Content`]: {
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100vh',
+      boxSizing: 'border-box'
+    },
+    [`& .${token.componentCls}Body`]: {
+      flex: 1,
+      overflowY: 'auto'
+    }
+  })
 }

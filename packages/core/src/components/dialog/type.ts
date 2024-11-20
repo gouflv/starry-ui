@@ -2,8 +2,6 @@ import type { ExtractPublicPropTypes, PropType } from 'vue'
 import type { ButtonPropType } from '../button'
 
 export const propTypes = {
-  // TODO
-  // bodyStyle: Object as PropType<CSSProperties>,
   cancelButtonProps: Object as PropType<ButtonPropType>,
   cancelText: {
     type: String,
@@ -14,15 +12,16 @@ export const propTypes = {
     type: Boolean,
     default: true
   },
+  container: {
+    type: [String, HTMLElement] as PropType<string | HTMLElement>,
+    default: 'body'
+  },
   destroyOnClose: Boolean,
   footer: {
     type: Boolean,
     default: true
   },
-  container: {
-    type: [String, HTMLElement] as PropType<string | HTMLElement>,
-    default: 'body'
-  },
+  full: Boolean,
   mask: {
     type: Boolean,
     default: true
@@ -36,8 +35,8 @@ export const propTypes = {
     type: String,
     default: '确定'
   },
-  title: String,
   open: Boolean,
+  title: String,
   width: {
     type: [String, Number] as PropType<string | number>,
     default: 520

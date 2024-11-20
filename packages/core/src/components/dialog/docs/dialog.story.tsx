@@ -46,38 +46,28 @@ export const Controlled: Story = {
               default: () => SimpleContent
             }}
           </Dialog>
-          <p>
-            <Button onClick={() => (open.value = true)}>Open</Button>
-          </p>
+          <Button onClick={() => (open.value = true)}>Open</Button>
         </>
       )
     }
   })
 }
 
-export const Scroll: Story = {
+export const Scrollable: Story = {
   render: (args) => ({
     setup() {
-      const open = ref(false)
       return () => (
-        <>
-          <Dialog
-            open={open.value}
-            onUpdate:open={(value) => (open.value = value)}
-          >
-            {{
-              default: () => (
-                <div>
-                  <div style={{ height: '100vh' }}></div>
-                  <div style={{ padding: '0 24px' }}>Content</div>
-                </div>
-              )
-            }}
-          </Dialog>
-          <p>
-            <Button onClick={() => (open.value = true)}>Open</Button>
-          </p>
-        </>
+        <Dialog title="Scrollable">
+          {{
+            default: () => (
+              <div>
+                <div style={{ height: '100vh' }}></div>
+                <div style={{ padding: '0 24px' }}>Content</div>
+              </div>
+            ),
+            trigger: () => <Button>Open</Button>
+          }}
+        </Dialog>
       )
     }
   })
@@ -91,6 +81,41 @@ export const ThemeContext: Story = {
           {{
             trigger: () => <Button>Open</Button>,
             default: () => SimpleContent
+          }}
+        </Dialog>
+      )
+    }
+  })
+}
+
+export const Centered: Story = {
+  render: (args) => ({
+    setup() {
+      return () => (
+        <Dialog title="Centered" centered>
+          {{
+            default: SimpleContent,
+            trigger: () => <Button>Open</Button>
+          }}
+        </Dialog>
+      )
+    }
+  })
+}
+
+export const Full: Story = {
+  render: (args) => ({
+    setup() {
+      return () => (
+        <Dialog title="Full" full>
+          {{
+            default: () => (
+              <div>
+                <div style={{ height: '100vh' }}></div>
+                <div style={{ padding: '0 24px' }}>Content</div>
+              </div>
+            ),
+            trigger: () => <Button>Open</Button>
           }}
         </Dialog>
       )
