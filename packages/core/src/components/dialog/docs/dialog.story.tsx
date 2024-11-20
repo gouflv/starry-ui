@@ -82,3 +82,18 @@ export const Scroll: Story = {
     }
   })
 }
+
+export const ThemeContext: Story = {
+  render: (args) => ({
+    setup() {
+      return () => (
+        <Dialog title="Modal" {...args}>
+          {{
+            trigger: () => <Button>Open</Button>,
+            default: () => SimpleContent
+          }}
+        </Dialog>
+      )
+    }
+  })
+}
