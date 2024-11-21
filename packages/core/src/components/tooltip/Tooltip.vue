@@ -21,7 +21,7 @@
               {{ title }}
             </slot>
           </div>
-          <Tooltip.Arrow :width="8" :class="classes.arrow" />
+          <Tooltip.Arrow :class="classes.arrow" />
         </Tooltip.Content>
       </Tooltip.Portal>
     </Tooltip.Root>
