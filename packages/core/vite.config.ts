@@ -16,7 +16,11 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      // https://github.com/vitejs/vite-ts-monorepo-rfc
+      '@starry-ui/theme': fileURLToPath(
+        new URL('../theme/src', import.meta.url)
+      )
     }
   },
   build: {
