@@ -16,7 +16,7 @@ Starry UI 是基于设计系统的 Vue 组件库和工具集合，适合企业�
 - 基于 **CSS-in-JS** 的主题方案。突破传统静态样式的局限。
   - 通过 JavaScript 实现运行时**动态样式**，赋予主题系统算法能力和动态特性，实现更灵活的主题定制与模式切换。
   - 不再导出静态 CSS 文件，避免全局样式冲突，实现**渐进式**升级。
-- 组件以社区中成熟的 **Headless UI** 组件为基座，仅套用主题和做有限的功能定制，最大程度保障可靠性和无障碍访问的支持。
+- 组件以社区中成熟的 **Headless UI** 组件为基座，仅需套用主题和做有限的功能定制，最大程度保障功能的可靠性和无障碍访问。
 
 ## 兼容性
 
@@ -41,3 +41,7 @@ Starry UI 是基于设计系统的 Vue 组件库和工具集合，适合企业�
 - 文档
   - [Storybook](https://storybook.js.org/)
   - [Vitepress](https://vitepress.vuejs.org/)
+
+## 参考
+
+[CSS-in-JS](https://ant-design.github.io/antd-style/zh-CN/guide/css-in-js-intro)

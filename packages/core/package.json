@@ -2,6 +2,16 @@
   "name": "@starry-ui/core",
   "version": "0.0.1",
   "type": "module",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gouflv/starry-ui"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
@@ -12,7 +22,9 @@
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
     "sb:dev": "storybook dev -p 6006 --no-open",
-    "sb:build": "storybook build -o .storybook/dist"
+    "sb:build": "storybook build -o .storybook/dist",
+    "prepublishOnly": "pnpm build",
+    "pub": "pnpm publish --access public"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.2",

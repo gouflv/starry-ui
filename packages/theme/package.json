@@ -1,6 +1,6 @@
 {
   "name": "@starry-ui/theme",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -19,7 +19,8 @@
   "scripts": {
     "build": "tsup",
     "token-meta": "node scripts/generate-token-meta.js",
-    "prepublish": "pnpm build"
+    "prepublishOnly": "pnpm build",
+    "pub": "pnpm publish --access=public"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
