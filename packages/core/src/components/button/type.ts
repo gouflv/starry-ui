@@ -1,5 +1,5 @@
 import type { SizeType } from '@/types'
-import type { ExtractPublicPropTypes, PropType } from 'vue'
+import type { ExtractPublicPropTypes, PropType, VNodeTypes } from 'vue'
 
 export type ButtonType = 'default' | 'primary' | 'link' | 'text'
 
@@ -28,7 +28,7 @@ export const propTypes = {
   disabled: Boolean,
   block: Boolean,
   danger: Boolean,
-  icon: Object,
+  icon: Object as PropType<VNodeTypes>,
   title: String,
   href: String,
   target: String
