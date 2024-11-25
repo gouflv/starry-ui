@@ -9,7 +9,7 @@ export interface SelectToken extends AliasToken {
   inputPaddingHorizontalBase: number
 }
 
-export function genSelectionStyle(token: SelectToken) {
+export const genSelectionStyle = (token: SelectToken) => {
   return css({
     ...resetComponent(token),
     position: 'relative',
@@ -88,24 +88,22 @@ export function genSelectionStyle(token: SelectToken) {
   })
 }
 
-function getTextStyle(token: SelectToken): CSSObject {
-  return {
-    flex: 1,
-    padding: 0,
-    transition: 'color 0.5s',
-    cursor: 'pointer',
-    userSelect: 'none',
-    ...textEllipsis,
-    '&::after': {
-      display: 'inline-block',
-      width: 0,
-      visibility: 'hidden',
-      content: '"\\a0"'
-    }
+const getTextStyle = (token: SelectToken): CSSObject => ({
+  flex: 1,
+  padding: 0,
+  transition: 'color 0.5s',
+  cursor: 'pointer',
+  userSelect: 'none',
+  ...textEllipsis,
+  '&::after': {
+    display: 'inline-block',
+    width: 0,
+    visibility: 'hidden',
+    content: '"\\a0"'
   }
-}
+})
 
-export function genSizeStyle(token: SelectToken, size: SizeType) {
+export const genSizeStyle = (token: SelectToken, size: SizeType) => {
   if (size === 'small') {
     return css(
       getSizeStyle({ ...token, controlHeight: token.controlHeightSM }, size)
@@ -128,7 +126,7 @@ export function genSizeStyle(token: SelectToken, size: SizeType) {
   return css(getSizeStyle(token, size))
 }
 
-function getSizeStyle(token: SelectToken, size: SizeType): CSSObject {
+const getSizeStyle = (token: SelectToken, size: SizeType): CSSObject => {
   const { controlHeight, borderRadius, fontSize } = token
   const selectHeightWithoutBorder = controlHeight - token.lineWidth * 2
   const selectionItemPadding = Math.ceil(token.fontSize * 1.25)
@@ -154,8 +152,8 @@ function getSizeStyle(token: SelectToken, size: SizeType): CSSObject {
   }
 }
 
-export function genViewportStyle(token: SelectToken) {
-  return css({
+export const genViewportStyle = (token: SelectToken) =>
+  css({
     ...resetComponent(token),
     marginTop: token.paddingXXS,
     backgroundColor: token.colorBgElevated,
@@ -163,18 +161,16 @@ export function genViewportStyle(token: SelectToken) {
     outline: 'none',
     boxShadow: token.boxShadowSecondary
   })
-}
 
-export function genScrollAreaStyle(token: SelectToken) {
-  return css({
+export const genScrollAreaStyle = (token: SelectToken) =>
+  css({
     padding: token.paddingXXS,
     overflowY: 'auto',
     WebkitOverflowScrolling: 'touch'
   })
-}
 
-export function genItemStyle(token: SelectToken) {
-  return css({
+export const genItemStyle = (token: SelectToken) =>
+  css({
     position: 'relative',
     display: 'block',
     minHeight: token.controlHeight,
@@ -207,27 +203,24 @@ export function genItemStyle(token: SelectToken) {
       backgroundColor: token.controlItemBgActive
     }
   })
-}
 
-export function genBorderLessStyle(token: SelectToken) {
-  return css({
+export const genBorderLessStyle = (token: SelectToken) =>
+  css({
     borderColor: 'transparent !important',
     backgroundColor: 'transparent !important',
     boxShadow: 'none !important'
   })
-}
 
-export function genLoadingStyle(token: SelectToken) {
-  return css({
+export const genLoadingStyle = (token: SelectToken) =>
+  css({
     boxSizing: 'border-box',
     padding: `${(token.controlHeight - token.fontSize * token.lineHeight) / 2}px ${token.controlPaddingHorizontal}px`,
     height: token.controlHeight,
     color: token.colorPrimaryText
   })
-}
 
-export function genEmptyStyle(token: SelectToken) {
-  return css({
+export const genEmptyStyle = (token: SelectToken) =>
+  css({
     boxSizing: 'border-box',
     padding: `${(token.controlHeight - token.fontSize * token.lineHeight) / 2}px ${token.controlPaddingHorizontal}px`,
     height: token.controlHeight,
@@ -235,10 +228,9 @@ export function genEmptyStyle(token: SelectToken) {
     fontSize: token.fontSize,
     userSelect: 'none'
   })
-}
 
-export function genDisabledStyle(token: SelectToken) {
-  return css({
+export const genDisabledStyle = (token: SelectToken) =>
+  css({
     cursor: 'not-allowed',
     borderColor: token.colorBorder,
     color: token.colorTextDisabled,
@@ -251,4 +243,3 @@ export function genDisabledStyle(token: SelectToken) {
       }
     }
   })
-}

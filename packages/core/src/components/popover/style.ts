@@ -9,10 +9,10 @@ export interface PopoverToken extends AliasToken {
   popoverPadding: number
 }
 
-export function PopoverTokenFactory(
+export const PopoverTokenFactory = (
   token: AliasToken,
   componentCls: string
-): PopoverToken {
+): PopoverToken => {
   return {
     ...token,
     componentCls,
@@ -22,7 +22,7 @@ export function PopoverTokenFactory(
   }
 }
 
-export function genPopoverStyle(token: PopoverToken) {
+export const genPopoverStyle = (token: PopoverToken) => {
   return css({
     // Content
     zIndex: token.zIndexPopupBase + 30,

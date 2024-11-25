@@ -11,10 +11,10 @@ export interface TooltipToken extends AliasToken {
   tooltipRadiusOuter: number
 }
 
-export function TooltipTokenFactory(
+export const TooltipTokenFactory = (
   token: AliasToken,
   componentCls: string
-): TooltipToken {
+): TooltipToken => {
   const {
     borderRadius,
     colorTextLightSolid,
@@ -32,7 +32,7 @@ export function TooltipTokenFactory(
   }
 }
 
-export function genTooltipStyle(token: TooltipToken) {
+export const genTooltipStyle = (token: TooltipToken) => {
   return css({
     // Content
     maxWidth: token.tooltipMaxWidth,

@@ -28,10 +28,10 @@ export interface ModalToken extends AliasToken {
   modalConfirmIconSize: number
 }
 
-export function modalTokenFactory(
+export const modalTokenFactory = (
   token: AliasToken,
   componentCls: string
-): ModalToken {
+): ModalToken => {
   const headerPaddingVertical = token.padding
   const headerFontSize = token.fontSizeHeading5
   const headerLineHeight = token.lineHeightHeading5
@@ -65,7 +65,7 @@ export function modalTokenFactory(
   }
 }
 
-export function genMaskStyle(token: ModalToken) {
+export const genMaskStyle = (token: ModalToken) => {
   return css({
     position: 'fixed',
     inset: 0,
@@ -80,7 +80,7 @@ export function genMaskStyle(token: ModalToken) {
   })
 }
 
-export function genModalStyle(token: ModalToken) {
+export const genModalStyle = (token: ModalToken) => {
   return css({
     // Wrap
     zIndex: token.zIndexPopupBase,
@@ -173,7 +173,7 @@ export function genModalStyle(token: ModalToken) {
   })
 }
 
-export function genModalCenterStyle(token: ModalToken) {
+export const genModalCenterStyle = (token: ModalToken) => {
   return css({
     textAlign: 'center',
     '&::before': {
@@ -193,7 +193,7 @@ export function genModalCenterStyle(token: ModalToken) {
   })
 }
 
-export function genFullScreenStyle(token: ModalToken) {
+export const genFullScreenStyle = (token: ModalToken) => {
   return css({
     [`& .${token.componentCls}Modal`]: {
       top: 0,
