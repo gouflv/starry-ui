@@ -12,11 +12,11 @@ import {
   genButtonSizeStyle,
   genButtonTypeStyle
 } from './style'
-import { propTypes } from './type'
+import { buttonPropTypes } from './type'
 
 export default defineComponent({
   name: 'SButton',
-  props: propTypes,
+  props: buttonPropTypes,
   emits: ['click'],
   slots: Object as SlotsType<{
     default: any

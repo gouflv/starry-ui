@@ -1,4 +1,4 @@
-import Button from '@/components/button'
+import { Button } from '@/components/button'
 import type { Meta, StoryObj } from '@storybook/vue3'
 import { ref } from 'vue'
 import Dialog from '../Dialog'

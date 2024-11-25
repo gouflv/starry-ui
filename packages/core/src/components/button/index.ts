@@ -1,3 +1,2 @@
-import Button from './Button'
-export default Button
-export { type ButtonPropTypes as ButtonPropType } from './type'
+export { default as Button } from './Button'
+export * from './type'

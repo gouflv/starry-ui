@@ -19,7 +19,7 @@ import {
   type SelectToken
 } from './style'
 import {
-  propTypes,
+  selectPropTypes,
   type Option,
   type OptionFilter,
   type RawValue
@@ -39,7 +39,7 @@ const config = useConfig()
 
 defineOptions({ name: 'SSelect', inheritAttrs: false })
 
-const props = defineProps(propTypes)
+const props = defineProps(selectPropTypes)
 
 const emits = defineEmits<{
   'update:open': [open: boolean]

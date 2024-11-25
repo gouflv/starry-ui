@@ -25,7 +25,7 @@ export type EllipsisType = {
   onExpand?: () => void
 }
 
-export const propTypes = {
+export const textPropTypes = {
   content: {
     type: String,
     required: true
@@ -43,11 +43,11 @@ const DefaultEllipsisOption: EllipsisType = {
   onExpand: () => {}
 }
 
-export type TextPropTypes = ExtractPublicPropTypes<typeof propTypes>
+export type TextPropTypes = ExtractPublicPropTypes<typeof textPropTypes>
 
 export default defineComponent({
   name: 'SText',
-  props: propTypes,
+  props: textPropTypes,
   setup(props) {
     const { token } = useToken()
     const config = useConfig()

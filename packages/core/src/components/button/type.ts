@@ -7,7 +7,7 @@ export type ButtonShape = 'default' | 'circle' | 'round'
 
 export type ButtonHTMLType = 'submit' | 'button' | 'reset'
 
-export const propTypes = {
+export const buttonPropTypes = {
   type: {
     type: String as PropType<ButtonType>,
     default: 'default'
@@ -34,4 +34,4 @@ export const propTypes = {
   target: String
 }
 
-export type ButtonPropTypes = ExtractPublicPropTypes<typeof propTypes>
+export type ButtonPropTypes = ExtractPublicPropTypes<typeof buttonPropTypes>

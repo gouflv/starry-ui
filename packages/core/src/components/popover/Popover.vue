@@ -38,9 +38,9 @@ import { useToken } from '@starry-ui/theme'
 import { Popover } from 'radix-vue/namespaced'
 import { computed, ref, watch } from 'vue'
 import { genPopoverStyle, PopoverTokenFactory } from './style'
-import { propTypes } from './type'
+import { popoverPropTypes } from './type'
 
-const props = defineProps(propTypes)
+const props = defineProps(popoverPropTypes)
 const emit = defineEmits<{
   'update:open': [boolean]
 }>()

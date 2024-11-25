@@ -14,7 +14,7 @@ import { genStickyStyle } from '../style/fixed'
 import { genSizeStyle } from '../style/size'
 import { genTableStyle } from '../style/table'
 import {
-  propTypes,
+  tablePropTypes,
   type DefaultRecordType,
   type SelectionChangeEvent,
   type TableSlots
@@ -32,7 +32,7 @@ import {
 
 defineOptions({ name: 'STable', inheritAttrs: false })
 
-const props = defineProps(propTypes<Record>())
+const props = defineProps(tablePropTypes<Record>())
 
 const emits = defineEmits<{
   change: []

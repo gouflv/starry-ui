@@ -5,7 +5,7 @@ import { useToken } from '@starry-ui/theme'
 import { onClickOutside } from '@vueuse/core'
 import { Dialog } from 'radix-vue/namespaced'
 import { computed, defineComponent, ref, watch, type SlotsType } from 'vue'
-import Button from '../button'
+import { Button } from '../button'
 import {
   genFullScreenStyle,
   genMaskStyle,
@@ -13,12 +13,12 @@ import {
   genModalStyle,
   modalTokenFactory
 } from './style'
-import { propTypes } from './type'
+import { dialogPropTypes } from './type'
 
 export default defineComponent({
   name: 'SDialog',
   inheritAttrs: false,
-  props: propTypes,
+  props: dialogPropTypes,
   emits: ['ok', 'cancel', 'update:open'],
   slots: Object as SlotsType<{
     default?: (props: { open: boolean }) => any

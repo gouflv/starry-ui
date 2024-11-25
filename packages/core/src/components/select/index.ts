@@ -1,4 +1,2 @@
-import Select from './Select.vue'
-
+export { default as Select } from './Select.vue'
 export * from './type'
-export default Select

@@ -11,7 +11,7 @@ export type Option = {
 
 export type OptionFilter = (option: Option, input: string) => boolean
 
-export const propTypes = {
+export const selectPropTypes = {
   // Basic
   open: Boolean,
   value: [String, Number] as PropType<RawValue>,
@@ -63,4 +63,4 @@ export const propTypes = {
   }
 }
 
-export type SelectPropTypes = ExtractPublicPropTypes<typeof propTypes>
+export type SelectPropTypes = ExtractPublicPropTypes<typeof selectPropTypes>

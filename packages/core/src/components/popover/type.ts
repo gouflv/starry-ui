@@ -1,7 +1,7 @@
 import type { PlacementType } from '@/types'
 import type { CSSProperties, ExtractPublicPropTypes, PropType } from 'vue'
 
-export const propTypes = {
+export const popoverPropTypes = {
   container: {
     type: [String, Object] as PropType<string | HTMLElement>
   },
@@ -18,4 +18,4 @@ export const propTypes = {
   content: String
 }
 
-export type PopoverPropTypes = ExtractPublicPropTypes<typeof propTypes>
+export type PopoverPropTypes = ExtractPublicPropTypes<typeof popoverPropTypes>

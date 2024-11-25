@@ -1,8 +1,8 @@
 import type { ExtractPublicPropTypes, PropType } from 'vue'
-import type { ButtonPropType } from '../button'
+import type { ButtonPropTypes } from '../button'
 
-export const propTypes = {
-  cancelButtonProps: Object as PropType<ButtonPropType>,
+export const dialogPropTypes = {
+  cancelButtonProps: Object as PropType<ButtonPropTypes>,
   cancelText: {
     type: String,
     default: '取消'
@@ -30,7 +30,7 @@ export const propTypes = {
     type: Boolean,
     default: true
   },
-  okButtonProps: Object as PropType<ButtonPropType>,
+  okButtonProps: Object as PropType<ButtonPropTypes>,
   okText: {
     type: String,
     default: '确定'
@@ -47,4 +47,4 @@ export const propTypes = {
   }
 }
 
-export type DialogPropTypes = ExtractPublicPropTypes<typeof propTypes>
+export type DialogPropTypes = ExtractPublicPropTypes<typeof dialogPropTypes>
