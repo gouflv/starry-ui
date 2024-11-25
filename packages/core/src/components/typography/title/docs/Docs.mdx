@@ -1,0 +1,21 @@
+import { Canvas, Controls, Markdown, Meta, Story } from '@storybook/blocks'
+import API from './api.md?raw'
+import * as S from './title.story'
+
+<Meta of={S} />
+
+# Typography.Title
+
+## Usage
+
+```tsx
+import { Typography } from '@starry-ui/core'
+
+render() {
+  return (
+    <Typography.Title>Text</Typography.Title>
+  )
+}
+```
+
+<Markdown>{API}</Markdown>

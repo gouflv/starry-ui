@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import Text from '../text/Text'
+import Text from '../Text'
 
 const meta: Meta<typeof Text> = {
   title: '通用/Typography.Text',
@@ -13,14 +13,17 @@ export const Default: Story = {
   render: (args) => ({
     setup() {
       const texts = [
-        <Text content="Text"></Text>,
-        <Text strong content="Strong"></Text>,
-        <Text type="primary" content="Primary"></Text>,
-        <Text type="secondary" content="Secondary"></Text>,
-        <Text type="success" content="Success"></Text>,
-        <Text type="warning" content="Warning"></Text>,
-        <Text type="danger" content="Danger"></Text>,
-        <Text type="disabled" content="Disabled"></Text>
+        <Text>Text</Text>,
+        <Text strong>Strong</Text>,
+        <Text type="primary">Primary</Text>,
+        <Text type="secondary">Secondary</Text>,
+        <Text type="success">Success</Text>,
+        <Text type="warning">Warning</Text>,
+        <Text type="danger">Danger</Text>,
+        <Text type="disabled">Disabled</Text>,
+        <Text href="https://bing.com" target="_blank">
+          Link
+        </Text>
       ]
       return () =>
         texts.map((text) => (

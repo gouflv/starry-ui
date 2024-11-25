@@ -48,3 +48,17 @@ export const textEllipsis: CSSObject = {
   whiteSpace: 'nowrap',
   textOverflow: 'ellipsis'
 }
+
+export const getOperationUnitStyle = (token: AliasToken): CSSObject => ({
+  color: token.colorLink,
+  textDecoration: 'none',
+  outline: 'none',
+  cursor: 'pointer',
+  transition: `color 300ms`,
+  '&:focus, &:hover': {
+    color: token.colorLinkHover
+  },
+  '&:active': {
+    color: token.colorLinkActive
+  }
+})

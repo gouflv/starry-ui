@@ -1,3 +1,4 @@
+import { getOperationUnitStyle } from '@/utils/style'
 import { css } from '@emotion/css'
 import type { AliasToken } from '@starry-ui/theme'
 import type { EllipsisType } from './Text'
@@ -6,7 +7,7 @@ export interface TextToken extends AliasToken {
   componentCls: string
 }
 
-export function genTextStyle(token: TextToken) {
+export const genTextStyle = (token: TextToken) => {
   return css({
     color: token.colorText,
     wordBreak: 'break-word',
@@ -25,7 +26,13 @@ export function genTextStyle(token: TextToken) {
       color: token.colorWarningText
     },
     [`&.${token.componentCls}--danger`]: {
-      color: token.colorErrorText
+      color: token.colorErrorText,
+      'a&:active, a&:focus': {
+        color: token.colorErrorActive
+      },
+      'a&:hover': {
+        color: token.colorErrorHover
+      }
     },
     [`&.${token.componentCls}--disabled`]: {
       color: token.colorTextDisabled,
@@ -35,7 +42,7 @@ export function genTextStyle(token: TextToken) {
   })
 }
 
-export function genEllipsisStyle(token: TextToken, { rows }: EllipsisType) {
+export const genEllipsisStyle = (token: TextToken, { rows }: EllipsisType) => {
   return css({
     overflow: 'hidden',
     textOverflow: 'ellipsis',
@@ -45,3 +52,24 @@ export function genEllipsisStyle(token: TextToken, { rows }: EllipsisType) {
     lineHeight: token.lineHeight
   })
 }
+
+export const getLinkStyle = (token: TextToken) =>
+  css({
+    'a&, a': {
+      ...getOperationUnitStyle(token),
+      textDecoration: token.linkDecoration,
+      '&:active, &:focus': {
+        color: token.linkHoverDecoration
+      },
+      [`&[disabled], &.${token.componentCls}--disabled`]: {
+        color: token.colorTextDisabled,
+        cursor: 'not-allowed',
+        '&:active, &:hover': {
+          color: token.colorTextDisabled
+        },
+        '&:active': {
+          pointerEvents: 'none'
+        }
+      }
+    }
+  })
