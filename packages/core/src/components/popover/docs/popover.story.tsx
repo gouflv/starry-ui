@@ -1,3 +1,4 @@
+import { Button } from '@/components/button'
 import { type Meta, type StoryObj } from '@storybook/vue3'
 import Popover from '../Popover.vue'
 
@@ -20,7 +21,7 @@ export const Default: Story = {
         <div>
           <Popover {...args} title="Lorem ipsum dolor sit amet">
             {{
-              trigger: () => <button>Click me</button>,
+              trigger: () => <Button>Click me</Button>,
               content: () => SimpleContent
             }}
           </Popover>
@@ -34,7 +35,7 @@ export const Default: Story = {
             overlayStyle={{ width: '200px' }}
           >
             {{
-              trigger: () => <button>Placement right</button>,
+              trigger: () => <Button>Placement right</Button>,
               content: () => SimpleContent
             }}
           </Popover>
@@ -48,7 +49,7 @@ export const Default: Story = {
             overlayStyle={{ width: '200px' }}
           >
             {{
-              trigger: () => <button>Placement auto fix</button>,
+              trigger: () => <Button>Placement auto fix</Button>,
               content: () => SimpleContent
             }}
           </Popover>

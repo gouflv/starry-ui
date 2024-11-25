@@ -1,3 +1,4 @@
+import { Button } from '@/components/button'
 import { type Meta, type StoryObj } from '@storybook/vue3'
 import Tooltip from '../Tooltip.vue'
 
@@ -15,13 +16,13 @@ export const Default: Story = {
       return () => (
         <div>
           <Tooltip {...args} title="Lorem ipsum dolor sit amet">
-            {{ default: () => <button>Hover me</button> }}
+            {{ default: () => <Button>Hover me</Button> }}
           </Tooltip>
 
           <div style={{ height: '300px' }}></div>
 
           <Tooltip {...args} title="Lorem ipsum dolor sit amet">
-            {{ default: () => <button>Hover me</button> }}
+            {{ default: () => <Button>Hover me</Button> }}
           </Tooltip>
         </div>
       )
