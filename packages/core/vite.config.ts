@@ -4,14 +4,14 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
     dts({
-      tsconfigPath: './tsconfig.app.json',
-      rollupTypes: true
+      tsconfigPath: './tsconfig.build.json',
+      exclude: ['src/**/docs/**']
+      // rollupTypes: true
     })
   ],
   resolve: {

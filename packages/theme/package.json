@@ -1,21 +1,26 @@
 {
   "name": "@starry-ui/theme",
-  "version": "1.0.3",
+  "description": "Starry UI theme package",
+  "type": "module",
+  "version": "1.0.4",
   "license": "MIT",
+  "homepage": "https://starry-ui.netlify.app",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/gouflv/starry-ui"
   },
+  "keywords": [
+    "css-in-js",
+    "starry-ui",
+    "theme",
+    "ui",
+    "vue"
+  ],
   "files": [
     "dist"
   ],
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.js"
-    }
-  },
   "scripts": {
     "build": "tsup",
     "token-meta": "node scripts/generate-token-meta.js",
