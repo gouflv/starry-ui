@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/vue3'
 import Text from '../text/Text'
 
 const meta: Meta<typeof Text> = {
-  title: '通用/Typography',
+  title: '通用/Typography.Text',
   component: Text
 }
 
@@ -54,6 +54,14 @@ export const Ellipsis: Story = {
           ></Text>
         </div>
       )
+    }
+  })
+}
+
+export const Expandable: Story = {
+  render: (args) => ({
+    setup() {
+      return () => <div style={{ width: '200px' }}>TODO</div>
     }
   })
 }

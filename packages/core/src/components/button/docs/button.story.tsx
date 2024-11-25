@@ -74,9 +74,17 @@ export const Loading: Story = {
             loading={loading.value}
             onClick={() => (loading.value = true)}
           >
-            Loading
+            Click me
           </Button>
-          <a onClick={() => (loading.value = !loading.value)}>toggle</a>
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault()
+              loading.value = !loading.value
+            }}
+          >
+            toggle
+          </a>
         </div>
       )
     }
