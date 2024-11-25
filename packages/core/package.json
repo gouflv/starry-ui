@@ -1,6 +1,6 @@
 {
   "name": "@starry-ui/core",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "module",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -33,6 +33,7 @@
     "sb:dev": "storybook dev -p 6006 --no-open",
     "sb:build": "storybook build -o .storybook/dist",
     "prepublishOnly": "pnpm build",
+    "prepub": "pnpm --filter theme build",
     "pub": "pnpm publish --access public"
   },
   "devDependencies": {
