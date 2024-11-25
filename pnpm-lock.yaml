@@ -27,7 +27,7 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0(vue@3.5.12(typescript@5.6.3))
       '@starry-ui/theme':
-        specifier: workspace:*
+        specifier: workspace:^*
         version: link:../theme
       '@tanstack/vue-table':
         specifier: ^8.20.5
