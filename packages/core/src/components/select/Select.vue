@@ -44,6 +44,7 @@ const props = defineProps(selectPropTypes)
 const emits = defineEmits<{
   'update:open': [open: boolean]
   'update:value': [value: RawValue, option: Option]
+  change: [value: RawValue, option: Option]
   search: [search: string]
 }>()
 
@@ -68,11 +69,11 @@ function onValueChange(value: RawValue) {
   innerValue.value = value
 
   // emit
-  emits(
-    'update:value',
-    value,
-    props.options.find((option) => option.value === value) as Option
-  )
+  const option = props.options.find(
+    (option) => option.value === value
+  ) as Option
+  emits('update:value', value, option)
+  emits('change', value, option)
 }
 
 //
