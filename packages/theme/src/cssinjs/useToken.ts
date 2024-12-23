@@ -1,4 +1,4 @@
-import { computed, type ComputedRef, inject } from 'vue-demi'
+import { computed, type ComputedRef, inject } from 'vue'
 import type { AliasToken, GlobalToken, MapToken, SeedToken } from '../interface'
 import { defaultTheme, getComputedToken } from '../internal'
 import defaultSeedToken from '../themes/seed'

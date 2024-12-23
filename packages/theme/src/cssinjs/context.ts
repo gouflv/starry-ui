@@ -1,4 +1,4 @@
-import { type ComputedRef, type InjectionKey, shallowRef } from 'vue-demi'
+import { type ComputedRef, type InjectionKey, shallowRef } from 'vue'
 import type { AliasToken, MapToken, SeedToken } from '../interface'
 import defaultSeedToken from '../themes/seed'
 import Theme from './theme/Theme'
