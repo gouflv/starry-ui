@@ -1,4 +1,4 @@
-import { computed, defineComponent, type PropType, provide } from 'vue'
+import { computed, defineComponent, type PropType, provide } from 'vue-demi'
 import type { AliasToken, MapToken, SeedToken } from '../interface'
 import defaultAlgoliaTheme from '../themes/default'
 import { DesignTokenContextKey } from './context'

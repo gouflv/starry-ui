@@ -2,5 +2,5 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "cSpell.words": ["cssinjs", "tanstack", "tinycolor", "vitepress"]
+  "cSpell.words": ["cssinjs", "demi", "tanstack", "tinycolor", "vitepress"]
 }
