@@ -3,11 +3,13 @@
     <slot />
 
     <div class="theme-switch" @click="open = true" ref="el">
-      <FormatPainterOutlined
-        v-if="!open"
-        style="color: white; font-size: 18px; cursor: pointer"
-      />
-      <template v-if="open">
+      <div v-if="!open" class="btn">
+        <FormatPainterOutlined
+          style="color: white; font-size: 18px; cursor: pointer"
+        />
+        主题
+      </div>
+      <div v-if="open" class="main">
         <div class="colors">
           <span
             class="c"
@@ -36,7 +38,7 @@
             <ReloadOutlined />
           </div>
         </div>
-      </template>
+      </div>
     </div>
   </DesignTokenProvider>
 </template>
@@ -89,12 +91,18 @@ onClickOutside(el, () => {
   z-index: 999;
   right: 8px;
   bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
   background-color: #444;
   padding: 5px 8px;
   border-radius: 5px;
+}
+.btn {
+  cursor: pointer;
+  color: #fff;
+}
+.main {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 .colors {
   display: flex;
