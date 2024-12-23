@@ -39,16 +39,9 @@
   },
   "dependencies": {
     "@ant-design/colors": "^7.1.0",
-    "@ctrl/tinycolor": "^4.1.0",
-    "vue-demi": "^0.14.10"
+    "@ctrl/tinycolor": "^4.1.0"
   },
   "peerDependencies": {
-    "@vue/composition-api": "^1.0.0",
-    "vue": "^2.0.2 || >=3.2"
-  },
-  "peerDependenciesMeta": {
-    "@vue/composition-api": {
-      "optional": true
-    }
+    "vue": ">=3.2"
   }
 }
