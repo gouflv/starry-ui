@@ -54,4 +54,4 @@ Alias Token 是 Map Token 的语意化别名，用于组件内使用。
 
 - `default`: 默认算法
 - `compact`: 紧凑算法
-- `loose`: 宽松算法（适用于“长辈模式”等场景）
+- `loose`: 宽松算法（适用于“关怀模式”等场景）

@@ -78,7 +78,7 @@ function setDefault() {
   algorithm.value = undefined
 }
 
-const open = ref(false)
+const open = ref(true)
 const el = ref()
 onClickOutside(el, () => {
   open.value = false
