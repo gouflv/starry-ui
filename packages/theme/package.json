@@ -1,7 +1,6 @@
 {
   "name": "@starry-ui/theme",
   "description": "Starry UI theme package",
-  "type": "module",
   "version": "1.0.5",
   "license": "MIT",
   "homepage": "https://starry-ui.netlify.app",
