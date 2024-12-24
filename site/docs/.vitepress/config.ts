@@ -5,6 +5,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'Starry UI',
   description: 'A VitePress Site',
+  appearance: false,
   themeConfig: {
     nav: [
       { text: '首页', link: '/' },
