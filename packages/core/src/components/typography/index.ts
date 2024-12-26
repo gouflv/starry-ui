@@ -1,6 +1,4 @@
 import Text from './text/Text'
-export { default as Text } from './text/Text'
+import Title from './title/Title'
 
-export default {
-  Text
-}
+export const Typography = { Text, Title }

@@ -59,7 +59,8 @@ export default defineComponent({
           genWrapperStyle(inputToken.value),
           props.disabled && `${componentCls.value}Wrap-disabled`,
           props.size === 'small' && `${componentCls.value}Wrap-sm`,
-          props.size === 'large' && `${componentCls.value}Wrap-lg`
+          props.size === 'large' && `${componentCls.value}Wrap-lg`,
+          attrs.class as any
         ]),
         input: cx([
           `${componentCls.value}Input`,
@@ -111,9 +112,9 @@ export default defineComponent({
       )
 
       return (
-        <span class={classes.value.wrap} {...attrs}>
+        <span class={classes.value.wrap} style={attrs.style as any}>
           {prefixNode}
-          <input class={classes.value.input} {...inputProps} {...attrs} />
+          <input class={classes.value.input} {...inputProps} />
           {suffixNode}
         </span>
       )
