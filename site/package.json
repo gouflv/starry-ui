@@ -14,6 +14,7 @@
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
     "@ctrl/tinycolor": "^4.1.0",
+    "@starry-ui/core": "workspace:*",
     "@starry-ui/theme": "workspace:*",
     "ant-design-vue": "^4.2.5",
     "lodash-es": "^4.17.21",

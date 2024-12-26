@@ -11,8 +11,8 @@ export default defineConfig({
       { text: '首页', link: '/' },
       { text: '设计', link: '/design/' },
       { text: '研发', link: '/develop/' },
-      { text: '组件', link: '//starry-ui-sb.netlify.app/' },
-      { text: '主题编辑', link: '/theme-editor' }
+      { text: '主题编辑', link: '/theme-editor' },
+      { text: '组件文档', link: '//starry-ui-sb.netlify.app/' }
     ],
 
     sidebar: {
@@ -72,6 +72,12 @@ export default defineConfig({
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('../../src', import.meta.url))
+        // '@starry-ui/theme': fileURLToPath(
+        //   new URL('../../../packages/theme/src', import.meta.url)
+        // ),
+        // '@starry-ui/core': fileURLToPath(
+        //   new URL('../../../packages/core/src', import.meta.url)
+        // )
       }
     }
   },
