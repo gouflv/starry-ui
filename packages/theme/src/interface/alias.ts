@@ -1,5 +1,10 @@
 import type { MapToken } from './maps'
 
+// ======================================================================
+// ==                           Alias Token                            ==
+// ======================================================================
+// 🔥🔥🔥🔥🔥🔥🔥 DO NOT MODIFY THIS. PLEASE CONTACT DESIGNER. 🔥🔥🔥🔥🔥🔥🔥
+
 export interface AliasToken extends MapToken {
   // Background
   colorFillContentHover: string
@@ -12,6 +17,10 @@ export interface AliasToken extends MapToken {
 
   // Border
   colorBorderBg: string
+  /**
+   * @nameZH 分割线颜色
+   * @desc 用于作为分割线的颜色，此颜色和 colorBorderSecondary 的颜色一致，但是用的是透明色。
+   */
   colorSplit: string
 
   // Text
@@ -22,7 +31,9 @@ export interface AliasToken extends MapToken {
   colorTextDescription: string
   colorTextLightSolid: string
 
+  /** Weak action. Such as `allowClear` or Alert close button */
   colorIcon: string
+  /** Weak action hover color. Such as `allowClear` or Alert close button */
   colorIconHover: string
 
   colorLink: string
@@ -36,16 +47,19 @@ export interface AliasToken extends MapToken {
   colorErrorOutline: string
 
   // Font
+  /** Operation icon in Select, Cascader, etc. icon fontSize. Normal is same as fontSizeSM */
   fontSizeIcon: number
+
+  /** For heading like h1, h2, h3 or option selected item */
   fontWeightStrong: number
 
   // Control
   controlOutlineWidth: number
-  controlItemBgHover: string
-  controlItemBgActive: string
-  controlItemBgActiveHover: string
+  controlItemBgHover: string // Note. It also is a color
+  controlItemBgActive: string // Note. It also is a color
+  controlItemBgActiveHover: string // Note. It also is a color
   controlInteractiveSize: number
-  controlItemBgActiveDisabled: string
+  controlItemBgActiveDisabled: string // Note. It also is a color
 
   // Padding
   paddingXXS: number
@@ -74,6 +88,7 @@ export interface AliasToken extends MapToken {
   marginXL: number
   marginXXL: number
 
+  // =============== Legacy: should be remove ===============
   opacityLoading: number
 
   boxShadow: string

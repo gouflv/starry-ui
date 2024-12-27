@@ -5,8 +5,8 @@ import type {
   OverrideToken,
   SeedToken
 } from '../interface'
-import seedToken from './seed'
-import getAlphaColor from './shared/getAlphaColor'
+import seedToken from '../themes/seed'
+import getAlphaColor from '../themes/shared/getAlphaColor'
 
 /** Raw merge of `@ant-design/cssinjs` token. Which need additional process */
 type RawMergedToken = MapToken &

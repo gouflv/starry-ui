@@ -10,6 +10,18 @@ export * from './font'
 export * from './size'
 export * from './style'
 
+export interface CommonMapToken extends StyleMapToken {
+  // Motion
+  motionDurationFast: string
+  motionDurationMid: string
+  motionDurationSlow: string
+}
+
+// ======================================================================
+// ==                         Map Token                         ==
+// ======================================================================
+// 🔥🔥🔥🔥🔥🔥🔥 DO NOT MODIFY THIS. PLEASE CONTACT DESIGNER. 🔥🔥🔥🔥🔥🔥🔥
+
 export interface MapToken
   extends SeedToken,
     ColorPalettes,
@@ -17,4 +29,5 @@ export interface MapToken
     SizeMapToken,
     HeightMapToken,
     StyleMapToken,
-    FontMapToken {}
+    FontMapToken,
+    CommonMapToken {}
