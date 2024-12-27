@@ -20,13 +20,13 @@ const getDesignToken = (config?: ThemeConfig): AliasToken => {
 
   const mergedToken = {
     ...seedToken,
-    ...config?.token
+    ...config?.token,
   }
   return getComputedToken(
     mergedToken as any,
     config?.token || {},
     theme,
-    formatToken
+    formatToken,
   )
 }
 

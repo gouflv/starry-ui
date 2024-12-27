@@ -15,6 +15,6 @@ export default function genCommonMapToken(token: SeedToken): CommonMapToken {
     lineWidthBold: lineWidth + 1,
 
     // radius
-    ...genRadius(borderRadius)
+    ...genRadius(borderRadius),
   }
 }

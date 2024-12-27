@@ -5,19 +5,19 @@ import { DerivativeFunc, TokenType } from './interface'
  */
 export default class Theme<
   DesignToken extends TokenType,
-  DerivativeToken extends TokenType
+  DerivativeToken extends TokenType,
 > {
   private derivatives: DerivativeFunc<DesignToken, DerivativeToken>[]
 
   constructor(
     derivatives:
       | DerivativeFunc<DesignToken, DerivativeToken>
-      | DerivativeFunc<DesignToken, DerivativeToken>[]
+      | DerivativeFunc<DesignToken, DerivativeToken>[],
   ) {
     this.derivatives = Array.isArray(derivatives) ? derivatives : [derivatives]
     if (derivatives.length === 0) {
       console.warn(
-        '[Starry-UI] Theme should have at least one derivative function.'
+        '[Starry-UI] Theme should have at least one derivative function.',
       )
     }
   }
@@ -25,7 +25,7 @@ export default class Theme<
   getDerivativeToken(token: DesignToken): DerivativeToken {
     return this.derivatives.reduce<DerivativeToken>(
       (result, derivative) => derivative(token, result),
-      undefined as any
+      undefined as any,
     )
   }
 }

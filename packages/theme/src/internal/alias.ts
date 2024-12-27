@@ -3,7 +3,7 @@ import type {
   AliasToken,
   MapToken,
   OverrideToken,
-  SeedToken
+  SeedToken,
 } from '../interface'
 import seedToken from '../themes/seed'
 import getAlphaColor from '../themes/shared/getAlphaColor'
@@ -18,7 +18,7 @@ type RawMergedToken = MapToken &
  * Merge seed & derivative & override token and generate alias token for developer.
  */
 export default function formatToken(
-  derivativeToken: RawMergedToken
+  derivativeToken: RawMergedToken,
 ): AliasToken {
   const { override, ...restToken } = derivativeToken
   const overrideTokens = { ...override }
@@ -29,7 +29,7 @@ export default function formatToken(
 
   const mergedToken = {
     ...restToken,
-    ...overrideTokens
+    ...overrideTokens,
   }
 
   const screenXS = 480
@@ -58,7 +58,7 @@ export default function formatToken(
     colorBorderBg: mergedToken.colorBgContainer,
     colorSplit: getAlphaColor(
       mergedToken.colorBorderSecondary,
-      mergedToken.colorBgContainer
+      mergedToken.colorBgContainer,
     ),
 
     // ============== Text ============== //
@@ -77,11 +77,11 @@ export default function formatToken(
 
     colorErrorOutline: getAlphaColor(
       mergedToken.colorErrorBg,
-      mergedToken.colorBgContainer
+      mergedToken.colorBgContainer,
     ),
     colorWarningOutline: getAlphaColor(
       mergedToken.colorWarningBg,
-      mergedToken.colorBgContainer
+      mergedToken.colorBgContainer,
     ),
 
     // Font
@@ -100,7 +100,7 @@ export default function formatToken(
     controlTmpOutline: mergedToken.colorFillQuaternary,
     controlOutline: getAlphaColor(
       mergedToken.colorPrimaryBg,
-      mergedToken.colorBgContainer
+      mergedToken.colorBgContainer,
     ),
 
     lineType: mergedToken.lineType,
@@ -214,7 +214,7 @@ export default function formatToken(
     boxShadowTabsOverflowBottom: 'inset 0 -10px 8px -8px rgba(0, 0, 0, 0.08)',
 
     // Override AliasToken
-    ...overrideTokens
+    ...overrideTokens,
   }
 
   return aliasToken

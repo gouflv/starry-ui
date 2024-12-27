@@ -7,8 +7,8 @@ const getTokenList = (list, source) =>
     .filter(
       (item) =>
         !item.comment?.blockTags.some(
-          (tag) => tag.tag === '@internal' || tag.tag === '@private'
-        )
+          (tag) => tag.tag === '@internal' || tag.tag === '@private',
+        ),
     )
     .map((item) => ({
       source,
@@ -29,7 +29,7 @@ const getTokenList = (list, source) =>
       nameEn:
         item.comment?.blockTags
           ?.find((tag) => tag.tag === '@nameEN')
-          ?.content.reduce((result, str) => result.concat(str.text), '') || ''
+          ?.content.reduce((result, str) => result.concat(str.text), '') || '',
     }))
 
 function main() {
@@ -42,7 +42,7 @@ function main() {
   app.bootstrap({
     // typedoc options here
     entryPoints: ['src/interface/index.ts'],
-    skipErrorChecking: true
+    skipErrorChecking: true,
   })
 
   const project = app.convert()
@@ -66,21 +66,21 @@ function main() {
 
     // Exclude preset colors
     tokenMeta.seed = tokenMeta.seed.filter(
-      (item) => !presetColors.some((color) => item.token.startsWith(color))
+      (item) => !presetColors.some((color) => item.token.startsWith(color)),
     )
     tokenMeta.map = tokenMeta.map.filter(
-      (item) => !presetColors.some((color) => item.token.startsWith(color))
+      (item) => !presetColors.some((color) => item.token.startsWith(color)),
     )
     tokenMeta.alias = tokenMeta.alias.filter(
-      (item) => !presetColors.some((color) => item.token.startsWith(color))
+      (item) => !presetColors.some((color) => item.token.startsWith(color)),
     )
 
     tokenMeta.alias = tokenMeta.alias.filter(
-      (item) => !tokenMeta.map.some((mapItem) => mapItem.token === item.token)
+      (item) => !tokenMeta.map.some((mapItem) => mapItem.token === item.token),
     )
     tokenMeta.map = tokenMeta.map.filter(
       (item) =>
-        !tokenMeta.seed.some((seedItem) => seedItem.token === item.token)
+        !tokenMeta.seed.some((seedItem) => seedItem.token === item.token),
     )
 
     const finalMeta = Object.entries(tokenMeta).reduce((acc, [key, value]) => {
@@ -91,7 +91,7 @@ function main() {
           desc: item.desc,
           descEn: item.descEn,
           type: item.type,
-          source: key
+          source: key,
         }
       })
       return acc

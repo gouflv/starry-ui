@@ -13,7 +13,7 @@ export const defaultPresetColors: PresetColorType = {
   volcano: '#FA541C',
   geekblue: '#2F54EB',
   gold: '#FAAD14',
-  lime: '#A0D911'
+  lime: '#A0D911',
 }
 
 const seedToken: SeedToken = {
@@ -71,6 +71,6 @@ const seedToken: SeedToken = {
   opacityImage: 1,
 
   // Wireframe
-  wireframe: false
+  wireframe: false,
 }
 export default seedToken

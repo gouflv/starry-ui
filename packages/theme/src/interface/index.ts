@@ -1,12 +1,12 @@
 import type { AliasToken } from './alias'
 
-export type OverrideToken = Partial<AliasToken> 
+export type OverrideToken = Partial<AliasToken>
 
 export { PresetColors } from './presetColors'
 export type {
   ColorPalettes,
   PresetColorKey,
-  PresetColorType
+  PresetColorType,
 } from './presetColors'
 
 export type { SeedToken } from './seeds'
@@ -18,7 +18,7 @@ export type {
   HeightMapToken,
   MapToken,
   SizeMapToken,
-  StyleMapToken
+  StyleMapToken,
 } from './maps'
 
 export type { AliasToken } from './alias'

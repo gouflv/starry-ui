@@ -26,7 +26,7 @@ const genFontMapToken = (fontSize: number): FontMapToken => {
     lineHeightHeading2: lineHeights[5],
     lineHeightHeading3: lineHeights[4],
     lineHeightHeading4: lineHeights[3],
-    lineHeightHeading5: lineHeights[2]
+    lineHeightHeading5: lineHeights[2],
   }
 }
 

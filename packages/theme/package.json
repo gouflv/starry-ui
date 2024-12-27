@@ -1,7 +1,7 @@
 {
   "name": "@starry-ui/theme",
   "description": "Starry UI theme package",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "license": "MIT",
   "homepage": "https://starry-ui.netlify.app",
   "main": "dist/index.js",
@@ -12,11 +12,10 @@
     "url": "https://github.com/gouflv/starry-ui"
   },
   "keywords": [
-    "css-in-js",
     "starry-ui",
+    "vue",
     "theme",
-    "ui",
-    "vue"
+    "css-in-js"
   ],
   "files": [
     "dist"
@@ -27,7 +26,8 @@
     "test": "vitest",
     "token-meta": "node scripts/generate-token-meta.js",
     "prepublishOnly": "pnpm build",
-    "pub": "pnpm publish --access=public"
+    "pub": "pnpm publish --access=public",
+    "format": "prettier --write ."
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",

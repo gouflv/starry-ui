@@ -14,6 +14,6 @@ export default function genSizeMapToken(token: SeedToken): SizeMapToken {
     size: sizeUnit * compactSizeStep,
     sizeSM: sizeUnit * compactSizeStep,
     sizeXS: sizeUnit * (compactSizeStep - 1),
-    sizeXXS: sizeUnit * (compactSizeStep - 1)
+    sizeXXS: sizeUnit * (compactSizeStep - 1),
   }
 }

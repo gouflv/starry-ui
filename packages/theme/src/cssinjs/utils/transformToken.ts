@@ -16,7 +16,7 @@ export const token2SCSSVar = (token: string, prefix = '') => {
 
 export const serializeCSSVar = <T extends Record<string, any>>(
   cssVars: T,
-  scope?: string
+  scope?: string,
 ) => {
   if (!Object.keys(cssVars).length) {
     return ''
@@ -29,7 +29,7 @@ export const serializeCSSVar = <T extends Record<string, any>>(
 
 export type TokenWithCSSVar<
   V,
-  T extends Record<string, V> = Record<string, V>
+  T extends Record<string, V> = Record<string, V>,
 > = {
   [key in keyof T]?: string | V
 }
@@ -88,13 +88,13 @@ const unitlessToken: {
   opacityLoading: true,
   fontWeightStrong: true,
   zIndexPopupBase: true,
-  zIndexBase: true
+  zIndexBase: true,
   // opacityImage: true,
 }
 
 export const transformToken = <
   V,
-  T extends Record<string, V> = Record<string, V>
+  T extends Record<string, V> = Record<string, V>,
 >(
   token: T,
   config?: {
@@ -110,7 +110,7 @@ export const transformToken = <
     prefix?: string
     scope?: string
     lang?: 'css' | 'less' | 'scss'
-  }
+  },
 ): string => {
   const ignore = config?.ignore || ignoreToken
   const unitless = config?.unitless || unitlessToken

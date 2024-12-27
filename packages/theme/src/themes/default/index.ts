@@ -3,7 +3,7 @@ import type {
   ColorPalettes,
   MapToken,
   PresetColorType,
-  SeedToken
+  SeedToken,
 } from '../../interface'
 import { defaultPresetColors } from '../seed'
 import genColorMapToken from '../shared/genColorMapToken'
@@ -26,7 +26,7 @@ export default function derivative(token: SeedToken): MapToken {
     .reduce((prev, cur) => {
       prev = {
         ...prev,
-        ...cur
+        ...cur,
       }
       return prev
     }, {} as ColorPalettes)
@@ -37,7 +37,7 @@ export default function derivative(token: SeedToken): MapToken {
     // Colors
     ...genColorMapToken(token, {
       generateColorPalettes,
-      generateNeutralColorPalettes
+      generateNeutralColorPalettes,
     }),
     // Font
     ...genFontMapToken(token.fontSize),
@@ -46,6 +46,6 @@ export default function derivative(token: SeedToken): MapToken {
     // Height
     ...genControlHeight(token),
     // Others
-    ...genCommonMapToken(token)
+    ...genCommonMapToken(token),
   }
 }

@@ -9,5 +9,5 @@ export { TinyColor }
 
 export const themes = {
   default: defaultAlgoliaTheme,
-  compact: compactAlgoliaTheme
+  compact: compactAlgoliaTheme,
 }

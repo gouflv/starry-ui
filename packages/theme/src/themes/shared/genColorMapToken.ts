@@ -9,7 +9,7 @@ interface PaletteGenerators {
 
 export default function genColorMapToken(
   seed: SeedToken,
-  { generateColorPalettes, generateNeutralColorPalettes }: PaletteGenerators
+  { generateColorPalettes, generateNeutralColorPalettes }: PaletteGenerators,
 ): ColorMapToken {
   const {
     colorSuccess: colorSuccessBase,
@@ -18,7 +18,7 @@ export default function genColorMapToken(
     colorInfo: colorInfoBase,
     colorPrimary: colorPrimaryBase,
     colorBgBase,
-    colorTextBase
+    colorTextBase,
   } = seed
 
   const primaryColors = generateColorPalettes(colorPrimaryBase)
@@ -87,6 +87,6 @@ export default function genColorMapToken(
     colorInfoTextActive: infoColors[10],
 
     colorBgMask: new TinyColor('#000').setAlpha(0.45).toRgbString(),
-    colorWhite: '#fff'
+    colorWhite: '#fff',
   }
 }

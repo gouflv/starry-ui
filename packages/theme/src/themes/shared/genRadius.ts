@@ -1,7 +1,7 @@
 import type { MapToken } from '../../interface'
 
 const genRadius = (
-  radiusBase: number
+  radiusBase: number,
 ): Pick<
   MapToken,
   | 'borderRadiusXS'
@@ -56,7 +56,7 @@ const genRadius = (
     borderRadiusXS: radiusXS,
     borderRadiusSM: radiusSM,
     borderRadiusLG: radiusLG,
-    borderRadiusOuter: radiusOuter
+    borderRadiusOuter: radiusOuter,
   }
 }
 

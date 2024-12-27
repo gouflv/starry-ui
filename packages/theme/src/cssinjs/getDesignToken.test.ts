@@ -27,8 +27,8 @@ test('should it works', () => {
 test('should it works with custom seed token {colorPrimary: red}', () => {
   const token = getDesignToken({
     token: {
-      colorPrimary: 'red'
-    }
+      colorPrimary: 'red',
+    },
   })
   expect(token.colorPrimary).toBe('red')
   expect(objectDiff(token, originToken)).toMatchSnapshot('custom seed token')
@@ -38,8 +38,8 @@ test('should it works with custom seed token {colorTextBase: blue}', () => {
   const token = getDesignToken({
     token: {
       colorPrimary: 'red',
-      colorTextBase: 'blue'
-    }
+      colorTextBase: 'blue',
+    },
   })
   expect(token.colorPrimary).toBe('red')
   expect(token.colorTextBase).toBe('blue')
@@ -49,8 +49,8 @@ test('should it works with custom seed token {colorTextBase: blue}', () => {
 test('should it works with custom map token {colorText: blue}', () => {
   const token = getDesignToken({
     token: {
-      colorText: 'blue'
-    }
+      colorText: 'blue',
+    },
   })
   expect(token.colorText).toBe('blue')
   expect(objectDiff(token, originToken)).toMatchSnapshot('custom map token')
@@ -59,7 +59,7 @@ test('should it works with custom map token {colorText: blue}', () => {
 test('should it works with compact algorithm', () => {
   const token = getDesignToken({
     token: {},
-    derivative: [themes.default, themes.compact]
+    derivative: [themes.default, themes.compact],
   })
   expect(objectDiff(token, originToken)).toMatchSnapshot('compact algorithm')
 })

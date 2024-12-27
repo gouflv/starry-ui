@@ -16,7 +16,7 @@ export default function getFontSizes(base: number) {
 
     return {
       size,
-      lineHeight: height / size
+      lineHeight: height / size,
     }
   })
 }

@@ -11,7 +11,7 @@ export const PresetColors = [
   'volcano',
   'geekblue',
   'lime',
-  'gold'
+  'gold',
 ] as const
 
 export type PresetColorKey = (typeof PresetColors)[number]

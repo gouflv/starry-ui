@@ -20,7 +20,7 @@ const derivative: DerivativeFunc<SeedToken, MapToken> = (token, mapToken) => {
 
     // controlHeight
     controlHeight,
-    ...genControlHeight({ ...mergedMapToken, controlHeight })
+    ...genControlHeight({ ...mergedMapToken, controlHeight }),
   }
 }
 
