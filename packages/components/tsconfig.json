@@ -1,0 +1,27 @@
+{
+  // https://github.com/vuejs/tsconfig
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "jsx": "preserve",
+    "resolveJsonModule": true,
+    "useDefineForClassFields": true,
+    "declaration": true,
+    "sourceMap": true,
+    "lib": ["ESNext", "DOM"],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@starry-ui/theme": ["../theme/src"]
+    }
+  },
+  "vueCompilerOptions": {
+    "target": 2.7
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "exclude": ["node_modules", "src/**/*.story.ts", "src/**/*.test.ts"]
+}
