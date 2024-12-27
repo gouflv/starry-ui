@@ -13,7 +13,7 @@ type ThemeConfig = {
     | DerivativeFunc<SeedToken, MapToken>[]
 }
 
-const getDesignToken = (config?: ThemeConfig): AliasToken => {
+export default function getDesignToken(config?: ThemeConfig): AliasToken {
   const theme = config?.derivative
     ? createTheme(config.derivative)
     : createTheme(defaultDerivative)
@@ -29,5 +29,3 @@ const getDesignToken = (config?: ThemeConfig): AliasToken => {
     formatToken,
   )
 }
-
-export default getDesignToken
