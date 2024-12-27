@@ -23,21 +23,26 @@
   ],
   "scripts": {
     "build": "tsup",
+    "type-check": "tsc --noEmit",
+    "test": "vitest",
     "token-meta": "node scripts/generate-token-meta.js",
     "prepublishOnly": "pnpm build",
     "pub": "pnpm publish --access=public"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
+    "@types/lodash-es": "^4.17.12",
     "@types/node": "^22.7.7",
     "@vue/test-utils": "^2.4.6",
     "fs-extra": "^11.2.0",
     "tsup": "^8.3.0",
     "typedoc": "^0.23.28",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.8"
   },
   "dependencies": {
     "@ant-design/colors": "^7.1.0",
-    "@ctrl/tinycolor": "^4.1.0"
+    "@ctrl/tinycolor": "^4.1.0",
+    "lodash-es": "^4.17.21"
   }
 }

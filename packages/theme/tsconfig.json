@@ -4,6 +4,6 @@
     "module": "esnext",
     "moduleResolution": "bundler"
   },
-  "include": ["src/**/*", "../../tests/theme/getDesignToken.test.ts"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
 }
