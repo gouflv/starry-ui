@@ -2,8 +2,9 @@
   "extends": "@tsconfig/node20/tsconfig.json",
   "compilerOptions": {
     "module": "ESNext",
-    "moduleResolution": "bundler",
-    "types": ["node"]
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "composite": true
   },
   "include": ["vite.config.ts"]
 }

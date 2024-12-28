@@ -19,7 +19,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && vue-tsc --project tsconfig.build.json",
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint . --fix"
   },

@@ -10,8 +10,6 @@
     "skipLibCheck": true,
     "jsx": "preserve",
     "resolveJsonModule": true,
-    "useDefineForClassFields": true,
-    "declaration": true,
     "sourceMap": true,
     "lib": ["ESNext", "DOM"],
     "paths": {
@@ -23,5 +21,6 @@
     "target": 2.7
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "exclude": ["node_modules", "src/**/*.story.ts", "src/**/*.test.ts"]
+  "exclude": ["node_modules", "src/**/*.story.ts", "src/**/*.test.ts"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
