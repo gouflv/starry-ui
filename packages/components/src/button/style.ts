@@ -314,6 +314,7 @@ export const genButtonBlockStyle = () =>
     width: '100%',
   })
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const genButtonLoadingStyle = (token: ButtonToken) =>
   css({
     opacity: 0.6,

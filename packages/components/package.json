@@ -20,9 +20,12 @@
   ],
   "scripts": {
     "build": "vite build",
-    "type-check": "vue-tsc --noEmit"
+    "type-check": "vue-tsc --noEmit",
+    "lint": "eslint . --fix"
   },
   "dependencies": {
+    "@ant-design/icons": "^2.1.1",
+    "@ant-design/icons-vue": "^2.0.0",
     "@emotion/css": "^11.13.5",
     "@starry-ui/theme": "workspace:*",
     "vue": "^2.7.16",
@@ -33,7 +36,11 @@
     "@vitejs/plugin-vue2": "^2.3.3",
     "@vitejs/plugin-vue2-jsx": "^1.1.1",
     "@vue/babel-helper-vue-jsx-merge-props": "^1.4.0",
+    "@vue/eslint-config-prettier": "^10.1.0",
+    "@vue/eslint-config-typescript": "^14.2.0",
     "@vue/tsconfig": "^0.1.0",
+    "eslint": "^9.17.0",
+    "eslint-plugin-vue": "^9.32.0",
     "npm-run-all2": "^7.0.2",
     "typescript": "^4.9.5",
     "vite": "^5.4.11",
