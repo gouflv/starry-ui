@@ -1,6 +1,7 @@
 import {
   computeToken,
   defaultSeedToken,
+  defaultTheme,
   formatToken,
   type AliasToken,
 } from '@starry-ui/theme'
@@ -17,7 +18,7 @@ export default function useToken(): ComputedRef<AliasToken> {
     computed(() => defaultConfig),
   )
 
-  const theme = computed(() => context.value.theme!)
+  const theme = computed(() => context.value.theme || defaultTheme)
 
   const mergedTokens = computed<any>(() =>
     Object.assign({}, defaultSeedToken, context.value.token),
