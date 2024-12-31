@@ -24,6 +24,14 @@ const config = {
     return mergeConfig(config, {
       plugins: [vue2Jsx()],
       resolve: {
+        alias: {
+          '@': path.resolve(__dirname, '../../components/src'),
+          '@starry-ui/components': path.resolve(
+            __dirname,
+            '../../components/src',
+          ),
+        },
+
         // https://github.com/storybookjs/storybook/issues/10887#issuecomment-901109891
         dedupe: ['@storybook/client-api'],
       },
@@ -37,13 +45,7 @@ const config = {
           '@storybook/addon-measure/preview.js',
           '@storybook/addon-outline/preview.js',
         ],
-      },
-      alias: {
-        '@': path.resolve(__dirname, '../../components/src'),
-        '@starry-ui/components': path.resolve(
-          __dirname,
-          '../../components/src',
-        ),
+        exclude: ['@star-ui/components'],
       },
       define: {
         global: 'window',
