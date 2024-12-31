@@ -30,11 +30,15 @@
     "@ant-design/icons-vue": "^2.0.0",
     "@emotion/css": "^11.13.5",
     "@starry-ui/theme": "workspace:*",
+    "@tanstack/table-core": "^8.20.5",
+    "@vueuse/core": "^12.2.0",
+    "lodash-es": "^4.17.21",
     "vue": "^2.7.16",
     "vue-demi": "^0.14.10"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
+    "@types/lodash-es": "^4.17.12",
     "@vitejs/plugin-vue2": "^2.3.3",
     "@vitejs/plugin-vue2-jsx": "^1.1.1",
     "@vue/babel-helper-vue-jsx-merge-props": "^1.4.0",
