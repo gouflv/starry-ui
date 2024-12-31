@@ -3,6 +3,7 @@ import { cx } from '@/theme'
 import { useToken } from '@/theme/cssinjs'
 import { computed, defineComponent } from 'vue'
 import LoadingIcon from './LoadingIcon'
+import { buttonPropTypes } from './props'
 import {
   genButtonBlockStyle,
   genButtonLoadingStyle,
@@ -11,7 +12,6 @@ import {
   genButtonSizeStyle,
   genButtonTypeStyle,
 } from './style'
-import { buttonPropTypes } from './type'
 
 export default defineComponent({
   name: 'SButton',

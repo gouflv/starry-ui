@@ -3,7 +3,7 @@ import { css } from '@/theme'
 import { getFocusStyle, resetComponent } from '@/theme/style'
 import type { CSSObject } from '@emotion/css/create-instance'
 import type { AliasToken } from '@starry-ui/theme'
-import type { ButtonType } from './type'
+import type { ButtonType } from './props'
 
 export interface ButtonToken extends AliasToken {
   componentCls: string
